@@ -12,6 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 </head>
 <body>
     <div id="app">
@@ -31,6 +35,15 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+
+                    @if (Auth::check())
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/categories') }}">
+                            Categories
+                        </a>
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/articles') }}">
+                            Articles
+                        </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -76,5 +89,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
+    <script src="{{ asset('js/jQuery.min.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.9.1/full/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>

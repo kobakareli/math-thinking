@@ -1,0 +1,28 @@
+form input {
+    &.title {
+        margin-bottom: 10px;
+    }
+}
+
+form img {
+  width: 100px;
+  max-height: 100px;
+}
+
+.language-marker {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.alert-danger {
+  margin-top: 60px;
+}
+
+.menu-item {
+  font-size: 14px !important;
+}
+
+.ck-editor__editable {
+  min-height: 200px;
+}
