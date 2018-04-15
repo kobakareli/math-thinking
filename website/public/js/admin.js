@@ -1,4 +1,7 @@
 jQuery(document).ready(function() {
+
+    // set select values
+
     var categoryIds = [];
 
     if(typeof articleCategories != 'undefined') {
@@ -6,16 +9,91 @@ jQuery(document).ready(function() {
             categoryIds.push(articleCategories[i]['id']);
         }
         jQuery('#categories').val(categoryIds);
+        categoryIds = [];
+    }
+
+    if(typeof testSuperCategories != 'undefined') {
+        for(var i = 0; i < testSuperCategories.length; i++) {
+            categoryIds.push(testSuperCategories[i]['id']);
+        }
+        jQuery('#supercategories').val(categoryIds);
+        categoryIds = [];
+    }
+
+    if(typeof testCategories != 'undefined') {
+        for(var i = 0; i < testCategories.length; i++) {
+            categoryIds.push(testCategories[i]['id']);
+        }
+        jQuery('#categories').val(categoryIds);
+        categoryIds = [];
+    }
+
+
+    var testTaskIds = [];
+
+    if(typeof testTasks != 'undefined') {
+        for(var i = 0; i < testTasks.length; i++) {
+            testTaskIds.push(testTasks[i]['id']);
+        }
+        jQuery('#tasks').val(testTaskIds);
+        testTaskIds = [];
+    }
+
+
+    var subCategoryIds = [];
+
+    if(typeof subCategories != 'undefined') {
+        for(var i = 0; i < subCategories.length; i++) {
+            subCategoryIds.push(subCategories[i]['id']);
+        }
+        jQuery('#categories').val(subCategoryIds);
+        subCategoryIds = [];
     }
 
     $('#categories').select2();
+    $('#supercategories').select2();
+    $('#tasks').select2();
+
+
+    $('#supercategories').on('change', function() {
+        $.get('/admin/ajax/tests/categories/' + $(this).val(), function(data) {
+            console.log(data);
+            $('.categories-container').html(data);
+            $('#categories').select2();
+            $('#categories').on('change', function() {
+                $.get('/admin/ajax/tests/tasks/' + $(this).val(), function(data2) {
+                    $('.tasks-container').html(data2);
+                    $('#tasks').select2();
+                });
+            });
+        });
+    });
 
     if($('.rich1').length) {
         CKEDITOR.replace( 'rich1' );
         CKEDITOR.replace( 'rich2' );
+        CKEDITOR.replace( 'rich3' );
+        CKEDITOR.replace( 'rich4' );
+        CKEDITOR.replace( 'rich5' );
+        CKEDITOR.replace( 'rich6' );
     }
 
-    if($('input[name="title_en"]').val() == 'Contact Page text') {
-        $('input[name="title_en"], input[name="title_ru"], input[name="title_ge"]').attr('readonly', '');
+    if($('input[name="has_options"]').is(':checked')){
+        setTimeout(function() {
+            $('.hide:not(.cke)').toggleClass('show');
+            $('.cke').addClass('hide');
+            $('#cke_rich1, #cke_rich4').removeClass('hide');
+        }, 1000);
     }
+
+    $('input[name="has_options"]').click(function(){
+        $('.hide:not(.cke)').toggleClass('show');
+        if($(this).is(':checked')){
+            $('.cke').addClass('hide');
+            $('#cke_rich1, #cke_rich4').removeClass('hide');
+        } else {
+            $('.cke').removeClass('hide');
+        }
+    });
+
 });

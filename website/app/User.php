@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'level', 'level_progress'
     ];
 
     /**
@@ -26,4 +26,37 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function tasks()
+    {
+        return $this->belongsToMany('App\Task', 'user_tasks',
+                'user_id', 'task_id')->withPivot('status');
+    }
+
+    public function tests()
+    {
+        return $this->belongsToMany('App\Test', 'user_tests',
+                'user_id', 'test_id')->withPivot('status', 'score');
+    }
+
+    public function addTask($task_id, $status)
+    {
+        $this->tasks()->attach($task_id, ['status' => $status]);
+    }
+
+    public function removeTask($task_id)
+    {
+        $this->tasks()->detach($task_id);
+    }
+
+    public function addTest($test_id, $status, $score)
+    {
+        $this->tests()->attach($test_id, ['status' => $status, 'score' => $score]);
+    }
+
+    public function removeTest($test_id)
+    {
+        $this->tests()->detach($test_id);
+    }
 }

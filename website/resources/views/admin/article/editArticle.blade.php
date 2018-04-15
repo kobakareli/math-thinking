@@ -28,7 +28,7 @@
                         <span class="language-marker">Categories:</span>
                         @foreach($article->categories as $category)
                             <div class="about-container" style="margin-bottom: 20px">
-                                <span class="about-title">{{ $article->title_en }}</span>
+                                <span class="about-title">{{ $category->title_en }}</span>
                             </div>
                         @endforeach
                         <div class="form-group">

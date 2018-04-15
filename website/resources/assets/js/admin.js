@@ -8,7 +8,17 @@ jQuery(document).ready(function() {
         jQuery('#categories').val(categoryIds);
     }
 
-    $('#categories').select2();
+    var subCategoryIds = [];
+
+    if(typeof subCategories != 'undefined') {
+        for(var i = 0; i < subCategories.length; i++) {
+            subCategoryIds.push(subCategories[i]['id']);
+        }
+        jQuery('#categories').val(subCategoryIds);
+    }
+    console.log(subCategoryIds);
+
+    //$('#categories').select2();
 
     if($('.rich1').length) {
         CKEDITOR.replace( 'rich1' );

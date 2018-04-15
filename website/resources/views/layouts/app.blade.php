@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <!-- Scripts -->
@@ -37,11 +38,20 @@
                     </a>
 
                     @if (Auth::check())
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/supercategories') }}">
+                            SuperCategories
+                        </a>
                         <a class="navbar-brand menu-item" href="{{ url('/admin/categories') }}">
                             Categories
                         </a>
                         <a class="navbar-brand menu-item" href="{{ url('/admin/articles') }}">
                             Articles
+                        </a>
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/tests') }}">
+                            Tests
+                        </a>
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/tasks') }}">
+                            Tasks
                         </a>
                     @endif
                 </div>

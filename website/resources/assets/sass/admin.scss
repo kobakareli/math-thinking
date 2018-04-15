@@ -1,28 +1,28 @@
 form input {
-    &.title {
-        margin-bottom: 10px;
-    }
+    margin-bottom: 10px;
 }
 
 form img {
-  width: 100px;
-  max-height: 100px;
+    width: 100px;
+    max-height: 100px;
 }
 
 .language-marker {
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 5px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .alert-danger {
-  margin-top: 60px;
+    margin-top: 60px;
 }
 
 .menu-item {
-  font-size: 14px !important;
+    font-size: 14px !important;
 }
 
 .ck-editor__editable {
-  min-height: 200px;
+    min-height: 200px;
 }

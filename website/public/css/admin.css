@@ -1,4 +1,4 @@
-form input.title {
+form input {
   margin-bottom: 10px;
 }
 
@@ -8,9 +8,11 @@ form img {
 }
 
 .language-marker {
+  display: inline-block;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .alert-danger {
