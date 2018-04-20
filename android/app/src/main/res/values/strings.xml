@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mathematical Thinking</string>
+    <string name="main_menu_theory">Theory</string>
+    <string name="main_menu_test">Test</string>
+    <string name="main_menu_problems">Problems</string>
+    <string name="main_menu_settings">Settings</string>
+</resources>
