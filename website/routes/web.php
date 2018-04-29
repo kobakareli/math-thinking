@@ -1,5 +1,7 @@
 <?php
 
+use App\SuperCategory;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,12 +14,24 @@
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    $supercategories = SuperCategory::all();
+    return view('pages.index', compact('supercategories'));
 });
 
 Auth::routes();
 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/tasks/page/{pageno}', 'TaskController@showAll');
+
+
+// ajax
+
+Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
+
+Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@ajaxSearch');
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
 

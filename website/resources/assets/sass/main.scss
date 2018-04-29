@@ -456,6 +456,7 @@ body, html {
             padding: 4.16% 8.33%;
             background-color: $color-darker;
             z-index: 2;
+            max-height: 100%;
 
             @media screen and (max-width: 960px) {
                 height: 100%;
@@ -465,6 +466,58 @@ body, html {
 
             @media screen and (max-width: 600px) {
                 padding: 20px;
+            }
+
+            .selects {
+                position: relative;
+                width: 100%;
+                height: 28px;
+                margin-bottom: 20px;
+
+                &>select, &>input, &>div, &>span {
+                    position: absolute;
+                    top: 0;
+                    width: 20% !important;
+                    height: 28px !important;
+
+                    &:nth-child(2) {
+                        left: 0;
+                    }
+
+                    &:nth-child(4), &:nth-child(3) {
+                        left: 27%;
+                    }
+
+                    &:nth-child(6), &:nth-child(5) {
+                        left: 54%;
+                    }
+
+                    &:nth-child(8), &:nth-child(7) {
+                        left: 80%;
+                    }
+
+                    .picker__holder {
+                        max-height: calc(28px + 1em) !important;
+                    }
+
+                    &.picker.picker--opened {
+                        .picker__holder {
+                            max-height: 10000px !important;
+                        }
+                    }
+
+                    &.categories-wrapper {
+                        &>* {
+                            width: 100% !important;
+                            height: 100% !important;
+
+                            .select2-selection {
+                                height: 28px !important;
+                                min-height: 28px !important;
+                            }
+                        }
+                    }
+                }
             }
 
             .search-input {
@@ -512,6 +565,114 @@ body, html {
                     height: auto;
                     flex-direction: column;
                 }
+
+                .result {
+                    width: 30%;
+
+                    @media screen and (max-width: 960px) {
+                        width: 100%;
+                    }
+
+                    .title {
+                        color: white;
+                    }
+
+                    a {
+                        text-decoration: none !important;
+                    }
+
+                    .posts {
+                        width: 100%;
+                        margin-top: 40px;
+
+                        @media screen and (max-width: 1450px) {
+                            margin-top: 25px;
+                        }
+
+                        @media screen and (max-width: 960px) {
+                            margin-top: 10px;
+                        }
+
+                        a {
+                            text-decoration: none !important;
+                        }
+
+                        .post {
+                            display: inline-block;
+                            position: relative;
+
+                            &.small {
+                                left: auto !important;
+                                right: 0 !important;
+                                width: 100% !important;
+                                height: auto !important;
+                                overflow: hidden;
+
+                                @media screen and (max-width: 960px) {
+                                    width: 60% !important;
+                                }
+
+                                @media screen and (max-width: 600px) {
+                                    width: 85% !important;
+                                }
+
+                                @media screen and (max-width: 350px) {
+                                    width: 92% !important;
+                                }
+
+                                &.prev {
+                                    top: auto !important;
+                                    bottom: 0 !important;
+                                }
+
+                                .post-texts {
+                                    display: inline-block;
+                                    padding-left: 0;
+                                    padding-right: 5%;
+                                    float: right;
+                                    width: 100%;
+
+                                    .offer-category {
+                                        margin-top: 10px;
+                                        color: #f36624;
+
+                                        @media screen and (max-width: 1450px) {
+                                            margin-top: 6px;
+                                        }
+                                    }
+
+                                    .offer-title {
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        color: white;
+                                    }
+
+                                    .description {
+                                        color: #ff9d1b;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .see-more {
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        color: #ff9d1b;
+                        margin-top: 40px;
+
+                        @media screen and (max-width: 1450px) {
+                            margin-top: 30px;
+                        }
+
+                        @media screen and (max-width: 960px) {
+                            margin-top: 0px;
+                            margin-bottom: 10px;
+                            text-align: left;
+                        }
+                    }
+                }
             }
         }
     }
@@ -522,16 +683,18 @@ body, html {
     position: relative;
     top: 130px;
     width: 40%;
-    height: 100%;
     left: 30%;
     border-style: solid;
     border-width: 2px;
     border-color: $color-main;
     border-radius: 20px;
     background-color: $color-main;
+    color: #cfcedc;
+    padding: 30px;
 
     @media screen and (max-width: 1450px) {
         top: 90px;
+        padding: 20px;
     }
 }
 
@@ -549,7 +712,7 @@ body, html {
         top: 90px;
     }
 
-    .login-form {
+    .login-form, .logged-in {
         display: none;
         width: 100%;
         height: auto;
@@ -604,6 +767,7 @@ body, html {
         }
 
         .sign-in-button {
+            display: block;
             color: white;
             background: $color-secondary;
             width: 50%;
@@ -618,11 +782,11 @@ body, html {
             }
         }
 
-        .password-recovery-link {
+        .password-recovery-link, .logout-link {
             float: right;
         }
 
-        .register-link, .password-recovery-link {
+        .link {
             color: $color-main;
         }
     }
@@ -650,8 +814,8 @@ body, html {
         background-color: white;
         padding-top: 30px;
         padding-bottom: 45px;
-        padding-left: calc(3.8% - 20px);
-        padding-right: calc(3.8% - 20px);
+        padding-left: 3.8%;
+        padding-right: 3.8%;
 
         @media screen and (max-width: 1450px) {
             padding-top: 20px;

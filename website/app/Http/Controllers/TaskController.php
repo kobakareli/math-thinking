@@ -120,6 +120,22 @@ class TaskController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll($pageno)
+    {
+        $tasks = Task::skip(($pageno-1)*10)->take(10)->get();
+        $supercategories = SuperCategory::all();
+        return view('pages.tasks', [
+            'tasks' => $tasks,
+            'supercategories' => $supercategories,
+            'pageno' => $pageno
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Task  $task

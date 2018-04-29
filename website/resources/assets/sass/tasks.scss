@@ -1,0 +1,53 @@
+.tasks-page {
+    .post {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #636b6f;
+
+        @media screen and (max-width: 1450px) {
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        p, div {
+            color: #cfcedc;
+
+            &.title {
+                font-weight: bold;
+            }
+
+            &.post-see-more {
+                margin-top: 10px;
+                color: #ff9d1b;
+            }
+        }
+
+        .post-category {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            color: #f36624;
+        }
+    }
+
+    .pagination {
+        position: relative;
+        margin-top: 30px;
+        height: 20px;
+
+        .pagination-link {
+            color: #cfcedc;
+            display: inline-block;
+
+            &.prev {
+                margin-right: 20px;
+            }
+        }
+    }
+}
