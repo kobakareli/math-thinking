@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Mathematical Thinking</string>
-    <string name="main_menu_theory">Theory</string>
-    <string name="main_menu_test">Test</string>
-    <string name="main_menu_problems">Problems</string>
+    <string name="main_menu_articles">Articles</string>
+    <string name="main_menu_tests">Tests</string>
+    <string name="main_menu_tasks">Tasks</string>
     <string name="main_menu_settings">Settings</string>
+    <string name="category_with_tabs">\u0009\u0009\u0009%s</string>
 </resources>

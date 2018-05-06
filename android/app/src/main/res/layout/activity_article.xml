@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tmand13.math_thinking.TheoryActivity">
+    tools:context="tmand13.math_thinking.ArticleActivity">
 
     <WebView
-        android:id="@+id/simpleTextView"
+        android:id="@+id/article_web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
