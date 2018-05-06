@@ -16,7 +16,7 @@ public abstract class AppDatabase extends RoomDatabase {
     // https://developer.android.com/reference/java/util/concurrent/Executor.html
     private static AppDatabase INSTANCE;
 
-    public abstract ArticleDao theoryDao();
+    public abstract ArticleDao articleDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

@@ -9,8 +9,6 @@ import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String THEORY = "theory";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +17,8 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println(db.theoryDao().getAll().size());
     }
 
-    public void openTheory(View view) {
-        /*Intent intent = new Intent(this, TheoryActivity.class);
-        String content_html = AppDatabase.getAppDatabase(getApplicationContext())
-                .theoryDao().getAll().get(0).getContentHtml();
-        intent.putExtra(THEORY, content_html);
-        startActivity(intent);*/
+    public void openCategories(View view) {
+        Intent intent = new Intent(this, CategoriesActivity.class);
+        startActivity(intent);
     }
 }
