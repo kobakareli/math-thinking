@@ -16,6 +16,8 @@ public class ArticleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String articleId = intent.getStringExtra(CategoriesActivity.ARTICLE_ID);
 
+        setTitle(articleId);
+
         // Capture the layout's TextView and set the string as its text
         WebView webView = findViewById(R.id.article_web_view);
 

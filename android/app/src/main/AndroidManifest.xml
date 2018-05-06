@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:label="Categories"
             android:theme="@style/CategoriesTheme"
             android:name=".CategoriesActivity">
         </activity>
