@@ -1,0 +1,82 @@
+.collapsible {
+  position: relative;
+  background-color: #78909C;
+  color: #37474F;
+  cursor: pointer;
+  padding: 18px;
+  margin: 50px 0 10px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+
+@media screen and (max-width: 1450px) {
+  .collapsible {
+    padding: 10px;
+    margin: 30px 0 5px;
+  }
+}
+
+.collapsible::after {
+  content: '+';
+  color: #37474F;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+  font-size: 36px;
+}
+
+@media screen and (max-width: 1450px) {
+  .collapsible::after {
+    font-size: 24px;
+  }
+}
+
+.collapsible.active::after {
+  content: "\2212";
+}
+
+.content {
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
+
+.submit-answer {
+  margin-top: 100px;
+}
+
+.submit-answer p {
+  color: #f36624;
+}
+
+@media screen and (max-width: 1450px) {
+  .submit-answer {
+    margin-top: 70px;
+  }
+}
+
+.submit-answer .closed input {
+  width: 100%;
+  padding: 10px 10px;
+}
+
+.submit-answer .submit-answer-button {
+  display: block;
+  color: white;
+  background: #ff9d1b;
+  width: 25%;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 0;
+  margin: 20px 0 10px;
+}
+
+.submit-answer .submit-answer-button:hover {
+  background: #f36624;
+}
+

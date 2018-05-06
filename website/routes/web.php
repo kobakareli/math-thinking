@@ -23,7 +23,9 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/tasks/page/{pageno}', 'TaskController@showAll');
+Route::post('/tasks/ajax/submit/answer', 'TaskController@submit');
+Route::get('/tasks/{pageno}/{sort}', 'TaskController@showAll');
+Route::get('/tasks/{task}', 'TaskController@show');
 
 
 // ajax

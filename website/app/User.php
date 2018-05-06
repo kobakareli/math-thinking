@@ -42,6 +42,7 @@ class User extends Authenticatable
 
     public function addTask($task_id, $status)
     {
+        $this->tasks()->detach($task_id);
         $this->tasks()->attach($task_id, ['status' => $status]);
     }
 
@@ -52,6 +53,7 @@ class User extends Authenticatable
 
     public function addTest($test_id, $status, $score)
     {
+        $this->tests()->detach($test_id);
         $this->tests()->attach($test_id, ['status' => $status, 'score' => $score]);
     }
 
