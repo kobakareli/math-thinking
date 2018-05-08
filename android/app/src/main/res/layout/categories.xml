@@ -13,7 +13,6 @@
         android:gravity="start|center_vertical"
         android:background="@color/colorBlue"
         android:textColor="@color/colorWhite"
-        android:textSize="30sp"
         android:padding="4dp" />
 
     <net.cachapa.expandablelayout.ExpandableLayout
