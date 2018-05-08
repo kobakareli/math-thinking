@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
 use App\SuperCategory;
 use App\Category;
 use Illuminate\Http\Request;
@@ -116,7 +117,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $supercategories = SuperCategory::all();
+        return view('pages.task', compact('supercategories', 'task'));
     }
 
     /**
@@ -124,15 +126,48 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAll($pageno)
+    public function showAll($pageno, $sort)
     {
-        $tasks = Task::skip(($pageno-1)*10)->take(10)->get();
+        $key = 'created_at';
+        $order = 'desc';
+        if($sort == 'old') {
+            $order = 'asc';
+        }
+        else if($sort == 'az') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'asc';
+        }
+        else if($sort == 'za') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'desc';
+        }
+        $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
         $supercategories = SuperCategory::all();
         return view('pages.tasks', [
             'tasks' => $tasks,
             'supercategories' => $supercategories,
-            'pageno' => $pageno
+            'pageno' => $pageno,
+            'sort' => $sort
         ]);
+    }
+
+    /**
+     * Submit answer to question.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function submit(Request $request)
+    {
+        $data = $request->all();
+        $user = User::find($data['user']);
+        $task = Task::find($data['task']);
+        $answer = $data['answer'];
+        $iscorrect = 0;
+        if($answer == $task->numeric_answer) {
+            $iscorrect = 1;
+        }
+        $user->addTask($task->id, $iscorrect);
+        return $iscorrect;
     }
 
     /**

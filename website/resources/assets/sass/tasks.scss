@@ -1,4 +1,16 @@
 .tasks-page {
+
+    .select, .select2 {
+        width: auto;
+        margin-bottom: 30px;
+        min-width: 200px;
+
+        @media screen and (max-width: 1450px) {
+            width: 20px;
+            min-width: 150px;
+        }
+    }
+
     .post {
         margin-bottom: 40px;
         padding-bottom: 20px;

@@ -76,7 +76,6 @@ $(document).ready(function () {
     });
 
     $('.search-input input').on('change', function() {
-        console.log('search');
         ajaxSearch();
     });
 

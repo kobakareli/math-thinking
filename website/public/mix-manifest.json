@@ -4,5 +4,6 @@
     "/css/admin.css": "/css/admin.css",
     "/css/main.css": "/css/main.css",
     "/css/fonts.css": "/css/fonts.css",
-    "/css/tasks.css": "/css/tasks.css"
+    "/css/tasks.css": "/css/tasks.css",
+    "/css/task.css": "/css/task.css"
 }
