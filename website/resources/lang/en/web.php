@@ -30,4 +30,8 @@ return [
     'submit_answer' => 'Submit answer',
     'type_answer' => 'Type your answer here',
     'submit' => 'Submit',
+    'most_answered' => 'Most Answered',
+    'least_answered' => 'Least Answered',
+    'most_correct' => 'Most Correctly Answered',
+    'least_correct' => 'Least Correctly Answered',
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\SuperCategory;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -62,6 +63,43 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll($pageno=null, $sort=null)
+    {
+        if($pageno == null) {
+            $pageno = 1;
+        }
+        if($sort == null) {
+            $sort = 'newest';
+        }
+        $key = 'created_at';
+        $order = 'desc';
+        if($sort == 'old') {
+            $order = 'asc';
+        }
+        else if($sort == 'az') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'asc';
+        }
+        else if($sort == 'za') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'desc';
+        }
+
+        $articles = Article::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+        $supercategories = SuperCategory::all();
+        return view('pages.articles', [
+            'articles' => $articles,
+            'supercategories' => $supercategories,
+            'pageno' => $pageno,
+            'sort' => $sort
+        ]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Article  $article
@@ -69,7 +107,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $supercategories = SuperCategory::all();
+        return view('pages.article', compact('supercategories', 'article'));
     }
 
     /**

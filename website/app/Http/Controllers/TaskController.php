@@ -126,8 +126,14 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAll($pageno, $sort)
+    public function showAll($pageno=null, $sort=null)
     {
+        if($pageno == null) {
+            $pageno = 1;
+        }
+        if($sort == null) {
+            $sort = 'newest';
+        }
         $key = 'created_at';
         $order = 'desc';
         if($sort == 'old') {
@@ -140,6 +146,22 @@ class TaskController extends Controller
         else if($sort == 'za') {
             $key = 'title_' . app()->getLocale();
             $order = 'desc';
+        }
+        else if($sort == 'ma') {
+            $key = 'total_answers';
+            $order = 'desc';
+        }
+        else if($sort == 'la') {
+            $key = 'total_answers';
+            $order = 'asc';
+        }
+        else if($sort == 'mc') {
+            $key = 'correct_answers';
+            $order = 'desc';
+        }
+        else if($sort == 'lc') {
+            $key = 'correct_answers';
+            $order = 'asc';
         }
         $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
         $supercategories = SuperCategory::all();
@@ -167,6 +189,9 @@ class TaskController extends Controller
             $iscorrect = 1;
         }
         $user->addTask($task->id, $iscorrect);
+        $task->total_answers += 1;
+        $task->correct_answers += $iscorrect;
+        $task->update();
         return $iscorrect;
     }
 
