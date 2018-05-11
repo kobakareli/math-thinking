@@ -111,10 +111,6 @@ public class CategoriesActivity extends AppCompatActivity {
                 int position = getAdapterPosition();
                 openArticle(categories.get(position));
             }
-
-            public TextView getArticleLink() {
-                return articleLink;
-            }
         }
     }
 

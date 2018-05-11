@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.database.Cursor;
 
 import java.util.List;
 
@@ -16,9 +17,17 @@ public interface TaskDao {
     @Query("SELECT * FROM task")
     List<Task> getAll();
 
+    @Query("SELECT t.title_en as title_en,t.task_id as _id FROM task t")
+    Cursor getCursorAll();
+
     @Insert
     void insert(Task task);
 
     @Delete
     void delete(Task task);
+
+    // TODO maybe change LIKE to MATCH and add indexes as described
+    // here: https://developer.android.com/guide/topics/search/search-dialog
+    @Query("SELECT task_id as _id, title_en FROM task where title_en LIKE (:titlePrefix)")
+    Cursor getCursor(String titlePrefix);
 }

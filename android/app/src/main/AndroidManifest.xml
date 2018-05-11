@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tmand13.math_thinking">
+
     <!-- TODO resolve all warnings in the end -->
     <application
         android:allowBackup="true"
@@ -14,15 +15,19 @@
             android:theme="@style/MenuTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".CategoriesActivity"
             android:label="Categories"
-            android:theme="@style/CategoriesTheme"
-            android:name=".CategoriesActivity">
-        </activity>
+            android:theme="@style/CategoriesTheme" />
         <activity android:name=".ArticleActivity" />
+        <activity
+                android:name=".TaskSearchActivity"
+                android:label="Tasks">
+        </activity>
     </application>
 
 </manifest>
