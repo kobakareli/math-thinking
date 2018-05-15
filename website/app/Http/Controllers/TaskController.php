@@ -164,12 +164,14 @@ class TaskController extends Controller
             $order = 'asc';
         }
         $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+        $islast = (count(Task::skip(($pageno)*10)->take(10)->get()) > 0);
         $supercategories = SuperCategory::all();
         return view('pages.tasks', [
             'tasks' => $tasks,
             'supercategories' => $supercategories,
             'pageno' => $pageno,
-            'sort' => $sort
+            'sort' => $sort,
+            'islast' => $islast
         ]);
     }
 

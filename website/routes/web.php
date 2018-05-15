@@ -31,6 +31,9 @@ Route::get('/task/{task}', 'TaskController@show');
 Route::get('/articles/{pageno?}/{sort?}', 'ArticleController@showAll');
 Route::get('/article/{article}', 'ArticleController@show');
 
+Route::get('/tests/{pageno?}/{sort?}', 'TestController@showAll');
+Route::get('/test/{test}', 'TestController@show');
+
 
 // ajax
 

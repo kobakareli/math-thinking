@@ -80,6 +80,44 @@ class TestController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll($pageno=null, $sort=null)
+    {
+        if($pageno == null) {
+            $pageno = 1;
+        }
+        if($sort == null) {
+            $sort = 'newest';
+        }
+        $key = 'created_at';
+        $order = 'desc';
+        if($sort == 'old') {
+            $order = 'asc';
+        }
+        else if($sort == 'az') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'asc';
+        }
+        else if($sort == 'za') {
+            $key = 'title_' . app()->getLocale();
+            $order = 'desc';
+        }
+        $tests = Test::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+        $islast = (count(Test::skip(($pageno)*10)->take(10)->get()) > 0);
+        $supercategories = SuperCategory::all();
+        return view('pages.tests', [
+            'tests' => $tests,
+            'supercategories' => $supercategories,
+            'pageno' => $pageno,
+            'sort' => $sort,
+            'islast' => $islast
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Test  $test

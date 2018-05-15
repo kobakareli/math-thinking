@@ -43,7 +43,9 @@
                 @if($pageno > 1)
                     <a class="pagination-link prev fs-18" href="{{ url('/articles/' . ($pageno-1)) . '/' . $sort}}">{{ trans('web.previous') }}</a>
                 @endif
-                <a class="pagination-link next fs-18" href="{{ url('/articles/' . ($pageno+1)) . '/' . $sort}}">{{ trans('web.next') }}</a>
+                @if(!$islast)
+                    <a class="pagination-link next fs-18" href="{{ url('/articles/' . ($pageno+1)) . '/' . $sort}}">{{ trans('web.next') }}</a>
+                @endif
             </div>
         </div>
     </div>
