@@ -34,4 +34,5 @@ return [
     'least_answered' => 'Least Answered',
     'most_correct' => 'Most Correctly Answered',
     'least_correct' => 'Least Correctly Answered',
+    'task' => 'Task',
 ];

@@ -17,9 +17,9 @@
         <div class="content">
             @foreach($tests as $test)
                 <div class="post">
-                    <a href="{{ url('/test/' . $task->id) }}">
+                    <a href="{{ url('/test/' . $test->id) }}">
                         <p class="title fs-24">
-                            {{ $task->{'title_' . App::getLocale()} }}
+                            {{ $test->{'title_' . App::getLocale()} }}
                         </p>
                         @foreach($test->categories as $category)
                             <span class="post-category">

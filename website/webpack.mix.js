@@ -20,4 +20,5 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
    .sass('resources/assets/sass/main.scss', 'public/css')
    .sass('resources/assets/sass/fonts.scss', 'public/css')
    .sass('resources/assets/sass/tasks.scss', 'public/css')
-   .sass('resources/assets/sass/task.scss', 'public/css');
+   .sass('resources/assets/sass/task.scss', 'public/css')
+   .sass('resources/assets/sass/test.scss', 'public/css');

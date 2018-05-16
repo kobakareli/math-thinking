@@ -1,0 +1,127 @@
+.tasks {
+  padding: 5%;
+  background-color: #78909C;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tasks .task {
+  display: none;
+  position: absolute;
+  color: white;
+  -webkit-transition: -webkit-transform 1s ease;
+  transition: -webkit-transform 1s ease;
+  transition: transform 1s ease;
+  transition: transform 1s ease, -webkit-transform 1s ease;
+}
+
+.tasks .task.active {
+  display: block;
+  position: relative;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.tasks .task.prev {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.tasks .task.next {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.tasks .task.first .title .prev {
+  display: none;
+}
+
+.tasks .task.last .title .next {
+  display: none;
+}
+
+.tasks .task .title {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1450px) {
+  .tasks .task .title {
+    margin-bottom: 15px;
+  }
+}
+
+.tasks .task .title .prev {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 20px;
+  padding-top: 20px;
+  background-image: url(/images/prev-task.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  left: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1450px) {
+  .tasks .task .title .prev {
+    width: 15px;
+    padding-top: 15px;
+  }
+}
+
+.tasks .task .title .next {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 20px;
+  padding-top: 20px;
+  background-image: url(/images/next-task.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  right: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1450px) {
+  .tasks .task .title .next {
+    width: 15px;
+    padding-top: 15px;
+  }
+}
+
+.tasks .task .collapsible {
+  background: #455A64;
+  color: white;
+}
+
+.tasks .task .collapsible::after {
+  color: white;
+}
+
+.tasks .task .submit-answer {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1450px) {
+  .tasks .task .submit-answer {
+    margin-top: 35px;
+  }
+}
+
+.tasks .task .submit-answer p {
+  color: black;
+}
+
+.tasks .task .submit-answer .answer {
+  color: black;
+}
+

@@ -76,7 +76,8 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        //
+        $supercategories = SuperCategory::all();
+        return view('pages.test', compact('supercategories', 'test'));
     }
 
     /**
@@ -106,7 +107,7 @@ class TestController extends Controller
             $order = 'desc';
         }
         $tests = Test::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Test::skip(($pageno)*10)->take(10)->get()) > 0);
+        $islast = (count(Test::skip(($pageno)*10)->take(10)->get()) == 0);
         $supercategories = SuperCategory::all();
         return view('pages.tests', [
             'tests' => $tests,
