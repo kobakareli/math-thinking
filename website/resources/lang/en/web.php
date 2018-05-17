@@ -35,4 +35,6 @@ return [
     'most_correct' => 'Most Correctly Answered',
     'least_correct' => 'Least Correctly Answered',
     'task' => 'Task',
+    'complete' => 'Complete',
+    'incomplete' => 'Incomplete',
 ];

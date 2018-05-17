@@ -10,9 +10,18 @@
 
         <p class="title fs-28">{{ $test->{'title_' . App::getLocale()} }}</p>
 
-        <form method="POST" action="" class="tasks">
+        @if(isset($status))
+            <div class="status-box @if($status == 1){{ 'done' }}@endif">
+                <span class="status complete fs-24">{{ trans('web.complete') }}</span>
+                <span class="status incomplete fs-24">{{ trans('web.incomplete') }}</span>
+                <span class="score fs-24">{{ $score . '/' . count($test->tasks) }}</span>
+            </div>
+        @endif
+
+        <form method="POST" action="{{url('/submit/test/' . $test->id)}}" class="tasks">
+            {{ csrf_field() }}
             @foreach($test->tasks as $indx=>$task)
-                <div class="task @if($indx == 0){{ 'active first' }}@endif @if($indx == count($test->tasks) - 1){{ 'last' }}@endif">
+                <div class="task @if($indx == 0){{ 'active first' }} @else{{ 'next' }}@endif @if($indx == count($test->tasks) - 1){{ 'last' }}@endif">
                     <div class="title fs-28">
                         <div class="prev active"></div>
                         {{ trans('web.task') . ' ' . ($indx + 1) }}
@@ -40,14 +49,14 @@
                             <p class="fs-18">{{ trans('web.submit_answer') }}</p>
                             @if($task->has_options)
                                 <div class="open fs-16">
-                                    <input class="answer" type="radio" name="answer" value="1"> <span class="answer-1" required>{{ $task->{'option_1_' . App::getLocale()} }}<span><br>
-                                    <input class="answer" type="radio" name="answer" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span><br>
-                                    <input class="answer" type="radio" name="answer" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span><br>
-                                    <input class="answer" type="radio" name="answer" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span>
+                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="1"> <span class="answer-1" required>{{ $task->{'option_1_' . App::getLocale()} }}<span><br>
+                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span><br>
+                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span><br>
+                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span>
                                 </div>
                             @else
                                 <div class="closed fs-16">
-                                    <input class="answer" type="number" name="answer" placeholder="{{ trans('web.type_answer') }}" required></input>
+                                    <input class="answer" type="number" name="{{ 'answer-' . $task->id }}" placeholder="{{ trans('web.type_answer') }}" required></input>
                                 </div>
                             @endif
                         </div>

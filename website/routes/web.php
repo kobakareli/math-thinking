@@ -34,6 +34,10 @@ Route::get('/article/{article}', 'ArticleController@show');
 Route::get('/tests/{pageno?}/{sort?}', 'TestController@showAll');
 Route::get('/test/{test}', 'TestController@show');
 
+Route::post('/submit/test/{test}', 'TestController@submitTest');
+
+Route::post('/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@search');
+
 
 // ajax
 

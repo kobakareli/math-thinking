@@ -41,7 +41,7 @@
                         <a href="{{ url('/' . App::getLocale() . '/articles') }}">
                             <div class="nav-item offers fs-17"><p>{{ trans('web.articles') }}</p></div>
                         </a>
-                        <a href="{{ url('/' . App::getLocale() . '/problems') }}">
+                        <a href="{{ url('/' . App::getLocale() . '/tasks') }}">
                             <div class="nav-item contact fs-17"><p>{{ trans('web.problems') }}</p></div>
                         </a>
                         <a href="{{ url('/' . App::getLocale() . '/tests') }}">

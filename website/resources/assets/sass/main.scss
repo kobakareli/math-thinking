@@ -2,10 +2,16 @@
 
 body, html {
     background-color: $color-lighter;
+    overflow-x: hidden;
+
+    @media screen and (min-width: 961px) {
+        height: 100vh;
+    }
 }
 
+
 #app {
-    height: 100vh;
+    height: 100%;
 }
 
 .header {
@@ -474,6 +480,10 @@ body, html {
                 height: 28px;
                 margin-bottom: 20px;
 
+                @media screen and (max-width: 1450px) {
+                    height: 70px;
+                }
+
                 &>select, &>input, &>div, &>span {
                     position: absolute;
                     top: 0;
@@ -515,6 +525,36 @@ body, html {
                                 height: 28px !important;
                                 min-height: 28px !important;
                             }
+                        }
+                    }
+
+                    @media screen and (max-width: 960px) {
+                        width: 45% !important;
+
+                        &:nth-child(2) {
+                            left: 0;
+                        }
+
+                        &:nth-child(4), &:nth-child(3) {
+                            left: 55%;
+                        }
+
+                        &:nth-child(6), &:nth-child(5) {
+                            top: 40px;
+                            left: 0;
+                        }
+
+                        &:nth-child(8), &:nth-child(7) {
+                            top: 40px;
+                            left: 55%;
+
+                            .picker__holder {
+                                right: 0;
+                            }
+                        }
+
+                        .picker__holder {
+                            width: 200%;
                         }
                     }
                 }
@@ -568,6 +608,10 @@ body, html {
 
                 .result {
                     width: 30%;
+                    padding: 10px 0;
+                    border-bottom-style: solid;
+                    border-bottom-width: 1px;
+                    border-bottom-color: white;
 
                     @media screen and (max-width: 960px) {
                         width: 100%;
@@ -691,10 +735,26 @@ body, html {
     background-color: $color-main;
     color: #cfcedc;
     padding: 30px;
+    margin-bottom: 50px;
 
     @media screen and (max-width: 1450px) {
         top: 90px;
         padding: 20px;
+        margin-bottom: 35px;
+    }
+
+    @media screen and (max-width: 960px) {
+        position: relative;
+        width: 90%;
+        margin: 30px;
+        width: calc(100% - 60px);
+        left: auto;
+        top: auto;
+    }
+
+    @media screen and (max-width: 600px) {
+        margin: 20px;
+        width: calc(100% - 40px);
     }
 }
 
@@ -710,6 +770,21 @@ body, html {
 
     @media screen and (max-width: 1450px) {
         top: 90px;
+    }
+
+    @media screen and (max-width: 960px) {
+        position: relative;
+        width: calc(100% - 60px);
+        margin: 30px;
+        margin-top: 90px;
+        left: auto;
+        top: auto;
+    }
+
+    @media screen and (max-width: 600px) {
+        margin: 20px;
+        margin-top: 60px;
+        width: calc(100% - 40px);
     }
 
     .login-form, .logged-in {
@@ -806,6 +881,22 @@ body, html {
         top: 90px;
     }
 
+    @media screen and (max-width: 960px) {
+        position: relative;
+        width: 90%;
+        margin: 30px;
+        margin-bottom: 130px;
+        width: calc(100% - 60px);
+        right: auto;
+        top: auto;
+    }
+
+    @media screen and (max-width: 600px) {
+        margin: 20px;
+        margin-bottom: 80px;
+        width: calc(100% - 40px);
+    }
+
     .trending {
         display: inline-block;
         height: auto;
@@ -821,10 +912,6 @@ body, html {
             padding-top: 20px;
             padding-bottom: 30px;
 
-        }
-
-        @media screen and (max-width: 960px) {
-            display: none;
         }
 
         .blog-section-title {

@@ -31,13 +31,13 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->belongsToMany('App\Task', 'user_tasks',
-                'user_id', 'task_id')->withPivot('status');
+                'user_id', 'task_id')->withPivot('status')->withTimestamps();;
     }
 
     public function tests()
     {
         return $this->belongsToMany('App\Test', 'user_tests',
-                'user_id', 'test_id')->withPivot('status', 'score');
+                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps();;
     }
 
     public function addTask($task_id, $status)

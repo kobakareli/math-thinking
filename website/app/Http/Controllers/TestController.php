@@ -7,6 +7,7 @@ use App\SuperCategory;
 use App\Category;
 use App\Task;
 use Illuminate\Http\Request;
+use Auth;
 
 class TestController extends Controller
 {
@@ -77,6 +78,14 @@ class TestController extends Controller
     public function show(Test $test)
     {
         $supercategories = SuperCategory::all();
+        if(Auth::check()) {
+            $t = auth()->user()->tests()->find($test->id);
+            if($t != null) {
+                $score = $t->pivot->score;
+                $status = $t->pivot->status;
+                return view('pages.test', compact('supercategories', 'test', 'status', 'score'));
+            }
+        }
         return view('pages.test', compact('supercategories', 'test'));
     }
 
@@ -201,5 +210,29 @@ class TestController extends Controller
     public function tasks(Category $category)
     {
         return view('renders/TestTasks', compact('category'))->render();
+    }
+
+
+    /**
+     * Fetch tasks in the category
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function submitTest(Request $request, Test $test)
+    {
+        $answers = $request->all();
+        $answers = array_slice($answers, 1);
+        $count = 0;
+        $tasks = $test->tasks;
+        foreach($answers as $key=>$value) {
+            $id = explode('-', $key)[1];
+            $task = $tasks->find($id);
+            if($task->numeric_answer == $value) {
+                $count += 1;
+            }
+        }
+        auth()->user()->addTest($test->id, 1, $count);
+        return redirect('/test/' . $test->id);
     }
 }

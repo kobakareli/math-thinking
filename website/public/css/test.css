@@ -1,4 +1,40 @@
-.tasks {
+.task-page .status-box {
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: red;
+  color: white;
+}
+
+@media screen and (max-width: 1450px) {
+  .task-page .status-box {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.task-page .status-box.done {
+  background-color: lightgreen;
+}
+
+.task-page .status-box.done .status.complete {
+  display: inline-block;
+}
+
+.task-page .status-box.done .status.incomplete {
+  display: none;
+}
+
+.task-page .status-box .status.complete {
+  display: none;
+}
+
+.task-page .status-box .score {
+  float: right;
+}
+
+.task-page .tasks {
   padding: 5%;
   background-color: #78909C;
   border-radius: 20px;
@@ -6,42 +42,43 @@
   position: relative;
 }
 
-.tasks .task {
-  display: none;
+.task-page .tasks .task {
   position: absolute;
   color: white;
-  -webkit-transition: -webkit-transform 1s ease;
-  transition: -webkit-transform 1s ease;
-  transition: transform 1s ease;
-  transition: transform 1s ease, -webkit-transform 1s ease;
+  -webkit-transition: -webkit-transform .5s ease;
+  transition: -webkit-transform .5s ease;
+  transition: transform .5s ease;
+  transition: transform .5s ease, -webkit-transform .5s ease;
+  opacity: 0;
 }
 
-.tasks .task.active {
+.task-page .tasks .task.active {
   display: block;
   position: relative;
   -webkit-transform: translateX(0);
           transform: translateX(0);
+  opacity: 1;
 }
 
-.tasks .task.prev {
+.task-page .tasks .task.prev {
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
 }
 
-.tasks .task.next {
+.task-page .tasks .task.next {
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
 }
 
-.tasks .task.first .title .prev {
+.task-page .tasks .task.first .title .prev {
   display: none;
 }
 
-.tasks .task.last .title .next {
+.task-page .tasks .task.last .title .next {
   display: none;
 }
 
-.tasks .task .title {
+.task-page .tasks .task .title {
   position: relative;
   text-align: center;
   margin-bottom: 20px;
@@ -49,12 +86,12 @@
 }
 
 @media screen and (max-width: 1450px) {
-  .tasks .task .title {
+  .task-page .tasks .task .title {
     margin-bottom: 15px;
   }
 }
 
-.tasks .task .title .prev {
+.task-page .tasks .task .title .prev {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -70,13 +107,13 @@
 }
 
 @media screen and (max-width: 1450px) {
-  .tasks .task .title .prev {
+  .task-page .tasks .task .title .prev {
     width: 15px;
     padding-top: 15px;
   }
 }
 
-.tasks .task .title .next {
+.task-page .tasks .task .title .next {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -92,36 +129,55 @@
 }
 
 @media screen and (max-width: 1450px) {
-  .tasks .task .title .next {
+  .task-page .tasks .task .title .next {
     width: 15px;
     padding-top: 15px;
   }
 }
 
-.tasks .task .collapsible {
+.task-page .tasks .task .collapsible {
   background: #455A64;
   color: white;
 }
 
-.tasks .task .collapsible::after {
+.task-page .tasks .task .collapsible::after {
   color: white;
 }
 
-.tasks .task .submit-answer {
+.task-page .tasks .task .submit-answer {
   margin-top: 50px;
 }
 
 @media screen and (max-width: 1450px) {
-  .tasks .task .submit-answer {
+  .task-page .tasks .task .submit-answer {
     margin-top: 35px;
   }
 }
 
-.tasks .task .submit-answer p {
+.task-page .tasks .task .submit-answer p {
   color: black;
 }
 
-.tasks .task .submit-answer .answer {
+.task-page .tasks .task .submit-answer .answer {
   color: black;
+}
+
+.task-page .tasks .submit-form-button {
+  display: block;
+  color: white;
+  background: #455A64;
+  width: 50%;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 1450px) {
+  .task-page .tasks .submit-form-button {
+    margin-top: 50px;
+    padding: 5px 0;
+  }
 }
 

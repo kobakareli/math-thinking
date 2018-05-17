@@ -1,118 +1,177 @@
-.tasks {
-    padding: 5%;
-    background-color: #78909C;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
+.task-page {
 
-    .task {
-        display: none;
-        position: absolute;
+    .status-box {
+        width: 100%;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 30px;
+        background-color: red;
         color: white;
-        transition: transform 1s ease;
 
-        &.active {
-            display: block;
-            position: relative;
-            transform: translateX(0);
-        }
-
-        &.prev {
-            transform: translateX(-100%);
-        }
-
-        &.next {
-            transform: translateX(100%);
-        }
-
-        &.first {
-            .title {
-                .prev {
-                    display: none;
-                }
-            }
-        }
-
-        &.last {
-            .title {
-                .next {
-                    display: none;
-                }
-            }
-        }
-
-        .title {
-            position: relative;
-            text-align: center;
+        @media screen and (max-width: 1450px) {
+            padding: 10px;
             margin-bottom: 20px;
-            width: 100%;
+        }
 
-            @media screen and (max-width: 1450px) {
-                margin-bottom: 15px;
-            }
+        &.done {
+            background-color: lightgreen;
 
-            .prev {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-                padding-top: 20px;
-                background-image: url(/images/prev-task.svg);
-                background-repeat: no-repeat;
-                background-size: 100% auto;
-                background-position: center;
-                left: 0;
-                cursor: pointer;
-
-                @media screen and (max-width: 1450px) {
-                    width: 15px;
-                    padding-top: 15px;
+            .status {
+                &.complete {
+                    display: inline-block;
                 }
-            }
-
-            .next {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 20px;
-                padding-top: 20px;
-                background-image: url(/images/next-task.svg);
-                background-repeat: no-repeat;
-                background-size: 100% auto;
-                background-position: center;
-                right: 0;
-                cursor: pointer;
-
-                @media screen and (max-width: 1450px) {
-                    width: 15px;
-                    padding-top: 15px;
+                &.incomplete {
+                    display: none;
                 }
             }
         }
 
-        .collapsible {
-            background: #455A64;
+        .status {
+            &.complete {
+                display: none;
+            }
+        }
+
+        .score {
+            float: right;
+        }
+    }
+
+    .tasks {
+        padding: 5%;
+        background-color: #78909C;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+
+        .task {
+            position: absolute;
             color: white;
+            transition: transform .5s ease;
+            opacity: 0;
 
-            &::after {
+            &.active {
+                display: block;
+                position: relative;
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            &.prev {
+                transform: translateX(-100%);
+            }
+
+            &.next {
+                transform: translateX(100%);
+            }
+
+            &.first {
+                .title {
+                    .prev {
+                        display: none;
+                    }
+                }
+            }
+
+            &.last {
+                .title {
+                    .next {
+                        display: none;
+                    }
+                }
+            }
+
+            .title {
+                position: relative;
+                text-align: center;
+                margin-bottom: 20px;
+                width: 100%;
+
+                @media screen and (max-width: 1450px) {
+                    margin-bottom: 15px;
+                }
+
+                .prev {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 20px;
+                    padding-top: 20px;
+                    background-image: url(/images/prev-task.svg);
+                    background-repeat: no-repeat;
+                    background-size: 100% auto;
+                    background-position: center;
+                    left: 0;
+                    cursor: pointer;
+
+                    @media screen and (max-width: 1450px) {
+                        width: 15px;
+                        padding-top: 15px;
+                    }
+                }
+
+                .next {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 20px;
+                    padding-top: 20px;
+                    background-image: url(/images/next-task.svg);
+                    background-repeat: no-repeat;
+                    background-size: 100% auto;
+                    background-position: center;
+                    right: 0;
+                    cursor: pointer;
+
+                    @media screen and (max-width: 1450px) {
+                        width: 15px;
+                        padding-top: 15px;
+                    }
+                }
+            }
+
+            .collapsible {
+                background: #455A64;
                 color: white;
+
+                &::after {
+                    color: white;
+                }
+            }
+
+            .submit-answer {
+                margin-top: 50px;
+
+                @media screen and (max-width: 1450px) {
+                    margin-top: 35px;
+                }
+
+                p {
+                    color: black;
+                }
+
+                .answer {
+                    color: black;
+                }
             }
         }
 
-        .submit-answer {
-            margin-top: 50px;
+        .submit-form-button {
+            display: block;
+            color: white;
+            background: #455A64;
+            width: 50%;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 70px;
 
             @media screen and (max-width: 1450px) {
-                margin-top: 35px;
-            }
-
-            p {
-                color: black;
-            }
-
-            .answer {
-                color: black;    
+                margin-top: 50px;
+                padding: 5px 0;
             }
         }
     }
+
 }

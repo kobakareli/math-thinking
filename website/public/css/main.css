@@ -1,10 +1,18 @@
 body,
 html {
   background-color: #78909C;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 961px) {
+  body,
+  html {
+    height: 100vh;
+  }
 }
 
 #app {
-  height: 100vh;
+  height: 100%;
 }
 
 .header {
@@ -564,6 +572,12 @@ html {
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 1450px) {
+  .header .search-wrapper .search-container .selects {
+    height: 70px;
+  }
+}
+
 .header .search-wrapper .search-container .selects > select,
 .header .search-wrapper .search-container .selects > input,
 .header .search-wrapper .search-container .selects > div,
@@ -644,6 +658,75 @@ html {
   min-height: 28px !important;
 }
 
+@media screen and (max-width: 960px) {
+  .header .search-wrapper .search-container .selects > select,
+  .header .search-wrapper .search-container .selects > input,
+  .header .search-wrapper .search-container .selects > div,
+  .header .search-wrapper .search-container .selects > span {
+    width: 45% !important;
+  }
+
+  .header .search-wrapper .search-container .selects > select:nth-child(2),
+  .header .search-wrapper .search-container .selects > input:nth-child(2),
+  .header .search-wrapper .search-container .selects > div:nth-child(2),
+  .header .search-wrapper .search-container .selects > span:nth-child(2) {
+    left: 0;
+  }
+
+  .header .search-wrapper .search-container .selects > select:nth-child(4),
+  .header .search-wrapper .search-container .selects > select:nth-child(3),
+  .header .search-wrapper .search-container .selects > input:nth-child(4),
+  .header .search-wrapper .search-container .selects > input:nth-child(3),
+  .header .search-wrapper .search-container .selects > div:nth-child(4),
+  .header .search-wrapper .search-container .selects > div:nth-child(3),
+  .header .search-wrapper .search-container .selects > span:nth-child(4),
+  .header .search-wrapper .search-container .selects > span:nth-child(3) {
+    left: 55%;
+  }
+
+  .header .search-wrapper .search-container .selects > select:nth-child(6),
+  .header .search-wrapper .search-container .selects > select:nth-child(5),
+  .header .search-wrapper .search-container .selects > input:nth-child(6),
+  .header .search-wrapper .search-container .selects > input:nth-child(5),
+  .header .search-wrapper .search-container .selects > div:nth-child(6),
+  .header .search-wrapper .search-container .selects > div:nth-child(5),
+  .header .search-wrapper .search-container .selects > span:nth-child(6),
+  .header .search-wrapper .search-container .selects > span:nth-child(5) {
+    top: 40px;
+    left: 0;
+  }
+
+  .header .search-wrapper .search-container .selects > select:nth-child(8),
+  .header .search-wrapper .search-container .selects > select:nth-child(7),
+  .header .search-wrapper .search-container .selects > input:nth-child(8),
+  .header .search-wrapper .search-container .selects > input:nth-child(7),
+  .header .search-wrapper .search-container .selects > div:nth-child(8),
+  .header .search-wrapper .search-container .selects > div:nth-child(7),
+  .header .search-wrapper .search-container .selects > span:nth-child(8),
+  .header .search-wrapper .search-container .selects > span:nth-child(7) {
+    top: 40px;
+    left: 55%;
+  }
+
+  .header .search-wrapper .search-container .selects > select:nth-child(8) .picker__holder,
+  .header .search-wrapper .search-container .selects > select:nth-child(7) .picker__holder,
+  .header .search-wrapper .search-container .selects > input:nth-child(8) .picker__holder,
+  .header .search-wrapper .search-container .selects > input:nth-child(7) .picker__holder,
+  .header .search-wrapper .search-container .selects > div:nth-child(8) .picker__holder,
+  .header .search-wrapper .search-container .selects > div:nth-child(7) .picker__holder,
+  .header .search-wrapper .search-container .selects > span:nth-child(8) .picker__holder,
+  .header .search-wrapper .search-container .selects > span:nth-child(7) .picker__holder {
+    right: 0;
+  }
+
+  .header .search-wrapper .search-container .selects > select .picker__holder,
+  .header .search-wrapper .search-container .selects > input .picker__holder,
+  .header .search-wrapper .search-container .selects > div .picker__holder,
+  .header .search-wrapper .search-container .selects > span .picker__holder {
+    width: 200%;
+  }
+}
+
 .header .search-wrapper .search-container .search-input {
   position: relative;
   width: 100%;
@@ -706,6 +789,10 @@ html {
 
 .header .search-wrapper .search-container .results .result {
   width: 30%;
+  padding: 10px 0;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: white;
 }
 
 @media screen and (max-width: 960px) {
@@ -843,12 +930,32 @@ html {
   background-color: #455A64;
   color: #cfcedc;
   padding: 30px;
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1450px) {
   .central-content {
     top: 90px;
     padding: 20px;
+    margin-bottom: 35px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .central-content {
+    position: relative;
+    width: 90%;
+    margin: 30px;
+    width: calc(100% - 60px);
+    left: auto;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .central-content {
+    margin: 20px;
+    width: calc(100% - 40px);
   }
 }
 
@@ -866,6 +973,25 @@ html {
 @media screen and (max-width: 1450px) {
   .left-content {
     top: 90px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .left-content {
+    position: relative;
+    width: calc(100% - 60px);
+    margin: 30px;
+    margin-top: 90px;
+    left: auto;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .left-content {
+    margin: 20px;
+    margin-top: 60px;
+    width: calc(100% - 40px);
   }
 }
 
@@ -989,6 +1115,26 @@ html {
   }
 }
 
+@media screen and (max-width: 960px) {
+  .right-content {
+    position: relative;
+    width: 90%;
+    margin: 30px;
+    margin-bottom: 130px;
+    width: calc(100% - 60px);
+    right: auto;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .right-content {
+    margin: 20px;
+    margin-bottom: 80px;
+    width: calc(100% - 40px);
+  }
+}
+
 .right-content .trending {
   display: inline-block;
   height: auto;
@@ -1005,12 +1151,6 @@ html {
   .right-content .trending {
     padding-top: 20px;
     padding-bottom: 30px;
-  }
-}
-
-@media screen and (max-width: 960px) {
-  .right-content .trending {
-    display: none;
   }
 }
 

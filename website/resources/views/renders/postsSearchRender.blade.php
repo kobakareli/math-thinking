@@ -2,7 +2,7 @@
     <div class="task-results result" data-url="{{ url('/') . '/' . App::getLocale() . '/ajax/search/' }}">
         <p class="title fs-22">{{ trans('web.problems') }}:</p>
         <div class="posts">
-            <a href="{{ url('/') . '/' . App::getLocale() . '/tasks/' . $tasks[0]->id}}">
+            <a href="{{ url('/') . '/' . App::getLocale() . '/task/' . $tasks[0]->id}}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">
@@ -33,7 +33,7 @@
         <p class="title fs-22">{{ trans('web.articles') }}:</p>
         <div class="posts">
 
-            <a href="{{ url('/') . '/' . App::getLocale() . '/articles/' . $articles[0]->id}}">
+            <a href="{{ url('/') . '/' . App::getLocale() . '/article/' . $articles[0]->id}}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">
@@ -64,7 +64,7 @@
     <div class="test-results result" data-url="{{ url('/') . '/' . App::getLocale() . '/ajax/search/' }}">
         <p class="title fs-22">{{ trans('web.tests') }}:</p>
         <div class="posts">
-            <a href="{{ url('/') . '/' . App::getLocale() . '/tests/' . $tests[0]->id}}">
+            <a href="{{ url('/') . '/' . App::getLocale() . '/test/' . $tests[0]->id}}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">
