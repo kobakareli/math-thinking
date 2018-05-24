@@ -21,13 +21,18 @@
         </activity>
         <activity
             android:name=".CategoriesActivity"
-            android:label="Categories"
+            android:label="Articles"
             android:theme="@style/CategoriesTheme" />
         <activity android:name=".ArticleActivity" />
         <activity
-                android:name=".TaskSearchActivity"
-                android:label="Tasks">
-        </activity>
+            android:name=".TaskSearchActivity"
+            android:label="Tasks"></activity>
+        <activity
+            android:name=".TaskActivity"
+            android:label="Task"></activity>
+        <activity
+            android:name=".TestSearchActivity"
+            android:label="Tests"></activity>
     </application>
 
 </manifest>

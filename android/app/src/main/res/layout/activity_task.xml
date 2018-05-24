@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TaskActivity" >
+
+    <LinearLayout
+        android:id="@+id/task_statement"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.6"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <WebView
+            android:id="@+id/task_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <WebView
+            android:id="@+id/task_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/task_answers"
+        app:layout_constraintTop_toBottomOf="@id/task_statement"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.4"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <Button
+            android:id="@+id/option1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:onClick="option1"
+            android:text="" />
+
+        <Button
+            android:id="@+id/option2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:onClick="option2"
+            android:text="" />
+
+        <Button
+            android:id="@+id/option3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:onClick="option3"
+            android:text="" />
+
+        <Button
+            android:id="@+id/option4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:onClick="option4"
+            android:text="" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -17,38 +17,36 @@ import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import tmand13.math_thinking.db.AppDatabase;
 /// TODO support list pagination
-public class TaskSearchActivity extends AppCompatActivity {
-    public static final String TASK_ID = "task_id";
+public class TestSearchActivity extends AppCompatActivity {
+    public static final String TEST_ID = "test_id";
 
     CursorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_search);
-        ListView listView = findViewById(R.id.list_view_tasks);
+        setContentView(R.layout.activity_test_search);
+
+        ListView listView = findViewById(R.id.list_view_tests);
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        adapter = new CursorAdapter(getApplicationContext(), db.taskDao().getCursorAll()) {
+        adapter = new CursorAdapter(getApplicationContext(), db.testDao().getCursorAll()) {
             @Override
             public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                return LayoutInflater.from(context).inflate(R.layout.task_search_item, parent, false);
+                return LayoutInflater.from(context).inflate(R.layout.test_search_item, parent, false);
             }
 
             @Override
             public void bindView(final View view, Context context, Cursor cursor) {
-                Button button = view.findViewById(R.id.task_search_item);
+                Button button = view.findViewById(R.id.test_search_item);
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("title_en"));
-                final int taskId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                final int testId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openTask(taskId);
+                        openTest(testId);
                     }
                 });
             }
@@ -56,17 +54,18 @@ public class TaskSearchActivity extends AppCompatActivity {
 
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.taskDao().getCursor(constraint + "%");
+                return db.testDao().getCursor(constraint + "%");
             }
         });
 
         listView.setAdapter(adapter);
     }
 
-    public void openTask(int taskId) {
-        Intent intent = new Intent(this, TaskActivity.class);
-        intent.putExtra(TASK_ID, taskId);
+    public void openTest(int testId) {
+        /*Intent intent = new Intent(this, TestActivi.class);
+        intent.putExtra(TEST_ID, testId);
         startActivity(intent);
+        */
     }
 
     // TODO might use LoaderManager & CursorLoader to move away loading from UI thread
@@ -76,7 +75,7 @@ public class TaskSearchActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menu_search);
         SearchView searchView = (SearchView) item.getActionView();
-        searchView.setQueryHint("Search task");
+        searchView.setQueryHint("Search test");
         // Before this searchview did not span the whole width
         searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

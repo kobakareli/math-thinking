@@ -20,6 +20,9 @@ public interface TaskDao {
     @Query("SELECT t.title_en as title_en,t.task_id as _id FROM task t")
     Cursor getCursorAll();
 
+    @Query("SELECT * FROM task where task_id = (:taskId)")
+    Task getTask(int taskId);
+
     @Insert
     void insert(Task task);
 
