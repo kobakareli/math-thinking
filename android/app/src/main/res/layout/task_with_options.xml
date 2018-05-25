@@ -8,27 +8,12 @@
     android:layout_height="match_parent"
     tools:context=".TaskActivity" >
 
-    <LinearLayout
-        android:id="@+id/task_statement"
+    <include
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.6"
-        android:orientation="vertical"
-        android:weightSum="5">
-
-        <WebView
-            android:id="@+id/task_title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <WebView
-            android:id="@+id/task_description"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4" />
-    </LinearLayout>
+        layout="@layout/task_title_description"/>
 
     <LinearLayout
         android:id="@+id/task_answers"
@@ -91,5 +76,12 @@
 
     </LinearLayout>
 
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="12dp"
+        layout="@layout/task_end_button"/>
 
 </android.support.constraint.ConstraintLayout>

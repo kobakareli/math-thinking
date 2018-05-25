@@ -19,6 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //insertTasks();
         //insertTests();
+        //insertTaskWithOptions();
+        //insertTwoDummyTasks();
+    }
+
+    private void insertTwoDummyTasks() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        for (int i = 104; i <= 105; i++) {
+            String iStr = String.valueOf(i);
+            db.taskDao().insert(new Task(i, "magari amocana"+String.valueOf(i), "gela",
+                    "es aris descriptioni",
+                    "d", "g", "g", "pasuxii",
+                    "pasxii", 1, 2, 2, i%2==0,
+                    "option pirveli", "d", "meore", "D",
+                    "mesame", "D", "meotxe", "D"));
+        }
     }
 
     private void insertTasks() {
@@ -27,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
             db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
                     "d", "d", "g", "g", "g",
                     "g", 1, 2, 2, false,
+                    "d", "d", "D", "D", "D",
+                    "D", "D", "D"));
+        }
+    }
+
+    private void insertTaskWithOptions() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        for (int i = 101; i <= 101; i++) {
+            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
+                    "d", "d", "g", "g", "g",
+                    "g", 1, 2, 2, true,
                     "d", "d", "D", "D", "D",
                     "D", "D", "D"));
         }

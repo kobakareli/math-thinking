@@ -29,6 +29,7 @@
             android:label="Tasks"></activity>
         <activity
             android:name=".TaskActivity"
+            android:windowSoftInputMode="adjustPan"
             android:label="Task"></activity>
         <activity
             android:name=".TestSearchActivity"
