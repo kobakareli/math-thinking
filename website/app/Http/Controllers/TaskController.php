@@ -191,6 +191,7 @@ class TaskController extends Controller
             $iscorrect = 1;
         }
         $user->addTask($task->id, $iscorrect);
+        $user->addTaskHistory($task->id, $iscorrect, $answer);
         $task->total_answers += 1;
         $task->correct_answers += $iscorrect;
         $task->update();

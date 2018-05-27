@@ -1,0 +1,17 @@
+.panel {
+  background-color: #455A64;
+  border-color: #78909C;
+}
+
+.panel .panel-heading {
+  background-color: #78909C;
+  border-color: #78909C;
+}
+
+.panel .form-control {
+  background-color: #78909C;
+  outline: none;
+  border: none;
+  color: black;
+}
+
