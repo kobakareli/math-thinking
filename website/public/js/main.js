@@ -102,6 +102,42 @@ $(document).ready(function () {
         }
         $.get(url, function(data) {
             $('.results').html(data);
+            $('.results a').on('click', function(e) {
+                e.preventDefault();
+                var type = "tasks";
+                if($(this).parent().hasClass('article-results')) {
+                    type = "articles";
+                }
+                else if($(e.target).parent().hasClass('test-results')) {
+                    type = "tests";
+                }
+                var url = $(this).attr('href');
+                search(url, type);
+            });
         });
+    }
+
+    function search(url, type) {
+        var term = $('.search-input input').val();
+        if(term == '') {
+            term = '-1';
+        }
+        var category = $('#categories').val();
+        if(category == '') {
+            category = '-1';
+        }
+        url += '/' + type + '/' + term + '/' + category;
+        var from = false;
+        if($('#date-from').val() != '') {
+            from = true;
+            url += '/' + $('#date-from').val();
+        }
+        if($('#date-to').val() != '') {
+            if(!from) {
+                url += '/to';
+            }
+            url += '/' + $('#date-to').val();
+        }
+        window.location.href=url;
     }
 });

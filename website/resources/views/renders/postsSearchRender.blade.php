@@ -25,7 +25,7 @@
                 </div>
             </a>
         </div>
-        <a href="{{ url('/' . App::getLocale() . '/search/') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
+        <a href="{{ url('/' . App::getLocale() . '/search') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
     </div>
 @endif
 @if(count($articles) > 0)
@@ -57,7 +57,7 @@
             </a>
 
         </div>
-        <a href="{{ url('/' . App::getLocale() . '/search/') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
+        <a href="{{ url('/' . App::getLocale() . '/search') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
     </div>
 @endif
 @if(count($tests) > 0)
@@ -80,6 +80,6 @@
                 </div>
             </a>
         </div>
-        <a href="{{ url('/' . App::getLocale() . '/search/') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
+        <a href="{{ url('/' . App::getLocale() . '/search') }}" class="see-more fs-16">{{ trans('web.see_more') }}</a>
     </div>
 @endif
