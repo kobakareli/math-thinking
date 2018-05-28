@@ -29,6 +29,7 @@
     <body>
 
         <div id="app">
+
             <section class="header">
                 <div class="nav-container">
                     <a class="logo-link" href="{{ url('/' . App::getLocale()) }}">
@@ -109,74 +110,7 @@
                 </div>
             </section>
 
-            <div class="left-content">
-                @if (Auth::check())
-                    <div class="logged-in active">
-                        <p class="greet fs-20">{{ trans('web.hello') }}, <span class="user-name">{{ Auth::user()->name }}</span></p>
-
-                        <a href="{{ url('/user') }}" class="profile-link link fs-17">
-                            {{ trans('web.profile') }}
-                        </a>
-                        <a href="/logout" class="logout-link link fs-17">
-                            {{ trans('web.logout') }}
-                        </a>
-                    </div>
-                @else
-                    <form class="login-form active" method="post" action="/login">
-
-                        {{ csrf_field() }}
-
-                        <div class="input-parent">
-                            <input type="text" name="email" placeholder="{{ trans('web.email') }}" required>
-                        </div>
-
-                        <div class="input-parent">
-                            <input type="password" name="password" placeholder="{{ trans('web.password') }}" required>
-                        </div>
-
-
-                        <button type="submit" class="sign-in-button fs-17">{{ trans('web.signin') }}</button>
-
-                        <a href="/register" class="register-link link fs-17">
-                            {{ trans('web.register') }}
-                        </a>
-                        <a href="/password/reset" class="password-recovery-link link fs-17">
-                            {{ trans('web.recover') }}
-                        </a>
-                    </form>
-                @endif
-            </div>
-
-            <div class="central-content">
-                @yield('content')
-            </div>
-
-            <div class="right-content">
-                <div class="trending">
-                    <p class="blog-section-title fs-20">{{ trans('web.trending') }} {{ trans('web.problems') }}</p>
-
-                    <div class="trends">
-                        <a href="">
-                            <div class="trend">
-
-                                <p class="title fs-16">
-                                    Test
-                                </p>
-                                <div class="info">
-                                    <span class="category fs-15">
-                                        Test
-                                    </span>
-                                    <div class="circle">
-                                    </div>
-                                    <span class="date fs-15">
-                                        Test
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @yield('content')
 
         </div>
 

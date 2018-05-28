@@ -37,4 +37,11 @@ return [
     'task' => 'Task',
     'complete' => 'Complete',
     'incomplete' => 'Incomplete',
+    'login' => 'Login',
+    'remember' => 'Remember me',
+    'forgot' => 'Forgot your password?',
+    'confirm' => 'Confirm password',
+    'name' => 'Name',
+    'reset' => 'Reset password',
+    'send_password' => 'Send password recovery link',
 ];

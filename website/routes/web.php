@@ -45,6 +45,10 @@ Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
 
 Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@ajaxSearch');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user', 'UserController@showProfile');
+});
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
 

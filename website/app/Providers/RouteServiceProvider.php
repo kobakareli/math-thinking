@@ -45,12 +45,12 @@ class RouteServiceProvider extends ServiceProvider
         //
         $locale = $request->segment(1);
         if($locale != 'login' && $locale != 'register' && $locale != 'admin' && $locale != 'home') {
-            if($locale != 'en' && $locale != 'ru' && $locale != 'ge') {
+            if($locale != 'en' && $locale != 'ge') {
                 $locale = 'en';
             }
             $this->app->setLocale($locale);
 
-            $router->group(['namespace' => $this->namespace, 'prefix' => $locale], function($router) {
+            $router->group(['namespace' => $this->namespace, 'prefix' => $locale, 'middleware' => 'web'], function($router) {
                 require app_path('../routes/web.php');
             });
         }

@@ -233,6 +233,7 @@ class TestController extends Controller
             }
         }
         auth()->user()->addTest($test->id, 1, $count);
+        auth()->user()->addTestHistory($test->id, 1, $count);
         return redirect('/test/' . $test->id);
     }
 }
