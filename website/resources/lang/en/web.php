@@ -44,4 +44,9 @@ return [
     'name' => 'Name',
     'reset' => 'Reset password',
     'send_password' => 'Send password recovery link',
+    'date' => 'Date',
+    'title' => 'Title',
+    'status' => 'Status',
+    'score' => 'Score',
+    'answer' => 'Submitted Answer',
 ];
