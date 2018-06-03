@@ -118,7 +118,12 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $supercategories = SuperCategory::all();
-        return view('pages.task', compact('supercategories', 'task'));
+        return view('pages.task', [
+            'supercategories' => $supercategories,
+            'task' => $task,
+            'page_title' => $task->title_en,
+            'has_share' => true
+        ]);
     }
 
     /**
@@ -171,7 +176,8 @@ class TaskController extends Controller
             'supercategories' => $supercategories,
             'pageno' => $pageno,
             'sort' => $sort,
-            'islast' => $islast
+            'islast' => $islast,
+            'page_title' => 'Tasks'
         ]);
     }
 

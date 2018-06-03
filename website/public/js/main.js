@@ -140,4 +140,16 @@ $(document).ready(function () {
         }
         window.location.href=url;
     }
+
+    $('.fb-button').on('click', function(e) {
+        e.preventDefault();
+        FB.ui({
+              method: 'share',
+              href: window.location.href,
+              /*picture: $('.og_image').attr('content'),
+              name: $('.og_title').attr('content'),
+              description: $('.og_description').attr('content')*/
+            }
+        );
+    });
 });

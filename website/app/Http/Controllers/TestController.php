@@ -83,10 +83,21 @@ class TestController extends Controller
             if($t != null) {
                 $score = $t->pivot->score;
                 $status = $t->pivot->status;
-                return view('pages.test', compact('supercategories', 'test', 'status', 'score'));
+                return view('pages.test', [
+                    'supercategories' => $supercategories,
+                    'test' => $test,
+                    'status' => $status,
+                    'score' => $score,
+                    'has_share' => true
+                ]);
             }
         }
-        return view('pages.test', compact('supercategories', 'test'));
+        return view('pages.test', [
+            'supercategories' => $supercategories,
+            'test' => $test,
+            'page_title' => $test->title_en,
+            'has_share' => true
+        ]);
     }
 
     /**
@@ -123,7 +134,8 @@ class TestController extends Controller
             'supercategories' => $supercategories,
             'pageno' => $pageno,
             'sort' => $sort,
-            'islast' => $islast
+            'islast' => $islast,
+            'page_title' => 'Tests'
         ]);
     }
 

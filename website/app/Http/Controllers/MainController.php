@@ -178,7 +178,8 @@ class MainController extends Controller
                     'articles' => $articlesArr,
                     'tests' => $testsArr,
                     'type' => $type,
-                    'supercategories' => $supercategories
+                    'supercategories' => $supercategories,
+                    'page_title' => 'Search'
                 ]);
     }
 }

@@ -97,7 +97,8 @@ class ArticleController extends Controller
             'supercategories' => $supercategories,
             'pageno' => $pageno,
             'sort' => $sort,
-            'islast' => $islast
+            'islast' => $islast,
+            'page_title' => 'Articles'
         ]);
     }
 
@@ -110,7 +111,12 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $supercategories = SuperCategory::all();
-        return view('pages.article', compact('supercategories', 'article'));
+        return view('pages.article', [
+            'supercategories' => $supercategories,
+            'article' => $article,
+            'page_title' => $article->title_en,
+            'has_share' => true
+        ]);
     }
 
     /**
