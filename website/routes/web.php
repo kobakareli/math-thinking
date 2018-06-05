@@ -16,13 +16,11 @@ use App\SuperCategory;
 Route::get('/', function () {
     $supercategories = SuperCategory::all();
     return view('pages.index', compact('supercategories'));
-});
+})->name('main');
 
 Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/tasks/ajax/submit/answer', 'TaskController@submit');
 Route::get('/tasks/{pageno?}/{sort?}', 'TaskController@showAll');
@@ -48,7 +46,9 @@ Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainControll
 
 
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+
+    Route::get('/home', 'HomeController@index')->name('home');
 
     // category routes
 
