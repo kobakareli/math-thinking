@@ -31,7 +31,52 @@
             color: #cfcedc;
 
             &.title {
+                position: relative;
                 font-weight: bold;
+
+                padding-right: 50px;
+
+                @media screen and (max-width: 1450px) {
+                    padding-right: 35px;
+                }
+
+                &.status-passed {
+                    &::after {
+                        content: "";
+                        width: 50px;
+                        height: 100%;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        background-image: url(/images/check.png);
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+
+                        @media screen and (max-width: 1450px) {
+                            width: 35px;
+                        }
+                    }
+                }
+
+                &.status-failed {
+                    &::after {
+                        content: "";
+                        width: 50px;
+                        height: 100%;
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        background-image: url(/images/cross.png);
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+
+                        @media screen and (max-width: 1450px) {
+                            width: 35px;
+                        }
+                    }
+                }
             }
 
             &.post-see-more {

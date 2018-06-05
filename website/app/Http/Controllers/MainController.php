@@ -146,7 +146,6 @@ class MainController extends Controller
                 $created = \Carbon\Carbon::parse(explode(" ",$task->created_at)[0]);
                 if((str_contains(strtolower($task->title_en), $term) || str_contains($task->title_ge, $term)) && $date) {
                     array_push($tasksArr, $task);
-                    break;
                 }
             }
         }
@@ -157,7 +156,6 @@ class MainController extends Controller
                 $created = \Carbon\Carbon::parse(explode(" ",$test->created_at)[0]);
                 if((str_contains(mb_strtolower($test->title_en), $term) || str_contains($test->title_ge, $term)) && $date) {
                     array_push($testsArr, $test);
-                    break;
                 }
             }
         }
@@ -168,7 +166,6 @@ class MainController extends Controller
                 $created = \Carbon\Carbon::parse(explode(" ",$article->created_at)[0]);
                 if((str_contains(strtolower($article->title_en), $term) || str_contains($article->title_ge, $term)) && $date) {
                     array_push($articlesArr, $article);
-                    break;
                 }
             }
         }
