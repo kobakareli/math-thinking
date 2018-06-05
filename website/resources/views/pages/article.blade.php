@@ -12,5 +12,7 @@
             {!! $article->{'text_' . App::getLocale()} !!}
         </div>
 
+        <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/article/' . $article->id) }}" data-numposts="5"></div>
+
     </div>
 @endsection

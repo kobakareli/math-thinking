@@ -66,6 +66,8 @@
             <input type="submit" class="submit-form-button fs-17" value="{{ trans('web.submit') }}">
             </input>
         </form>
+
+        <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/test/' . $test->id) }}" data-numposts="5"></div>
     </div>
 @endsection
 

@@ -46,6 +46,9 @@
                 </div>
             </div>
         @endif
+
+
+        <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}" data-numposts="5"></div>
     </div>
 @endsection
 
