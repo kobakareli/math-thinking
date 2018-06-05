@@ -1,5 +1,129 @@
+html {
+  overflow: auto;
+  max-height: 100vh;
+}
+
+body {
+  overflow: hidden;
+}
+
 .central-content {
-  left: 8.33%;
-  width: 70%;
+  width: 80%;
+  left: 10%;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: 960px) {
+  .central-content {
+    margin-top: 80px !important;
+    margin-bottom: 100px !important;
+  }
+}
+
+.central-content .share-div {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .share-div {
+    margin-bottom: 35px;
+  }
+}
+
+.central-content .share-div .fb-button {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .share-div .fb-button {
+    width: 35px;
+  }
+}
+
+.central-content .name-text,
+.central-content .mail-text,
+.central-content .level-text {
+  display: inline-block;
+  font-weight: bold;
+  min-width: 150px;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .name-text,
+  .central-content .mail-text,
+  .central-content .level-text {
+    min-width: 110px;
+  }
+}
+
+.central-content .mail,
+.central-content .name,
+.central-content .level {
+  color: #ff9d1b;
+}
+
+.central-content .table-title {
+  margin: 50px 0 30px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .table-title {
+    margin: 35px 0 20px;
+  }
+}
+
+.central-content .table-wrapper {
+  overflow: auto;
+  max-height: 400px;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .table-wrapper {
+    max-height: 300px;
+  }
+}
+
+.central-content .table-wrapper table {
+  min-width: 100%;
+}
+
+.central-content .table-wrapper table th {
+  padding: 10px 20px;
+}
+
+.central-content .table-wrapper table th.date-row,
+.central-content .table-wrapper table th.title-row {
+  width: 35%;
+  overflow: hidden;
+}
+
+.central-content .table-wrapper table th.score-row,
+.central-content .table-wrapper table th.answer-row,
+.central-content .table-wrapper table th.status-row {
+  width: 15%;
+}
+
+.central-content .table-wrapper table tbody {
+  overflow-x: hidden;
+}
+
+.central-content .table-wrapper table tbody tr {
+  overflow: hidden;
+}
+
+.central-content .table-wrapper table tbody tr td {
+  padding: 10px 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
+  border-left-style: none;
+}
+
+.central-content .table-wrapper table tbody tr td:last-child {
+  border-right-style: none;
 }
 

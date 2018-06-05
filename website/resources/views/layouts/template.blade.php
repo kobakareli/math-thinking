@@ -6,7 +6,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 
-        <title>Laravel | Laravel</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+        @if(isset($page_title))
+            <title>{{ $page_title }} | Math Thinking</title>
+            <meta class="og_title" property="og:title" content="{{ $page_title . ' | Math Thinking' }}">
+        @else
+            <title>Math Thinking</title>
+            <meta class="og_title" property="og:title" content="Math Thinking">
+        @endif
+
+        <meta class="og_description" property="og:description" content="">
+
+        <meta name="description"  content="" />
+
+        <meta class="og_image" property="og:image" content="" id="meta_image">
+
+        <meta property="og:type" content="website" />
+        <meta property="fb:app_id" content="1026007677546401" />
+        <meta property="fb:pages" content="" />
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -36,6 +56,23 @@
           js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=1026007677546401&autoLogAppEvents=1';
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
+        <script>
+            window.fbAsyncInit = function() {
+                 FB.init({
+                   appId      : '1026007677546401',
+                   xfbml      : true,
+                   version    : 'v2.3'
+                 });
+            };
+
+           (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 
         <div id="app">
             <section class="header">
@@ -161,28 +198,42 @@
             </div>
 
             <div class="right-content">
+
+                @if (isset($has_share))
+                    <div class="share-div">
+                        <p class="share fs-18">{{ trans('web.share_page') }}:</p>
+                        <img class="fb-button" src="/images/fb.png">
+                    </div>
+
+                    <hr>
+                @endif
+
                 <div class="trending">
                     <p class="blog-section-title fs-20">{{ trans('web.trending') }} {{ trans('web.problems') }}</p>
 
                     <div class="trends">
-                        <a href="">
-                            <div class="trend">
+                        @foreach($popular as $ptask)
+                            <a href="{{ url('/tasks/' . $ptask->id) }}">
+                                <div class="trend">
 
-                                <p class="title fs-16">
-                                    Test
-                                </p>
-                                <div class="info">
-                                    <span class="category fs-15">
-                                        Test
-                                    </span>
-                                    <div class="circle">
+                                    <p class="title fs-16">
+                                        {{ $ptask->{'title_' . App::getLocale()} }}
+                                    </p>
+                                    <div class="info">
+                                        <span class="category fs-15">
+                                            @if(count($ptask->categories))
+                                                {{ $ptask->categories[0]->{'title_' . App::getLocale()} }}
+                                            @endif
+                                        </span>
+                                        <div class="circle">
+                                        </div>
+                                        <span class="date fs-15">
+                                            {{ \Carbon\Carbon::parse(explode(" ",$ptask->created_at)[0])->format('d/m/Y') }}
+                                        </span>
                                     </div>
-                                    <span class="date fs-15">
-                                        Test
-                                    </span>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

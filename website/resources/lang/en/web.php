@@ -49,4 +49,8 @@ return [
     'status' => 'Status',
     'score' => 'Score',
     'answer' => 'Submitted Answer',
+    'level' => 'Level',
+    'tasks_history' => 'Tasks History',
+    'tests_history' => 'Tests History',
+    'share_page' => 'Share This Page',
 ];

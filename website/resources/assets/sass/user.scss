@@ -1,4 +1,106 @@
+html {
+    overflow: auto;
+    max-height: 100vh;
+}
+body {
+    overflow: hidden;
+}
+
 .central-content {
-    left: 8.33%;
-    width: 70%;
+    width: 80%;
+    left: 10%;
+    margin: 0 !important;
+
+    @media screen and (max-width: 960px) {
+        margin-top: 80px !important;
+        margin-bottom: 100px !important;
+    }
+
+    .share-div {
+        width: 100%;
+        margin-bottom: 50px;
+
+        @media screen and (max-width: 1450px) {
+            margin-bottom: 35px;
+        }
+
+        .fb-button {
+            width: 50px;
+            height: auto;
+            cursor: pointer;
+
+            @media screen and (max-width: 1450px) {
+                width: 35px;
+            }
+        }
+    }
+
+    .name-text, .mail-text, .level-text {
+        display: inline-block;
+        font-weight: bold;
+        min-width: 150px;
+
+        @media screen and (max-width: 1450px) {
+            min-width: 110px;
+        }
+    }
+
+    .mail, .name, .level {
+        color: #ff9d1b;
+    }
+
+    .table-title {
+        margin: 50px 0 30px;
+        font-weight: bold;
+
+        @media screen and (max-width: 1450px) {
+            margin: 35px 0 20px;
+        }
+    }
+
+    .table-wrapper {
+        overflow: auto;
+        max-height: 400px;
+
+        @media screen and (max-width: 1450px) {
+            max-height: 300px;
+        }
+
+        table {
+            min-width: 100%;
+
+            th {
+                padding: 10px 20px;
+
+                &.date-row, &.title-row {
+                    width: 35%;
+                    overflow: hidden;
+                }
+
+                &.score-row, &.answer-row, &.status-row {
+                    width: 15%;
+                }
+            }
+
+            tbody {
+                overflow-x: hidden;
+
+                tr {
+                    overflow: hidden;
+
+                    td {
+                        padding: 10px 20px;
+                        border-width: 1px;
+                        border-style: solid;
+                        border-color: white;
+                        border-left-style: none;
+
+                        &:last-child {
+                            border-right-style: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

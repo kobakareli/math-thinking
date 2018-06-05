@@ -56,8 +56,11 @@ class UserController extends Controller
         }
     }
 
-    public function showProfile()
+    public function showProfile(User $user)
     {
-        return view('pages.userProfile');
+        return view('pages.userProfile', [
+            'user' => $user,
+            'page_title' => $user->name
+        ]);
     }
 }

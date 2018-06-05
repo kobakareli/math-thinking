@@ -38,6 +38,7 @@ Route::post('/submit/test/{test}', 'TestController@submitTest');
 
 Route::get('/search/{type}/{term}/{category}/{datefrom?}/{dateto?}', 'MainController@search');
 
+Route::get('/user/{user}', 'UserController@showProfile');
 
 // ajax
 
@@ -45,9 +46,6 @@ Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
 
 Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@ajaxSearch');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/user', 'UserController@showProfile');
-});
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
