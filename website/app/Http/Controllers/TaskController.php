@@ -195,6 +195,13 @@ class TaskController extends Controller
         $iscorrect = 0;
         if($answer == $task->numeric_answer) {
             $iscorrect = 1;
+            if($user->level_progress == $user->level*5 - 1) {
+                $user->level += 1;
+                $user->level_progress = 0;
+            }
+            else {
+                $user->level_progress += 1;
+            }
         }
         $user->addTask($task->id, $iscorrect);
         $user->addTaskHistory($task->id, $iscorrect, $answer);
