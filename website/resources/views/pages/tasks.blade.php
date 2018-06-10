@@ -20,9 +20,17 @@
 
         <div class="content">
             @foreach($tasks as $task)
+                <?php
+                    if(Auth::check()) {
+                        $user = $task->users->find(Auth::user()->id);
+                        if($user != null && $user->count() > 0) {
+                            $status = $user->pivot->status;
+                        }
+                    }
+                ?>
                 <div class="post">
                     <a href="{{ url('/task/' . $task->id) }}">
-                        <p class="title fs-24">
+                        <p class="title fs-24 @if(isset($status) && $status == 1){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
                             {{ $task->{'title_' . App::getLocale()} }}
                         </p>
                         @foreach($task->categories as $category)
@@ -41,6 +49,11 @@
                         <p class="post-see-more">{{ trans('web.see_more') }}</p>
                     </a>
                 </div>
+                <?php
+                    if(isset($status)) {
+                        unset($status);
+                    }
+                ?>
             @endforeach
 
             <div class="pagination">

@@ -28,6 +28,12 @@ class Task extends Model
                 'task_id', 'category_id');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Task', 'user_tasks',
+                'task_id', 'user_id')->withPivot('status')->withTimestamps();;
+    }
+
     /* manipulate categories */
     public function addCategory($categoryId)
     {

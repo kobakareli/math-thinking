@@ -26,6 +26,12 @@ class Test extends Model
                 'test_id', 'task_id');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Test', 'user_tests',
+                'test_id', 'user_id')->withPivot('status', 'score')->withTimestamps();;
+    }
+
     /* manipulate categories */
     public function addCategory($categoryId)
     {
