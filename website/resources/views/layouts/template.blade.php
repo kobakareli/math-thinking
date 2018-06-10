@@ -71,20 +71,20 @@
             <section class="header">
                 <div class="nav-container">
                     <a class="logo-link" href="{{ url('/' . App::getLocale()) }}">
-                        <img class="logo desktop active" src="{{ url('/images/bog.svg') }}" />
-                        <img class="logo mobile" src="{{ url('/images/bog-logo.svg') }}" />
+                        <img class="logo desktop active" src="{{ url('/images/logo.png') }}" />
+                        <img class="logo mobile" src="{{ url('/images/logo.png') }}" />
                     </a>
 
                     <div class="nav">
 
                         <a href="{{ url('/' . App::getLocale() . '/articles') }}">
-                            <div class="nav-item offers fs-17"><p>{{ trans('web.articles') }}</p></div>
+                            <div class="nav-item articles fs-17"><p>{{ trans('web.articles') }}</p></div>
                         </a>
                         <a href="{{ url('/' . App::getLocale() . '/tasks') }}">
-                            <div class="nav-item contact fs-17"><p>{{ trans('web.problems') }}</p></div>
+                            <div class="nav-item tasks fs-17"><p>{{ trans('web.problems') }}</p></div>
                         </a>
                         <a href="{{ url('/' . App::getLocale() . '/tests') }}">
-                            <div class="nav-item blog fs-17"><p>{{ trans('web.tests') }}</p></div>
+                            <div class="nav-item tests fs-17"><p>{{ trans('web.tests') }}</p></div>
                         </a>
 
                     </div>

@@ -202,6 +202,7 @@ class TaskController extends Controller
             else {
                 $user->level_progress += 1;
             }
+            $user->update();
         }
         $user->addTask($task->id, $iscorrect);
         $user->addTaskHistory($task->id, $iscorrect, $answer);

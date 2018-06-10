@@ -257,20 +257,16 @@ html {
             transform: translateX(-50%);
   }
 
-  .header .nav-container .nav .nav-item.offers {
-    background-image: url(/images/offers-footer.png);
+  .header .nav-container .nav .nav-item.articles {
+    background-image: url(/images/article.png);
   }
 
-  .header .nav-container .nav .nav-item.contact {
-    background-image: url(/images/contact-footer.png);
+  .header .nav-container .nav .nav-item.tasks {
+    background-image: url(/images/task.png);
   }
 
-  .header .nav-container .nav .nav-item.blog {
-    background-image: url(/images/blog-footer.png);
-  }
-
-  .header .nav-container .nav .nav-item.about {
-    background-image: url(/images/about-footer.png);
+  .header .nav-container .nav .nav-item.tests {
+    background-image: url(/images/test.svg);
   }
 }
 

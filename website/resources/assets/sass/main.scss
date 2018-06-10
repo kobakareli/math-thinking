@@ -211,20 +211,16 @@ body, html {
                         transform: translateX(-50%);
                     }
 
-                    &.offers {
-                        background-image: url(/images/offers-footer.png);
+                    &.articles {
+                        background-image: url(/images/article.png);
                     }
 
-                    &.contact {
-                        background-image: url(/images/contact-footer.png);
+                    &.tasks {
+                        background-image: url(/images/task.png);
                     }
 
-                    &.blog {
-                        background-image: url(/images/blog-footer.png);
-                    }
-
-                    &.about {
-                        background-image: url(/images/about-footer.png);
+                    &.tests {
+                        background-image: url(/images/test.svg);
                     }
                 }
 

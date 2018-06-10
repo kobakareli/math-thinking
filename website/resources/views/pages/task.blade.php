@@ -37,7 +37,7 @@
                     </div>
                 @else
                     <div class="closed fs-16">
-                        <input class="answer" type="number" name="answer" placeholder="{{ trans('web.type_answer') }}"></input>
+                        <input class="answer" name="answer" placeholder="{{ trans('web.type_answer') }}"></input>
                     </div>
                 @endif
 
