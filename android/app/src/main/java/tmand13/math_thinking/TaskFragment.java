@@ -26,9 +26,7 @@ import tmand13.math_thinking.db.Task;
 // TODO remove unused libraries and solve all intellij idea
 // advice
 public class TaskFragment extends Fragment {
-    public static final String TASK_ID = "task_id";
-
-    int taskId;
+    Integer taskId;
     //TODO control edittext based on answer type
     Task task;
     Button option1, option2, option3, option4;
@@ -43,7 +41,7 @@ public class TaskFragment extends Fragment {
     public static TaskFragment newInstance(int taskId) {
         TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
-        args.putInt(TASK_ID, taskId);
+        args.putInt(TaskActivity.TASK_ID, taskId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,30 +50,30 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            taskId = getArguments().getInt(TASK_ID);
+            taskId = getArguments().getInt(TaskActivity.TASK_ID);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        AppDatabase db = AppDatabase.getAppDatabase(getContext());
-        task = db.taskDao().getTask(taskId);
-
-        int layout;
-        if (task == null) {
-            layout = R.layout.empty;
-        } else if (task.isHasOptions()) {
-            layout = R.layout.task_with_options;
+        if (taskId == null) {
+            return inflater.inflate(R.layout.empty, container, false);
         } else {
-            layout = R.layout.task_without_options;
+            AppDatabase db = AppDatabase.getAppDatabase(getContext());
+            task = db.taskDao().getTask(taskId);
+
+            if (task.isHasOptions()) {
+                return inflater.inflate(R.layout.task_with_options, container, false);
+            } else {
+                return inflater.inflate(R.layout.task_without_options, container, false);
+            }
         }
-        return inflater.inflate(layout, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        if (task == null) {
+        if (taskId == null) {
             return;
         }
         TextView titleTextView = view.findViewById(R.id.task_title);
@@ -171,6 +169,7 @@ public class TaskFragment extends Fragment {
     }
 
     public void answerSelected(View view) {
+        alreadyAnswered = true;
         removeKeyboardAndFocus();
         //todo close keyboard
         String userAnswer = answerField.getText().toString();
@@ -193,5 +192,9 @@ public class TaskFragment extends Fragment {
                 task.getHintEn(), mimeType, encoding, "");
 
         dialog.show();
+    }
+
+    public boolean alreadyAnswered() {
+        return alreadyAnswered;
     }
 }

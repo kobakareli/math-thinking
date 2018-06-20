@@ -20,8 +20,6 @@ import android.widget.SearchView;
 import tmand13.math_thinking.db.AppDatabase;
 /// TODO support list pagination
 public class TestSearchActivity extends AppCompatActivity {
-    public static final String TEST_ID = "test_id";
-
     CursorAdapter adapter;
 
     @Override
@@ -62,10 +60,9 @@ public class TestSearchActivity extends AppCompatActivity {
     }
 
     public void openTest(int testId) {
-        /*Intent intent = new Intent(this, TestActivi.class);
-        intent.putExtra(TEST_ID, testId);
+        Intent intent = new Intent(this, TestActivity.class);
+        intent.putExtra(TestActivity.TEST_ID, testId);
         startActivity(intent);
-        */
     }
 
     // TODO might use LoaderManager & CursorLoader to move away loading from UI thread
