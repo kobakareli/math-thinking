@@ -6,10 +6,12 @@ use App\Task;
 use App\User;
 use App\SuperCategory;
 use App\Category;
+use App\Calculator;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -189,26 +191,29 @@ class TaskController extends Controller
     public function submit(Request $request)
     {
         $data = $request->all();
-        $user = User::find($data['user']);
-        $task = Task::find($data['task']);
         $answer = $data['answer'];
+        $answer = Calculator::calculate($answer);
         $iscorrect = 0;
-        if($answer == $task->numeric_answer) {
-            $iscorrect = 1;
-            if($user->level_progress == $user->level*5 - 1) {
-                $user->level += 1;
-                $user->level_progress = 0;
+        if($answer != "error") {
+            $user = User::find($data['user']);
+            $task = Task::find($data['task']);
+            if($answer == $task->numeric_answer) {
+                $iscorrect = 1;
+                if($user->level_progress == $user->level*5 - 1) {
+                    $user->level += 1;
+                    $user->level_progress = 0;
+                }
+                else {
+                    $user->level_progress += 1;
+                }
+                $user->update();
             }
-            else {
-                $user->level_progress += 1;
-            }
-            $user->update();
+            $user->addTask($task->id, $iscorrect);
+            $user->addTaskHistory($task->id, $iscorrect, $answer);
+            $task->total_answers += 1;
+            $task->correct_answers += $iscorrect;
+            $task->update();
         }
-        $user->addTask($task->id, $iscorrect);
-        $user->addTaskHistory($task->id, $iscorrect, $answer);
-        $task->total_answers += 1;
-        $task->correct_answers += $iscorrect;
-        $task->update();
         return $iscorrect;
     }
 
