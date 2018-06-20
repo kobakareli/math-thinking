@@ -45,12 +45,4 @@
 
     </LinearLayout>
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="12dp"
-        layout="@layout/task_end_button"/>
-
 </android.support.constraint.ConstraintLayout>

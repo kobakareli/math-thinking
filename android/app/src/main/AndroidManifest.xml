@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MenuTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,19 +22,23 @@
         </activity>
         <activity
             android:name=".CategoriesActivity"
+            android:screenOrientation="portrait"
             android:label="Articles"
             android:theme="@style/CategoriesTheme" />
         <activity android:name=".ArticleActivity" />
         <activity
             android:name=".TaskSearchActivity"
-            android:label="Tasks"></activity>
+            android:screenOrientation="portrait"
+            android:label="Tasks"/>
         <activity
             android:name=".TaskActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
-            android:label="Task"></activity>
+            android:label="Task"/>
         <activity
             android:name=".TestSearchActivity"
-            android:label="Tests"></activity>
+            android:screenOrientation="portrait"
+            android:label="Tests"/>
     </application>
 
 </manifest>
