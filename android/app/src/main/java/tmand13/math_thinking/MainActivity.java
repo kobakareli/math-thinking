@@ -17,15 +17,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //insertTasks();
-        //insertTests();
-        //insertTaskWithOptions();
-        //insertTwoDummyTasks();
+        //insertData();
+    }
+
+    private void insertData() {
+        insertTasks();
+        insertTaskWithOptions();
+        insertTwoDummyTasks();
+        insertTests();
     }
 
     private void insertTwoDummyTasks() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 104; i <= 105; i++) {
+        for (int i = 102; i <= 105; i++) {
             String iStr = String.valueOf(i);
             db.taskDao().insert(new Task(i, "magari amocana"+String.valueOf(i), "gela",
                     "es aris descriptioni",
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertTasks() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 3; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
                     "d", "d", "g", "g", "g",
                     "g", 1, 2, 2, false,
@@ -60,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertTests() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 3; i <= 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             db.testDao().insert(new Test(i, "test" + String.valueOf(i),
-                    "ტესტი" + String.valueOf(i), ""));
+                    "ტესტი" + String.valueOf(i), "1,2,104"));
         }
     }
 

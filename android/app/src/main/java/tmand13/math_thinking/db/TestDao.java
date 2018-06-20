@@ -20,6 +20,9 @@ public interface TestDao {
     @Query("SELECT t.title_en as title_en,t.test_id as _id FROM test t")
     Cursor getCursorAll();
 
+    @Query("SELECT * FROM test where test_id = (:testId)")
+    Test getTest(int testId);
+
     @Insert
     void insert(Test test);
 

@@ -26,6 +26,8 @@ import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Task;
 
 public class TaskActivity extends AppCompatActivity {
+    public static final String TASK_ID = "task_id";
+
     TaskFragment fragment;
 
     @Override
@@ -34,7 +36,7 @@ public class TaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task);
 
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra(TaskFragment.TASK_ID, -1);
+        int taskId = intent.getIntExtra(TASK_ID, -1);
 
         fragment = TaskFragment.newInstance(taskId);
         FragmentManager fm = getSupportFragmentManager();
@@ -61,10 +63,6 @@ public class TaskActivity extends AppCompatActivity {
 
     public void answerSelected(View view) {
         fragment.answerSelected(view);
-    }
-
-    public void taskEnd(View view) {
-        finish();
     }
 
     @Override
