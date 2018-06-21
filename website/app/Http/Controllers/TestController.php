@@ -7,6 +7,7 @@ use App\SuperCategory;
 use App\Category;
 use App\Task;
 use Illuminate\Http\Request;
+use App\Calculator;
 use Auth;
 
 class TestController extends Controller
@@ -240,7 +241,8 @@ class TestController extends Controller
         foreach($answers as $key=>$value) {
             $id = explode('-', $key)[1];
             $task = $tasks->find($id);
-            if($task->numeric_answer == $value) {
+            $answer = Calculator::calculate($value);
+            if($task->numeric_answer == $answer) {
                 $count += 1;
             }
         }
