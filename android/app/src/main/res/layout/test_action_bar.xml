@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="25sp"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentLeft="true"
+        android:text="Test" />
+
+    <LinearLayout
+        android:id="@+id/test_score"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:weightSum="3"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/test_score_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/test_score_right_number"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="0"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/test_score_right_text"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="right"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/test_score_wrong"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/test_score_wrong_number"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="0"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/test_score_wrong_text"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="wrong"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/test_score_tasks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/test_score_tasks_number"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="0"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/test_score_tasks_text"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="tasks"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/hint_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_lightbulb_outline_black_24dp"
+        android:background="@null" />
+
+</RelativeLayout>
