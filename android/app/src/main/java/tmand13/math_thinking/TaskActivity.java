@@ -1,29 +1,14 @@
 package tmand13.math_thinking;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.SearchView;
-
-import tmand13.math_thinking.db.AppDatabase;
-import tmand13.math_thinking.db.Task;
 
 public class TaskActivity extends AppCompatActivity {
     public static final String TASK_ID = "task_id";
@@ -68,7 +53,7 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.hint, menu);
+        inflater.inflate(R.menu.menu_hint, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

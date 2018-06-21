@@ -33,6 +33,7 @@ public class TaskFragment extends Fragment {
     boolean alreadyAnswered;
     EditText answerField;
     ImageButton answerSelect;
+    boolean answerIsRight;
 
     public TaskFragment() {
         // Required empty public constructor
@@ -154,9 +155,11 @@ public class TaskFragment extends Fragment {
         int numericAnswer = task.getNumericAnswer();
         if (numericAnswer == optionId) {
             option.setBackgroundColor(Color.GREEN);
+            answerIsRight = true;
         } else {
             option.setBackgroundColor(Color.RED);
             getOptionButton(numericAnswer).setBackgroundColor(Color.GREEN);
+            answerIsRight = false;
         }
     }
 
@@ -169,14 +172,19 @@ public class TaskFragment extends Fragment {
     }
 
     public void answerSelected(View view) {
+        if (alreadyAnswered) {
+            return;
+        }
         alreadyAnswered = true;
         removeKeyboardAndFocus();
         //todo close keyboard
         String userAnswer = answerField.getText().toString();
         if (userAnswer.equals(task.getAnswerEn())) {
             answerField.setBackgroundColor(Color.GREEN);
+            answerIsRight = true;
         } else {
             answerField.setBackgroundColor(Color.RED);
+            answerIsRight = false;
         }
     }
 
@@ -196,5 +204,9 @@ public class TaskFragment extends Fragment {
 
     public boolean alreadyAnswered() {
         return alreadyAnswered;
+    }
+    
+    public boolean answerIsRight() {
+        return answerIsRight;
     }
 }

@@ -1,28 +1,18 @@
 package tmand13.math_thinking;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.SearchView;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +29,7 @@ public class TestActivity extends AppCompatActivity {
     ArrayList<TaskFragment> removedFragments;
     int curId;
     int numberOfTasks;
-    int correct;
+    int right;
     int wrong;
     OnSwipeTouchListener onSwipeTouchListener;
 
@@ -79,7 +69,7 @@ public class TestActivity extends AppCompatActivity {
         }
 
         numberOfTasks = taskIdsList.size();
-        correct = 0;
+        right = 0;
         wrong = 0;
         curId = 0;
 
@@ -122,26 +112,78 @@ public class TestActivity extends AppCompatActivity {
             }
         };
         testActivityView.setOnTouchListener(onSwipeTouchListener);
+
+        getSupportActionBar().setCustomView(R.layout.test_action_bar);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+        ImageView imageView = findViewById(R.id.hint_show);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragments.get(curId).showHint();
+            }
+        });
+
+        updateNumberOfTasksOnView();
+    }
+
+    private void updateScore(boolean alreadyAnsweredBefore) {
+        boolean alreadyAnsweredAfter = fragments.get(curId).alreadyAnswered();
+        boolean answerIsRight = fragments.get(curId).answerIsRight();
+        if (!alreadyAnsweredBefore && alreadyAnsweredAfter) {
+            if (answerIsRight) {
+                right++;
+                updateRightOnView();
+            } else {
+                wrong++;
+                updateWrongOnView();
+            }
+        }
     }
 
     public void option1(View view) {
+        boolean alreadyAnsweredBefore = fragments.get(curId).alreadyAnswered();
         fragments.get(curId).option1(view);
+        updateScore(alreadyAnsweredBefore);
+    }
+
+    private void updateRightOnView() {
+        TextView textView = findViewById(R.id.test_score_right_number);
+        textView.setText(String.valueOf(right));
+    }
+
+    private void updateWrongOnView() {
+        TextView textView = findViewById(R.id.test_score_wrong_number);
+        textView.setText(String.valueOf(wrong));
+    }
+
+    private void updateNumberOfTasksOnView() {
+        TextView textView = findViewById(R.id.test_score_tasks_number);
+        textView.setText(String.valueOf(numberOfTasks));
     }
 
     public void option2(View view) {
+        boolean alreadyAnsweredBefore = fragments.get(curId).alreadyAnswered();
         fragments.get(curId).option2(view);
+        updateScore(alreadyAnsweredBefore);
     }
 
     public void option3(View view) {
+        boolean alreadyAnsweredBefore = fragments.get(curId).alreadyAnswered();
         fragments.get(curId).option3(view);
+        updateScore(alreadyAnsweredBefore);
     }
 
     public void option4(View view) {
+        boolean alreadyAnsweredBefore = fragments.get(curId).alreadyAnswered();
         fragments.get(curId).option4(view);
+        updateScore(alreadyAnsweredBefore);
     }
 
     public void answerSelected(View view) {
+        boolean alreadyAnsweredBefore = fragments.get(curId).alreadyAnswered();
         fragments.get(curId).answerSelected(view);
+        updateScore(alreadyAnsweredBefore);
     }
 
     public void testEnd() {
@@ -150,22 +192,6 @@ public class TestActivity extends AppCompatActivity {
 
     public void testComplete() {
         super.onBackPressed();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.hint, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_hint) {
-            fragments.get(curId).showHint();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
