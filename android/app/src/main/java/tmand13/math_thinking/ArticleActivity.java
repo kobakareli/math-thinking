@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-public class ArticleActivity extends AppCompatActivity {
+public class ArticleActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

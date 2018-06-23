@@ -19,7 +19,7 @@ import android.widget.SearchView;
 
 import tmand13.math_thinking.db.AppDatabase;
 /// TODO support list pagination
-public class TestSearchActivity extends AppCompatActivity {
+public class TestSearchActivity extends BaseActivity {
     CursorAdapter adapter;
 
     @Override

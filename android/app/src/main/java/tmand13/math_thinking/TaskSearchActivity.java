@@ -22,7 +22,7 @@ import java.util.Map;
 
 import tmand13.math_thinking.db.AppDatabase;
 /// TODO support list pagination
-public class TaskSearchActivity extends AppCompatActivity {
+public class TaskSearchActivity extends BaseActivity {
     public static final String TASK_ID = "task_id";
 
     CursorAdapter adapter;

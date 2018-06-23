@@ -25,7 +25,8 @@
             android:label="Articles"
             android:screenOrientation="portrait"
             android:theme="@style/CategoriesTheme" />
-        <activity android:name=".ArticleActivity" />
+        <activity
+            android:name=".ArticleActivity"/>
         <activity
             android:name=".TaskSearchActivity"
             android:label="Tasks"
@@ -41,9 +42,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".TestActivity"
+            android:label="Test"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:label="Test"/>
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".SettingsActivity"/>
     </application>
 
 </manifest>

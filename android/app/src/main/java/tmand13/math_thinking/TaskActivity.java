@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-public class TaskActivity extends AppCompatActivity {
+public class TaskActivity extends BaseActivity {
     public static final String TASK_ID = "task_id";
 
     TaskFragment fragment;

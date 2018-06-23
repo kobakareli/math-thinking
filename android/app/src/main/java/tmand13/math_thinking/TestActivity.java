@@ -22,7 +22,7 @@ import tmand13.math_thinking.db.Test;
 
 //TODO show answer button gvinda?
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends BaseActivity {
     public static final String TEST_ID = "test_id";
 
     ArrayList<TaskFragment> fragments;
@@ -46,6 +46,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void showTaskFragment(int fragmentId) {
+        // TODO use some kind of animation
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.tesk_task_fragment, fragments.get(fragmentId));

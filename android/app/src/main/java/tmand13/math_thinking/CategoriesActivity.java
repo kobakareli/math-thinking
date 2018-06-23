@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CategoriesActivity extends AppCompatActivity {
+public class CategoriesActivity extends BaseActivity {
     public static final String ARTICLE_ID = "article_id";
 
     Map<String, List<String>> superCategoriesToCategories;
