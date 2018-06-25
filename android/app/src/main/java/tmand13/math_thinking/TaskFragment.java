@@ -191,8 +191,7 @@ public class TaskFragment extends Fragment {
     public void showHint() {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.hint_dialog);
-        dialog.setTitle(R.string.hint);
-
+        
         WebView hintWebView = (WebView) dialog.findViewById(R.id.hint_webview);
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
