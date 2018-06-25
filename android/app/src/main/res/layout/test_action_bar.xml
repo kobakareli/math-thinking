@@ -9,10 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:layout_alignParentLeft="true"
-        android:text="Test" />
+        android:text="@string/test"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:id="@+id/test_score"
@@ -35,7 +36,7 @@
                 android:id="@+id/test_score_right_number"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
@@ -45,11 +46,13 @@
                 android:id="@+id/test_score_right_text"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="right"
+                android:text="@string/right"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:textSize="8sp"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -64,7 +67,7 @@
                 android:id="@+id/test_score_wrong_number"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
@@ -74,11 +77,13 @@
                 android:id="@+id/test_score_wrong_text"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="wrong"
+                android:text="@string/wrong"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:textSize="8sp"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -93,7 +98,7 @@
                 android:id="@+id/test_score_tasks_number"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
@@ -103,11 +108,13 @@
                 android:id="@+id/test_score_tasks_text"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="tasks"
+                android:text="@string/tasks_number"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:textSize="8sp"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -120,6 +127,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_lightbulb_outline_black_24dp"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

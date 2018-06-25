@@ -18,9 +18,12 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.Task;
+
 /// TODO support list pagination
 public class TaskSearchActivity extends BaseActivity {
     public static final String TASK_ID = "task_id";
@@ -31,6 +34,8 @@ public class TaskSearchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_search);
+        setTitle(R.string.tasks);
+
         ListView listView = findViewById(R.id.list_view_tasks);
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         adapter = new CursorAdapter(getApplicationContext(), db.taskDao().getCursorAll()) {
@@ -42,7 +47,7 @@ public class TaskSearchActivity extends BaseActivity {
             @Override
             public void bindView(final View view, Context context, Cursor cursor) {
                 Button button = view.findViewById(R.id.task_search_item);
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title_en"));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(Task.getTitleColumnName(getBaseContext())));
                 final int taskId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
                 button.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +61,11 @@ public class TaskSearchActivity extends BaseActivity {
 
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.taskDao().getCursor(constraint + "%");
+                if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
+                    return db.taskDao().getCursorEn(constraint + "%");
+                } else {
+                    return db.taskDao().getCursorGe(constraint + "%");
+                }
             }
         });
 

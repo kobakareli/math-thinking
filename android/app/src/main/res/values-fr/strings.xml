@@ -7,4 +7,16 @@
     <string name="category_with_tabs">\u0009\u0009\u0009%s</string>
     <string name="tasks_search_hint">მოძებნე ამოცანა</string>
     <string name="language">ენა</string>
+    <string name="settings">პარამეტრები</string>
+    <string name="test">ტესტი</string>
+    <string name="tests">ტესტები</string>
+    <string name="tasks">ამოცანები</string>
+    <string name="task">ამოცანა</string>
+    <string name="articles">თეორიები</string>
+    <string name="right">სწორი</string>
+    <string name="wrong">არასწორი</string>
+    <string name="tasks_number">ამოცანები</string>
+    <string name="zero">0</string>
+    <string name="choose_language">აირჩიეთ ენა…</string>
+    <string name="hint">მინიშნება</string>
 </resources>

@@ -4,7 +4,12 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.Context;
 import android.support.annotation.NonNull;
+
+import java.util.Locale;
+
+import tmand13.math_thinking.LocaleHelper;
 
 /**
  * Created by tmand on 4/17/2018.
@@ -39,7 +44,7 @@ public class Article {
 
     @NonNull
     @ColumnInfo(name = "title_ge")
-    private String titleGE;
+    private String titleGe;
 
     @NonNull
     @ColumnInfo(name = "text_en")
@@ -50,12 +55,12 @@ public class Article {
     private String textGe;
 
     public Article(int articleId, int categoryId, int superCategoryId, @NonNull String titleEn,
-                   @NonNull String titleGE, @NonNull String textEn, @NonNull String textGe) {
+                   @NonNull String titleGe, @NonNull String textEn, @NonNull String textGe) {
         this.articleId = articleId;
         this.categoryId = categoryId;
         this.superCategoryId = superCategoryId;
         this.titleEn = titleEn;
-        this.titleGE = titleGE;
+        this.titleGe = titleGe;
         this.textEn = textEn;
         this.textGe = textGe;
     }
@@ -94,12 +99,12 @@ public class Article {
     }
 
     @NonNull
-    public String getTitleGE() {
-        return titleGE;
+    public String getTitleGe() {
+        return titleGe;
     }
 
-    public void setTitleGE(@NonNull String titleGE) {
-        this.titleGE = titleGE;
+    public void setTitleGe(@NonNull String titleGe) {
+        this.titleGe = titleGe;
     }
 
     @NonNull
@@ -118,5 +123,23 @@ public class Article {
 
     public void setTextGe(@NonNull String textGe) {
         this.textGe = textGe;
+    }
+
+    public String getTitle(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return titleEn;
+        } else {
+            return titleGe;
+        }
+    }
+
+    public String getText(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return textEn;
+        } else {
+            return textGe;
+        }
     }
 }

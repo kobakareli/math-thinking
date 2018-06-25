@@ -17,7 +17,7 @@ public interface TestDao {
     @Query("SELECT * FROM test")
     List<Test> getAll();
 
-    @Query("SELECT t.title_en as title_en,t.test_id as _id FROM test t")
+    @Query("SELECT t.title_en as title_en,t.title_ge as title_ge,t.test_id as _id FROM test t")
     Cursor getCursorAll();
 
     @Query("SELECT * FROM test where test_id = (:testId)")
@@ -32,5 +32,11 @@ public interface TestDao {
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
     @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix)")
-    Cursor getCursor(String titlePrefix);
+    Cursor getCursorEn(String titlePrefix);
+
+    // TODO maybe change LIKE to MATCH and add indexes as described
+    // here: https://developer.android.com/guide/topics/search/search-dialog
+    @Query("SELECT test_id as _id, title_ge FROM test where title_ge LIKE (:titlePrefix)")
+    Cursor getCursorGe(String titlePrefix);
 }
+

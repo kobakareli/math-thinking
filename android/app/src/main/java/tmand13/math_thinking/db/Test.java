@@ -3,11 +3,15 @@ package tmand13.math_thinking.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+
+import tmand13.math_thinking.LocaleHelper;
 
 /**
  * Created by tmand on 4/19/2018.
@@ -94,5 +98,23 @@ public class Test {
 
     public List<Integer> getTasksIdsList() {
         return stringToList(tasksIds);
+    }
+
+    public String getTitle(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return titleEn;
+        } else {
+            return titleGe;
+        }
+    }
+
+    public static String getTitleColumnName(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return "title_en";
+        } else {
+            return "title_ge";
+        }
     }
 }

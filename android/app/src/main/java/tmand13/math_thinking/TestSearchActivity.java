@@ -17,7 +17,11 @@ import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import java.util.Locale;
+
 import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.Test;
+
 /// TODO support list pagination
 public class TestSearchActivity extends BaseActivity {
     CursorAdapter adapter;
@@ -26,6 +30,7 @@ public class TestSearchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_search);
+        setTitle(R.string.tests);
 
         ListView listView = findViewById(R.id.list_view_tests);
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
@@ -38,7 +43,7 @@ public class TestSearchActivity extends BaseActivity {
             @Override
             public void bindView(final View view, Context context, Cursor cursor) {
                 Button button = view.findViewById(R.id.test_search_item);
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title_en"));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(Test.getTitleColumnName(getBaseContext())));
                 final int testId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
                 button.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +57,11 @@ public class TestSearchActivity extends BaseActivity {
 
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.testDao().getCursor(constraint + "%");
+                if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
+                    return db.testDao().getCursorEn(constraint + "%");
+                } else {
+                    return db.testDao().getCursorGe(constraint + "%");
+                }
             }
         });
 

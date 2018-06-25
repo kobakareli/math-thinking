@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(R.string.app_name);
         //insertData();
     }
 
@@ -40,34 +41,34 @@ public class MainActivity extends BaseActivity {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         for (int i = 102; i <= 105; i++) {
             String iStr = String.valueOf(i);
-            db.taskDao().insert(new Task(i, "magari amocana"+String.valueOf(i), "gela",
+            db.taskDao().insert(new Task(i, "magari amocana"+String.valueOf(i), "მაგარი ამოცანა",
                     "es aris descriptioni",
-                    "d", "g", "g", "pasuxii",
-                    "pasxii", 1, 2, 2, i%2==0,
-                    "option pirveli", "d", "meore", "D",
-                    "mesame", "D", "meotxe", "D"));
+                    "ეს არის დესკრიპშენი", "g", "ჰინტი", "pasuxii",
+                    "პასუხი", 1, 2, 2, i%2==0,
+                    "option pirveli", "პირველი", "meore", "მეორე",
+                    "mesame", "მესამე", "meotxe", "მეოთხე"));
         }
     }
 
     private void insertTasks() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         for (int i = 1; i <= 100; i++) {
-            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
-                    "d", "d", "g", "g", "g",
-                    "g", 1, 2, 2, false,
-                    "d", "d", "D", "D", "D",
-                    "D", "D", "D"));
+            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "გელა",
+                    "d", "დ", "g", "ჰინტი", "g",
+                    "პასუხი", 1, 2, 2, false,
+                    "d", "დ", "D", "დდ", "d",
+                    "დდდ", "D", "დდდდ"));
         }
     }
 
     private void insertTaskWithOptions() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         for (int i = 101; i <= 101; i++) {
-            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
-                    "d", "d", "g", "g", "g",
-                    "g", 1, 2, 2, true,
-                    "d", "d", "D", "D", "D",
-                    "D", "D", "D"));
+            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "გელსონა",
+                    "d", "აეეეე", "g", "გგ", "g",
+                    "პასუხი", 1, 2, 2, true,
+                    "d", "დ", "D", "დდ", "D",
+                    "დდდ", "D", "დდდდ"));
         }
     }
 

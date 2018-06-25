@@ -3,7 +3,12 @@ package tmand13.math_thinking.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.Context;
 import android.support.annotation.NonNull;
+
+import java.util.Locale;
+
+import tmand13.math_thinking.LocaleHelper;
 
 /**
  * Created by tmand on 4/19/2018.
@@ -302,5 +307,86 @@ public class Task {
 
     public void setOption4Ge(@NonNull String option4Ge) {
         this.option4Ge = option4Ge;
+    }
+
+    public String getTitle(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return titleEn;
+        } else {
+            return titleGe;
+        }
+    }
+
+    public String getDescription(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return descriptionEn;
+        } else {
+            return descriptionGe;
+        }
+    }
+
+    public String getHint(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return hintEn;
+        } else {
+            return hintGe;
+        }
+    }
+
+    public String getAnswer(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return answerEn;
+        } else {
+            return answerGe;
+        }
+    }
+
+    public String getOption1(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option1En;
+        } else {
+            return option1Ge;
+        }
+    }
+
+    public String getOption2(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option2En;
+        } else {
+            return option2Ge;
+        }
+    }
+
+    public String getOption3(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option3En;
+        } else {
+            return option3Ge;
+        }
+    }
+
+    public String getOption4(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option4En;
+        } else {
+            return option4Ge;
+        }
+    }
+
+    public static String getTitleColumnName(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return "title_en";
+        } else {
+            return "title_ge";
+        }
     }
 }

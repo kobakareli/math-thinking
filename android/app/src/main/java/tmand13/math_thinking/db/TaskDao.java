@@ -17,7 +17,7 @@ public interface TaskDao {
     @Query("SELECT * FROM task")
     List<Task> getAll();
 
-    @Query("SELECT t.title_en as title_en,t.task_id as _id FROM task t")
+    @Query("SELECT t.title_en as title_en,t.title_ge as title_ge,t.task_id as _id FROM task t")
     Cursor getCursorAll();
 
     @Query("SELECT * FROM task where task_id = (:taskId)")
@@ -32,5 +32,10 @@ public interface TaskDao {
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
     @Query("SELECT task_id as _id, title_en FROM task where title_en LIKE (:titlePrefix)")
-    Cursor getCursor(String titlePrefix);
+    Cursor getCursorEn(String titlePrefix);
+
+    // TODO maybe change LIKE to MATCH and add indexes as described
+    // here: https://developer.android.com/guide/topics/search/search-dialog
+    @Query("SELECT task_id as _id, title_ge FROM task where title_ge LIKE (:titlePrefix)")
+    Cursor getCursorGe(String titlePrefix);
 }

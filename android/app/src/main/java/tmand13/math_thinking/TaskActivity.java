@@ -19,6 +19,7 @@ public class TaskActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        setTitle(R.string.task);
 
         Intent intent = getIntent();
         int taskId = intent.getIntExtra(TASK_ID, -1);

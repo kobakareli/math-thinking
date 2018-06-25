@@ -15,30 +15,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Locale;
+
 public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        setTitle(R.string.settings);
 
         Button button = findViewById(R.id.language_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String[] listItems = {"English", "ქართული"};
+                final String[] listItems = {
+                        getResources().getString(R.string.english),
+                        getResources().getString(R.string.georgian),
+                };
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingsActivity.this);
-                mBuilder.setTitle("Choose language...");
+                mBuilder.setTitle(R.string.choose_language);
                 mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-                            LocaleHelper.setLocale(getBaseContext(), "en");
+                            LocaleHelper.setLocale(getBaseContext(), Locale.ENGLISH.getLanguage());
                             relaunch(SettingsActivity.this);
                         } else if (which == 1) {
                             // using "fr", because somehow it does not work for "ka".
                             // TODO might fix in future
-                            LocaleHelper.setLocale(getBaseContext(), "fr");
+                            LocaleHelper.setLocale(getBaseContext(), Locale.FRENCH.getLanguage());
                             relaunch(SettingsActivity.this);
                         }
                         dialog.dismiss();

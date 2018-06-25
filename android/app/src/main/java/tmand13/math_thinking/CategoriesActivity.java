@@ -29,6 +29,7 @@ public class CategoriesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.super_categories);
+        setTitle(R.string.articles);
 
         fetchDataFromDB();
 

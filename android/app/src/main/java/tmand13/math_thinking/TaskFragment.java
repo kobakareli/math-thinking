@@ -82,19 +82,19 @@ public class TaskFragment extends Fragment {
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        titleTextView.setText(task.getTitleEn());
+        titleTextView.setText(task.getTitle(getContext()));
         descriptionWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getDescriptionEn(), mimeType, encoding, "");
+                task.getDescription(getContext()), mimeType, encoding, "");
 
         if (task.isHasOptions()) {
             option1 = view.findViewById(R.id.option1);
             option2 = view.findViewById(R.id.option2);
             option3 = view.findViewById(R.id.option3);
             option4 = view.findViewById(R.id.option4);
-            option1.setText(task.getOption1En());
-            option2.setText(task.getOption2En());
-            option3.setText(task.getOption3En());
-            option4.setText(task.getOption4En());
+            option1.setText(task.getOption1(getContext()));
+            option2.setText(task.getOption2(getContext()));
+            option3.setText(task.getOption3(getContext()));
+            option4.setText(task.getOption4(getContext()));
         } else {
             answerField = view.findViewById(R.id.answer_field);
             answerField.addTextChangedListener(new TextWatcher() {
@@ -179,7 +179,7 @@ public class TaskFragment extends Fragment {
         removeKeyboardAndFocus();
         //todo close keyboard
         String userAnswer = answerField.getText().toString();
-        if (userAnswer.equals(task.getAnswerEn())) {
+        if (userAnswer.equals(task.getAnswer(getContext()))) {
             answerField.setBackgroundColor(Color.GREEN);
             answerIsRight = true;
         } else {
@@ -191,13 +191,13 @@ public class TaskFragment extends Fragment {
     public void showHint() {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.hint_dialog);
-        dialog.setTitle("Hint");
+        dialog.setTitle(R.string.hint);
 
         WebView hintWebView = (WebView) dialog.findViewById(R.id.hint_webview);
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
         hintWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getHintEn(), mimeType, encoding, "");
+                task.getHint(getContext()), mimeType, encoding, "");
 
         dialog.show();
     }
