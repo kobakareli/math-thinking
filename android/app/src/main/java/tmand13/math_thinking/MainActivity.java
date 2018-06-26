@@ -22,6 +22,7 @@ import tmand13.math_thinking.db.Category;
 import tmand13.math_thinking.db.SuperCategory;
 import tmand13.math_thinking.db.Task;
 import tmand13.math_thinking.db.Test;
+import tmand13.math_thinking.db.TestCategory;
 
 public class MainActivity extends BaseActivity {
     @Override
@@ -40,6 +41,22 @@ public class MainActivity extends BaseActivity {
         insertSuperCategories();
         insertCategories();
         insertArticles();
+        insertTestCategories();
+    }
+
+    private void insertTestCategories() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.testCategoryDao().insert(new TestCategory(1, 1, 1));
+        db.testCategoryDao().insert(new TestCategory(2, 2, 2));
+        db.testCategoryDao().insert(new TestCategory(3, 3, 3));
+        db.testCategoryDao().insert(new TestCategory(4, 4, 4));
+        db.testCategoryDao().insert(new TestCategory(5, 5, 5));
+        db.testCategoryDao().insert(new TestCategory(6, 6, 6));
+        db.testCategoryDao().insert(new TestCategory(7, 7, 7));
+        db.testCategoryDao().insert(new TestCategory(8, 8, 8));
+        db.testCategoryDao().insert(new TestCategory(9, 9, 9));
+        db.testCategoryDao().insert(new TestCategory(10, 10, 10));
+        db.testCategoryDao().insert(new TestCategory(11, 11, 11));
     }
 
     private void insertSuperCategories() {

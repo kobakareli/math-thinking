@@ -9,7 +9,8 @@ import android.content.Context;
  * Created by tmand on 4/17/2018.
  */
 
-@Database(entities = {Article.class, Category.class, SuperCategory.class, Task.class, Test.class},
+@Database(entities = {Article.class, Category.class, SuperCategory.class, Task.class, Test.class,
+        TestCategory.class},
         version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     //TODO: https://github.com/googlesamples/android-architecture-components/blob/master/BasicSample/app/src/main/java/com/example/android/persistence/db/AppDatabase.java
@@ -25,6 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TaskDao taskDao();
 
     public abstract TestDao testDao();
+
+    public abstract TestCategoryDao testCategoryDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
