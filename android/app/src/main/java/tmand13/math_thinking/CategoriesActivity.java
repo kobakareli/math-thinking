@@ -19,11 +19,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.Category;
+import tmand13.math_thinking.db.SuperCategory;
+
 public class CategoriesActivity extends BaseActivity {
     public static final String ARTICLE_ID = "article_id";
 
     Map<String, List<String>> superCategoriesToCategories;
-    List<String> superCategories;
+    List<String> superCategoriesTitles;
+    Map<String, Integer> categoryToArticleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +45,34 @@ public class CategoriesActivity extends BaseActivity {
     }
 
     private void fetchDataFromDB() {
-        // TODO dummy implementation
-        superCategories = new ArrayList<>();
-        superCategories.add("1. Math");
-        superCategories.add("2. Logic");
-        superCategories.add("3. Common sense");
-
         superCategoriesToCategories = new HashMap<>();
+        superCategoriesTitles = new ArrayList<>();
+        categoryToArticleId = new HashMap<>();
 
-        List<String> math = new ArrayList<>();
-        math.add("1.1 math_1");
-        math.add("1.2 math_2");
-        math.add("1.3 math_3");
-        superCategoriesToCategories.put(superCategories.get(0), math);
+        final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        List<SuperCategory> superCategories = db.superCategoryDao().getAll();
+        List<Category> categories = db.categoryDao().getAll();
+        List<Article> articles = db.articleDao().getAll();
+        Map<Integer, String> idToSuperCategory = new HashMap<>();
+        Map<Integer, String> idToCategory = new HashMap<>();
 
-        List<String> logic = new ArrayList<>();
-        logic.add("2.1 logic_1");
-        logic.add("2.2 logic_2");
-        logic.add("2.3 logic_3");
-        superCategoriesToCategories.put(superCategories.get(1), logic);
+        for (SuperCategory superCategory : superCategories) {
+            String title = superCategory.getTitle(getBaseContext());
+            idToSuperCategory.put(superCategory.getSuperCategoryId(), title);
+            superCategoriesTitles.add(title);
+            superCategoriesToCategories.put(title, new ArrayList<String>());
+        }
 
-        List<String> commonSense = new ArrayList<>();
-        commonSense.add("3.1 commonsense_1");
-        commonSense.add("3.2 commonsense_2");
-        commonSense.add("3.3 commonsense_3");
-        superCategoriesToCategories.put(superCategories.get(2), commonSense);
+        for (Category category : categories) {
+            idToCategory.put(category.getCategoryId(), category.getTitle(getBaseContext()));
+        }
+
+        for (Article article : articles) {
+            String superCategory = idToSuperCategory.get(article.getSuperCategoryId());
+            String category = idToCategory.get(article.getCategoryId());
+            superCategoriesToCategories.get(superCategory).add(category);
+            categoryToArticleId.put(category, article.getArticleId());
+        }
     }
 
     private class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
@@ -110,7 +119,7 @@ public class CategoriesActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
-                openArticle(categories.get(position));
+                openArticle(categoryToArticleId.get(categories.get(position)));
             }
         }
     }
@@ -140,7 +149,7 @@ public class CategoriesActivity extends BaseActivity {
 
         @Override
         public int getItemCount() {
-            return superCategories.size();
+            return superCategoriesTitles.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
@@ -163,12 +172,13 @@ public class CategoriesActivity extends BaseActivity {
                 int position = getAdapterPosition();
                 boolean isSelected = position == selectedItem;
 
-                expandButton.setText(superCategories.get(position));
+                expandButton.setText(superCategoriesTitles.get(position));
                 expandButton.setSelected(isSelected);
 
                 recyclerViewCategories = expandableLayout.findViewById(R.id.categories);
                 recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories, superCategories.get(position)));
+                recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories,
+                        superCategoriesTitles.get(position)));
 
                 expandableLayout.setExpanded(isSelected, false);
             }
@@ -200,7 +210,7 @@ public class CategoriesActivity extends BaseActivity {
         }
     }
 
-    public void openArticle(String articleId) {
+    public void openArticle(int articleId) {
         Intent intent = new Intent(this, ArticleActivity.class);
         intent.putExtra(ARTICLE_ID, articleId);
         startActivity(intent);

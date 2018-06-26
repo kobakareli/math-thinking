@@ -20,6 +20,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract CategoryDao categoryDao();
 
+    public abstract SuperCategoryDao superCategoryDao();
+
     public abstract TaskDao taskDao();
 
     public abstract TestDao testDao();

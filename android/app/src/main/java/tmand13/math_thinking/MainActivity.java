@@ -18,6 +18,8 @@ import java.util.Locale;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.Category;
+import tmand13.math_thinking.db.SuperCategory;
 import tmand13.math_thinking.db.Task;
 import tmand13.math_thinking.db.Test;
 
@@ -35,6 +37,75 @@ public class MainActivity extends BaseActivity {
         insertTaskWithOptions();
         insertTwoDummyTasks();
         insertTests();
+        insertSuperCategories();
+        insertCategories();
+        insertArticles();
+    }
+
+    private void insertSuperCategories() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.superCategoryDao().insert(new SuperCategory(1, "Logic",
+                "ლოგიკა"));
+        db.superCategoryDao().insert(new SuperCategory(4, "Procents",
+                "პროცენტები"));
+        db.superCategoryDao().insert(new SuperCategory(2, "graph theory",
+                "გრაფთა თეორია"));
+        db.superCategoryDao().insert(new SuperCategory(3, "Geometry",
+                "გეომეტრია"));
+    }
+    //TODO maybe give numbers like 1. Logic 1.1 Logic puzzles so on programmatically
+    private void insertCategories() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.categoryDao().insert(new Category(1, "Puzzles",
+                "პაზლები"));
+        db.categoryDao().insert(new Category(2, "Crosswords1",
+                "კროსვორდები1"));
+        db.categoryDao().insert(new Category(3, "Crosswords2",
+                "კროსვორდები2"));
+        db.categoryDao().insert(new Category(4, "Crosswords3",
+                "კროსვორდები3"));
+        db.categoryDao().insert(new Category(5, "Crosswords4",
+                "კროსვორდები4"));
+        db.categoryDao().insert(new Category(6, "Crosswords5",
+                "კროსვორდები5"));
+        db.categoryDao().insert(new Category(7, "Crosswords6",
+                "კროსვორდები6"));
+        db.categoryDao().insert(new Category(8, "Crosswords7",
+                "კროსვორდები7"));
+        db.categoryDao().insert(new Category(9, "trees",
+                "ხეები"));
+        db.categoryDao().insert(new Category(10, "dijsktra",
+                "დეიქსტრა"));
+        db.categoryDao().insert(new Category(11, "Triangle",
+                "სამკუთხედი"));
+    }
+
+    private void insertArticles() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.articleDao().insert(new Article(1, 1, 1,
+                "Puzzles","პაზლები", "puzzles", "პაზლები"));
+        db.articleDao().insert(new Article(2, 2, 1,
+                "Crosswords1","კროსვორდები1", "Crosswords1", "კროსვორდები1"));
+        db.articleDao().insert(new Article(3, 3, 1,
+                "Crosswords2","კროსვორდები2", "Crosswords2", "კროსვორდები2"));
+        db.articleDao().insert(new Article(4, 4, 1,
+                "Crosswords3","კროსვორდები3", "Crosswords3", "კროსვორდები3"));
+        db.articleDao().insert(new Article(5, 5, 1,
+                "Crosswords4","კროსვორდები4", "Crosswords4", "კროსვორდები4"));
+        db.articleDao().insert(new Article(6, 6, 1,
+                "Crosswords5","კროსვორდები5", "Crosswords5", "კროსვორდები5"));
+        db.articleDao().insert(new Article(7, 7, 1,
+                "Crosswords6","კროსვორდები6", "Crosswords6", "კროსვორდები6"));
+        db.articleDao().insert(new Article(8, 8, 1,
+                "Crosswords7","კროსვორდები7", "Crosswords7", "კროსვორდები7"));
+
+        db.articleDao().insert(new Article(9, 9, 2,
+                "trees","ხეები", "trees", "ხეები"));
+        db.articleDao().insert(new Article(10, 10, 2,
+                "dijsktra","დეიქსტრა", "dijsktra", "დეიქსტრა"));
+
+        db.articleDao().insert(new Article(11, 11, 3,
+                "Triangle","სამკუთხედი", "Triangle", "სამკუთხედი"));
     }
 
     private void insertTwoDummyTasks() {
