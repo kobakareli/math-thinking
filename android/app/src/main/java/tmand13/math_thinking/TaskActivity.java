@@ -3,7 +3,6 @@ package tmand13.math_thinking;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -54,15 +53,17 @@ public class TaskActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_hint, menu);
+        inflater.inflate(R.menu.menu_task, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_hint) {
+        if (id == R.id.menu_task_hint) {
             fragment.showHint();
+        } else if (id == R.id.menu_task_answer) {
+            fragment.showAnswer();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -3,9 +3,7 @@ package tmand13.math_thinking;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Task;
@@ -189,14 +185,22 @@ public class TaskFragment extends Fragment {
     }
 
     public void showHint() {
+        showWebviewDialog(task.getHint(getContext()));
+    }
+
+    public void showAnswer() {
+        showWebviewDialog(task.getAnswer(getContext()));
+    }
+
+    private void showWebviewDialog(String data) {
         final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.hint_dialog);
-        
-        WebView hintWebView = (WebView) dialog.findViewById(R.id.hint_webview);
+        dialog.setContentView(R.layout.webview_dialog);
+
+        WebView hintWebView = (WebView) dialog.findViewById(R.id.webview_dialog);
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        hintWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getHint(getContext()), mimeType, encoding, "");
+        hintWebView.loadDataWithBaseURL("file:///android_asset/", data, mimeType,
+                encoding, "");
 
         dialog.show();
     }

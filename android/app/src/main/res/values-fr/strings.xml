@@ -18,4 +18,6 @@
     <string name="tasks_number">ამოცანები</string>
     <string name="zero">0</string>
     <string name="choose_language">აირჩიეთ ენა…</string>
+    <string name="hint">მითითება</string>
+    <string name="answer">პასუხი</string>
 </resources>

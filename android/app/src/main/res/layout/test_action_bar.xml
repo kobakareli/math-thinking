@@ -120,14 +120,30 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/hint_show"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_lightbulb_outline_black_24dp"
-        android:background="@null"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/answer_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_teacher_show_answer"
+            android:layout_marginRight="20dp"
+            android:background="@null" />
+
+        <ImageButton
+            android:id="@+id/hint_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_bulb"
+            android:background="@null" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

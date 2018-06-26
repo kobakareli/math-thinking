@@ -117,11 +117,19 @@ public class TestActivity extends BaseActivity {
         getSupportActionBar().setCustomView(R.layout.test_action_bar);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        ImageView imageView = findViewById(R.id.hint_show);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        ImageView showHintView = findViewById(R.id.hint_show);
+        showHintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragments.get(curId).showHint();
+            }
+        });
+
+        ImageView showAnswerView = findViewById(R.id.answer_show);
+        showAnswerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragments.get(curId).showAnswer();
             }
         });
 
