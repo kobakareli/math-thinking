@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.6"
-        layout="@layout/task_title_description"/>
+        layout="@layout/task_description"/>
 
     <LinearLayout
         android:id="@+id/task_answers"

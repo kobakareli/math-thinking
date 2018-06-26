@@ -73,12 +73,10 @@ public class TaskFragment extends Fragment {
         if (taskId == null) {
             return;
         }
-        TextView titleTextView = view.findViewById(R.id.task_title);
         WebView descriptionWebView = view.findViewById(R.id.task_description);
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        titleTextView.setText(task.getTitle(getContext()));
         descriptionWebView.loadDataWithBaseURL("file:///android_asset/",
                 task.getDescription(getContext()), mimeType, encoding, "");
 
