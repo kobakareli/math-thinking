@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.TaskTest;
 import tmand13.math_thinking.db.Test;
 
 //TODO show answer button gvinda?
@@ -63,7 +64,11 @@ public class TestActivity extends BaseActivity {
 
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         Test test = db.testDao().getTest(testId);
-        List<Integer> taskIdsList = test.getTasksIdsList();
+        List<TaskTest> taskTests = db.taskTestDao().getByTestId(test.getTestId());
+        List<Integer> taskIdsList = new ArrayList<>();
+        for (TaskTest taskTest : taskTests) {
+            taskIdsList.add(taskTest.getTaskId());
+        }
         if (taskIdsList.isEmpty()) {
             // TODO any better dealing?
             testEnd();

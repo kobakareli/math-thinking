@@ -12,13 +12,16 @@ import java.util.List;
  */
 
 @Dao
-public interface SuperCategoryCategoryDao {
-    @Query("SELECT * FROM super_category_category")
-    List<SuperCategoryCategory> getAll();
+public interface TaskTestDao {
+    @Query("SELECT * FROM task_test")
+    List<TaskTest> getAll();
+
+    @Query("SELECT * FROM task_test where test_id = (:testId)")
+    List<TaskTest> getByTestId(int testId);
 
     @Insert
-    void insert(SuperCategoryCategory superCategoryCategory);
+    void insert(TaskTest taskTest);
 
     @Delete
-    void delete(SuperCategoryCategory superCategoryCategory);
+    void delete(TaskTest taskTest);
 }

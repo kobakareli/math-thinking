@@ -31,34 +31,10 @@ public class Test {
     @ColumnInfo(name = "title_ge")
     private String titleGe;
 
-    @NonNull
-    @ColumnInfo(name = "tasks_ids")
-    private String tasksIds;
-
-    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe, @NonNull String tasksIds) {
+    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe) {
         this.testId = testId;
         this.titleEn = titleEn;
         this.titleGe = titleGe;
-        this.tasksIds = tasksIds;
-    }
-
-    public static String listToString(List<Integer> taskIds) {
-        StringBuilder sb = new StringBuilder();
-        String delimiter = "";
-        for(Integer taskId : taskIds){
-            sb.append(delimiter).append(String.valueOf(taskId));
-            delimiter = ",";
-        }
-        return sb.toString();
-    }
-
-    public static List<Integer> stringToList(String taskIds) {
-        List<String> taskIdsListStr = Arrays.asList(taskIds.split(","));
-        List<Integer> taskIdsListInt = new ArrayList<>(taskIdsListStr.size());
-        for (String taskId : taskIdsListStr) {
-            taskIdsListInt.add(Integer.valueOf(taskId));
-        }
-        return taskIdsListInt;
     }
 
     public int getTestId() {
@@ -85,19 +61,6 @@ public class Test {
 
     public void setTitleGe(@NonNull String titleGe) {
         this.titleGe = titleGe;
-    }
-
-    @NonNull
-    public String getTasksIds() {
-        return tasksIds;
-    }
-
-    public void setTasksIds(@NonNull String tasksIds) {
-        this.tasksIds = tasksIds;
-    }
-
-    public List<Integer> getTasksIdsList() {
-        return stringToList(tasksIds);
     }
 
     public String getTitle(Context context) {

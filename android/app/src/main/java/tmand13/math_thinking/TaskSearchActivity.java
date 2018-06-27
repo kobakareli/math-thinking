@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 
 import java.util.HashMap;
 import java.util.Locale;

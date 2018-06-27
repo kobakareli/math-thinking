@@ -23,6 +23,7 @@ import tmand13.math_thinking.db.Category;
 import tmand13.math_thinking.db.SuperCategory;
 import tmand13.math_thinking.db.SuperCategoryCategory;
 import tmand13.math_thinking.db.Task;
+import tmand13.math_thinking.db.TaskTest;
 import tmand13.math_thinking.db.Test;
 import tmand13.math_thinking.db.TestCategory;
 
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity {
         insertArticles();
         insertArticleCategories();
         insertTestCategories();
+        insertTaskTests();
     }
 
     private void insertTestCategories() {
@@ -209,7 +211,16 @@ public class MainActivity extends BaseActivity {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         for (int i = 1; i <= 100; i++) {
             db.testDao().insert(new Test(i, "test" + String.valueOf(i),
-                    "ტესტი" + String.valueOf(i), "1,2,104"));
+                    "ტესტი" + String.valueOf(i)));
+        }
+    }
+
+    private void insertTaskTests() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        for (int i = 1; i <= 100; i++) {
+            db.taskTestDao().insert(new TaskTest(3*i-2, i, i));
+            db.taskTestDao().insert(new TaskTest(3*i-1, i+1, i));
+            db.taskTestDao().insert(new TaskTest(3*i, 104, i));
         }
     }
 
