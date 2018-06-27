@@ -16,27 +16,11 @@ import tmand13.math_thinking.LocaleHelper;
  */
 
 //TODO maybe add indexes to speed up
-@Entity(tableName = "article", foreignKeys = {
-        @ForeignKey(
-                entity = Category.class,
-                parentColumns = "category_id",
-                childColumns = "category_id"
-        ),
-        @ForeignKey(
-                entity = SuperCategory.class,
-                parentColumns = "super_category_id",
-                childColumns = "super_category_id"
-        )})
+@Entity(tableName = "article")
 public class Article {
     @PrimaryKey
     @ColumnInfo(name = "article_id")
     private int articleId;
-
-    @ColumnInfo(name = "category_id")
-    private int categoryId;
-
-    @ColumnInfo(name = "super_category_id")
-    private int superCategoryId;
 
     @NonNull
     @ColumnInfo(name = "title_en")
@@ -54,11 +38,9 @@ public class Article {
     @ColumnInfo(name = "text_ge")
     private String textGe;
 
-    public Article(int articleId, int categoryId, int superCategoryId, @NonNull String titleEn,
-                   @NonNull String titleGe, @NonNull String textEn, @NonNull String textGe) {
+    public Article(int articleId, @NonNull String titleEn, @NonNull String titleGe,
+                   @NonNull String textEn, @NonNull String textGe) {
         this.articleId = articleId;
-        this.categoryId = categoryId;
-        this.superCategoryId = superCategoryId;
         this.titleEn = titleEn;
         this.titleGe = titleGe;
         this.textEn = textEn;
@@ -71,22 +53,6 @@ public class Article {
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public int getSuperCategoryId() {
-        return superCategoryId;
-    }
-
-    public void setSuperCategoryId(int superCategoryId) {
-        this.superCategoryId = superCategoryId;
     }
 
     @NonNull

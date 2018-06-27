@@ -21,15 +21,19 @@ import java.util.Map;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.ArticleCategory;
 import tmand13.math_thinking.db.Category;
 import tmand13.math_thinking.db.SuperCategory;
+import tmand13.math_thinking.db.SuperCategoryCategory;
 
 public class CategoriesActivity extends BaseActivity {
     public static final String ARTICLE_ID = "article_id";
 
-    Map<String, List<String>> superCategoriesToCategories;
-    List<String> superCategoriesTitles;
-    Map<String, Integer> categoryToArticleId;
+    List<Integer> superCategories;
+    Map<Integer, List<Integer>> superCategoriesToCategories;
+    Map<Integer, Integer> categoriesToArticles;
+    Map<Integer, String> superCategoriesIdsToTitles;
+    Map<Integer, String> categoriesIdsToTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,43 +49,48 @@ public class CategoriesActivity extends BaseActivity {
     }
 
     private void fetchDataFromDB() {
+        superCategories = new ArrayList<>();
         superCategoriesToCategories = new HashMap<>();
-        superCategoriesTitles = new ArrayList<>();
-        categoryToArticleId = new HashMap<>();
+        categoriesToArticles = new HashMap<>();
+        superCategoriesIdsToTitles = new HashMap<>();
+        categoriesIdsToTitles = new HashMap<>();
 
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        List<SuperCategory> superCategories = db.superCategoryDao().getAll();
-        List<Category> categories = db.categoryDao().getAll();
-        List<Article> articles = db.articleDao().getAll();
-        Map<Integer, String> idToSuperCategory = new HashMap<>();
-        Map<Integer, String> idToCategory = new HashMap<>();
-
-        for (SuperCategory superCategory : superCategories) {
-            String title = superCategory.getTitle(getBaseContext());
-            idToSuperCategory.put(superCategory.getSuperCategoryId(), title);
-            superCategoriesTitles.add(title);
-            superCategoriesToCategories.put(title, new ArrayList<String>());
+        for (ArticleCategory articleCategory : db.articleCategoryDao().getAll()) {
+            categoriesToArticles.put(articleCategory.getCategoryId(),
+                    articleCategory.getArticleId());
         }
-
-        for (Category category : categories) {
-            idToCategory.put(category.getCategoryId(), category.getTitle(getBaseContext()));
+        for (SuperCategoryCategory superCategoryCategory : db.superCategoryCategoryDao().getAll()) {
+            int superCategoryId = superCategoryCategory.getSuperCategoryId();
+            int categoryId = superCategoryCategory.getCategoryId();
+            if (!superCategoriesToCategories.containsKey(superCategoryId)) {
+                superCategoriesToCategories.put(superCategoryId, new ArrayList<Integer>());
+                superCategories.add(superCategoryId);
+            }
+            superCategoriesToCategories.get(superCategoryId).add(categoryId);
         }
-
-        for (Article article : articles) {
-            String superCategory = idToSuperCategory.get(article.getSuperCategoryId());
-            String category = idToCategory.get(article.getCategoryId());
-            superCategoriesToCategories.get(superCategory).add(category);
-            categoryToArticleId.put(category, article.getArticleId());
+        for (SuperCategory superCategory : db.superCategoryDao().getAll()) {
+            int superCategoryId = superCategory.getSuperCategoryId();
+            superCategoriesIdsToTitles.put(superCategory.getSuperCategoryId(),
+                    superCategory.getTitle(getBaseContext()));
+            if (!superCategoriesToCategories.containsKey(superCategoryId)) {
+                superCategoriesToCategories.put(superCategoryId, new ArrayList<Integer>());
+                superCategories.add(superCategoryId);
+            }
+        }
+        for (Category category : db.categoryDao().getAll()) {
+            categoriesIdsToTitles.put(category.getCategoryId(),
+                    category.getTitle(getBaseContext()));
         }
     }
 
     private class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
         private RecyclerView recyclerView;
-        private List<String> categories;
+        private List<Integer> categories;
 
-        CategoriesAdapter(RecyclerView recyclerView, String superCategory) {
+        CategoriesAdapter(RecyclerView recyclerView, int superCategoryId) {
             this.recyclerView = recyclerView;
-            this.categories = superCategoriesToCategories.get(superCategory);
+            this.categories = superCategoriesToCategories.get(superCategoryId);
         }
 
         @NonNull
@@ -113,13 +122,14 @@ public class CategoriesActivity extends BaseActivity {
 
             void bind() {
                 int position = getAdapterPosition();
-                articleLink.setText(getString(R.string.category_with_tabs, categories.get(position)));
+                articleLink.setText(getString(R.string.category_with_tabs,
+                        categoriesIdsToTitles.get(categories.get(position))));
             }
 
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
-                openArticle(categoryToArticleId.get(categories.get(position)));
+                openArticle(categoriesToArticles.get(categories.get(position)));
             }
         }
     }
@@ -149,7 +159,7 @@ public class CategoriesActivity extends BaseActivity {
 
         @Override
         public int getItemCount() {
-            return superCategoriesTitles.size();
+            return superCategories.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
@@ -172,13 +182,13 @@ public class CategoriesActivity extends BaseActivity {
                 int position = getAdapterPosition();
                 boolean isSelected = position == selectedItem;
 
-                expandButton.setText(superCategoriesTitles.get(position));
+                expandButton.setText(superCategoriesIdsToTitles.get(superCategories.get(position)));
                 expandButton.setSelected(isSelected);
 
                 recyclerViewCategories = expandableLayout.findViewById(R.id.categories);
                 recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories,
-                        superCategoriesTitles.get(position)));
+                        superCategories.get(position)));
 
                 expandableLayout.setExpanded(isSelected, false);
             }

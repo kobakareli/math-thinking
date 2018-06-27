@@ -18,8 +18,10 @@ import java.util.Locale;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.ArticleCategory;
 import tmand13.math_thinking.db.Category;
 import tmand13.math_thinking.db.SuperCategory;
+import tmand13.math_thinking.db.SuperCategoryCategory;
 import tmand13.math_thinking.db.Task;
 import tmand13.math_thinking.db.Test;
 import tmand13.math_thinking.db.TestCategory;
@@ -40,7 +42,9 @@ public class MainActivity extends BaseActivity {
         insertTests();
         insertSuperCategories();
         insertCategories();
+        insertSuperCategoryCategories();
         insertArticles();
+        insertArticleCategories();
         insertTestCategories();
     }
 
@@ -57,6 +61,32 @@ public class MainActivity extends BaseActivity {
         db.testCategoryDao().insert(new TestCategory(9, 9, 9));
         db.testCategoryDao().insert(new TestCategory(10, 10, 10));
         db.testCategoryDao().insert(new TestCategory(11, 11, 11));
+    }
+
+    private void insertSuperCategoryCategories() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(1, 1, 1));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(2, 1, 2));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(3, 1, 3));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(4, 1, 4));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(5, 1, 5));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(6, 1, 6));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(7, 1, 7));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(8, 1, 8));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(9, 2, 9));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(10, 2, 10));
+        db.superCategoryCategoryDao().insert(
+                new SuperCategoryCategory(11, 3, 11));
     }
 
     private void insertSuperCategories() {
@@ -97,31 +127,46 @@ public class MainActivity extends BaseActivity {
                 "სამკუთხედი"));
     }
 
+    private void insertArticleCategories() {
+        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        db.articleCategoryDao().insert(new ArticleCategory(1, 1, 1));
+        db.articleCategoryDao().insert(new ArticleCategory(2, 2, 2));
+        db.articleCategoryDao().insert(new ArticleCategory(3, 3, 3));
+        db.articleCategoryDao().insert(new ArticleCategory(4, 4, 4));
+        db.articleCategoryDao().insert(new ArticleCategory(5, 5, 5));
+        db.articleCategoryDao().insert(new ArticleCategory(6, 6, 6));
+        db.articleCategoryDao().insert(new ArticleCategory(7, 7, 7));
+        db.articleCategoryDao().insert(new ArticleCategory(8, 8, 8));
+        db.articleCategoryDao().insert(new ArticleCategory(9, 9, 9));
+        db.articleCategoryDao().insert(new ArticleCategory(10, 10, 10));
+        db.articleCategoryDao().insert(new ArticleCategory(11, 11, 11));
+    }
+
     private void insertArticles() {
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        db.articleDao().insert(new Article(1, 1, 1,
+        db.articleDao().insert(new Article(1,
                 "Puzzles","პაზლები", "puzzles", "პაზლები"));
-        db.articleDao().insert(new Article(2, 2, 1,
+        db.articleDao().insert(new Article(2,
                 "Crosswords1","კროსვორდები1", "Crosswords1", "კროსვორდები1"));
-        db.articleDao().insert(new Article(3, 3, 1,
+        db.articleDao().insert(new Article(3,
                 "Crosswords2","კროსვორდები2", "Crosswords2", "კროსვორდები2"));
-        db.articleDao().insert(new Article(4, 4, 1,
+        db.articleDao().insert(new Article(4,
                 "Crosswords3","კროსვორდები3", "Crosswords3", "კროსვორდები3"));
-        db.articleDao().insert(new Article(5, 5, 1,
+        db.articleDao().insert(new Article(5,
                 "Crosswords4","კროსვორდები4", "Crosswords4", "კროსვორდები4"));
-        db.articleDao().insert(new Article(6, 6, 1,
+        db.articleDao().insert(new Article(6,
                 "Crosswords5","კროსვორდები5", "Crosswords5", "კროსვორდები5"));
-        db.articleDao().insert(new Article(7, 7, 1,
+        db.articleDao().insert(new Article(7,
                 "Crosswords6","კროსვორდები6", "Crosswords6", "კროსვორდები6"));
-        db.articleDao().insert(new Article(8, 8, 1,
+        db.articleDao().insert(new Article(8,
                 "Crosswords7","კროსვორდები7", "Crosswords7", "კროსვორდები7"));
 
-        db.articleDao().insert(new Article(9, 9, 2,
+        db.articleDao().insert(new Article(9,
                 "trees","ხეები", "trees", "ხეები"));
-        db.articleDao().insert(new Article(10, 10, 2,
+        db.articleDao().insert(new Article(10,
                 "dijsktra","დეიქსტრა", "dijsktra", "დეიქსტრა"));
 
-        db.articleDao().insert(new Article(11, 11, 3,
+        db.articleDao().insert(new Article(11,
                 "Triangle","სამკუთხედი", "Triangle", "სამკუთხედი"));
     }
 

@@ -17,7 +17,10 @@ public interface TestCategoryDao {
     List<TestCategory> getAll();
 
     @Query("SELECT * FROM test_category where category_id = (:categoryId)")
-    TestCategory getTestCategory(int categoryId);
+    TestCategory getByCategoryId(int categoryId);
+
+    @Query("SELECT * FROM test_category where test_id = (:testId)")
+    TestCategory getByTestId(int testId);
 
     @Insert
     void insert(TestCategory testCategory);

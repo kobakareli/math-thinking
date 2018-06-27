@@ -10,7 +10,7 @@ import android.content.Context;
  */
 
 @Database(entities = {Article.class, Category.class, SuperCategory.class, Task.class, Test.class,
-        TestCategory.class},
+        TestCategory.class, ArticleCategory.class, SuperCategoryCategory.class},
         version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     //TODO: https://github.com/googlesamples/android-architecture-components/blob/master/BasicSample/app/src/main/java/com/example/android/persistence/db/AppDatabase.java
@@ -28,6 +28,10 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TestDao testDao();
 
     public abstract TestCategoryDao testCategoryDao();
+
+    public abstract SuperCategoryCategoryDao superCategoryCategoryDao();
+
+    public abstract ArticleCategoryDao articleCategoryDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {

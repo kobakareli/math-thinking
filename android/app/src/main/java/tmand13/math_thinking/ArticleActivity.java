@@ -12,8 +12,7 @@ import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
 
 public class ArticleActivity extends BaseActivity {
-
-    Article article;
+    int articleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +21,10 @@ public class ArticleActivity extends BaseActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        int articleId = intent.getIntExtra(CategoriesActivity.ARTICLE_ID, -1);
-
-        System.out.println();
+        articleId = intent.getIntExtra(CategoriesActivity.ARTICLE_ID, -1);
 
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        article = db.articleDao().getArticle(articleId);
+        Article article = db.articleDao().getArticle(articleId);
         String articleTitle = article.getTitle(getBaseContext());
         setTitle(articleTitle);
 
@@ -58,7 +55,8 @@ public class ArticleActivity extends BaseActivity {
 
     private void openTest() {
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        int testId = db.testCategoryDao().getTestCategory(article.getCategoryId()).getTestId();
+        int categoryId = db.articleCategoryDao().getByArticleId(articleId).getCategoryId();
+        int testId = db.testCategoryDao().getByCategoryId(categoryId).getTestId();
         Intent intent = new Intent(this, TestActivity.class);
         intent.putExtra(TestActivity.TEST_ID, testId);
         startActivity(intent);
