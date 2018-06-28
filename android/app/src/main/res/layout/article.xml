@@ -13,6 +13,7 @@
         android:gravity="start|center_vertical"
         android:background="@color/colorYellow"
         android:textColor="@color/colorWhite"
-        android:paddingLeft="10dp"/>
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp" />
 
 </android.support.constraint.ConstraintLayout>

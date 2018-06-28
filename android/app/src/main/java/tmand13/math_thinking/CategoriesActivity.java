@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.TextView;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -112,7 +113,7 @@ public class CategoriesActivity extends BaseActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            private TextView articleLink;
+            private Button articleLink;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -122,8 +123,7 @@ public class CategoriesActivity extends BaseActivity {
 
             void bind() {
                 int position = getAdapterPosition();
-                articleLink.setText(getString(R.string.category_with_tabs,
-                        categoriesIdsToTitles.get(categories.get(position))));
+                articleLink.setText(categoriesIdsToTitles.get(categories.get(position)));
             }
 
             @Override
@@ -165,7 +165,7 @@ public class CategoriesActivity extends BaseActivity {
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
             private ExpandableLayout expandableLayout;
             private RecyclerView recyclerViewCategories;
-            private TextView expandButton;
+            private Button expandButton;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -214,7 +214,10 @@ public class CategoriesActivity extends BaseActivity {
             @Override
             public void onExpansionUpdate(float expansionFraction, int state) {
                 if (state == ExpandableLayout.State.EXPANDING) {
-                    recyclerView.smoothScrollToPosition(getAdapterPosition());
+                    // We need this, because sometimes selectedItem is -1 and
+                    // smoothScrollToPosition crashes.
+                    int scrollPosition = selectedItem < 0 ? 0 : selectedItem;
+                    recyclerView.smoothScrollToPosition(scrollPosition);
                 }
             }
         }

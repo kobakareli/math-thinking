@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/main_menu_articles"
-            android:onClick="openCategories"/>
+            android:onClick="openCategories"
+            android:padding="4dp"/>
         <Button
             android:background="@color/colorYellow"
             android:textColor="@color/colorWhite"
@@ -35,7 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_menu_tests"
-            android:onClick="openTests" />
+            android:onClick="openTests"
+            android:padding="4dp"/>
         <Button
             android:background="@color/colorYellow"
             android:textColor="@color/colorWhite"
@@ -43,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_menu_tasks"
-            android:onClick="openTasks"/>
+            android:onClick="openTasks"
+            android:padding="4dp"/>
         <Button
             android:background="@color/colorYellow"
             android:textColor="@color/colorWhite"
@@ -51,7 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_menu_settings"
-            android:onClick="openSettings"/>
+            android:onClick="openSettings"
+            android:padding="4dp"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
