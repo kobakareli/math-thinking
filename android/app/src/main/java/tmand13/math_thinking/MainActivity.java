@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity {
         db.superCategoryDao().insert(new SuperCategory(2, "graph theory",
                 "გრაფთა თეორია"));
         db.superCategoryDao().insert(new SuperCategory(3, "Geometry",
-                "გეომეტრია"));
+                "გეომეტრიააააააააააააა"));
     }
     //TODO maybe give numbers like 1. Logic 1.1 Logic puzzles so on programmatically
     private void insertCategories() {
@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity {
         db.categoryDao().insert(new Category(1, "Puzzles",
                 "პაზლები"));
         db.categoryDao().insert(new Category(2, "Crosswords1",
-                "კროსვორდები1"));
+                "კროსვორდები11111111111111"));
         db.categoryDao().insert(new Category(3, "Crosswords2",
                 "კროსვორდები2"));
         db.categoryDao().insert(new Category(4, "Crosswords3",
@@ -149,7 +149,7 @@ public class MainActivity extends BaseActivity {
         db.articleDao().insert(new Article(1,
                 "Puzzles","პაზლები", "puzzles", "პაზლები"));
         db.articleDao().insert(new Article(2,
-                "Crosswords1","კროსვორდები1", "Crosswords1", "კროსვორდები1"));
+                "Crosswords1","კროსვორდები11111111111111", "Crosswords1", "კროსვორდები11111111111111"));
         db.articleDao().insert(new Article(3,
                 "Crosswords2","კროსვორდები2", "Crosswords2", "კროსვორდები2"));
         db.articleDao().insert(new Article(4,
