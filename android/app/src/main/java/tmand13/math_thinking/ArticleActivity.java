@@ -30,6 +30,9 @@ public class ArticleActivity extends BaseActivity {
 
         // Capture the layout's TextView and set the string as its text
         WebView webView = findViewById(R.id.article_web_view);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
 
         final String mimeType = "text/html";
         final String encoding = "UTF-8";

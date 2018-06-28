@@ -74,6 +74,10 @@ public class TaskFragment extends Fragment {
             return;
         }
         WebView descriptionWebView = view.findViewById(R.id.task_description);
+        descriptionWebView.getSettings().setSupportZoom(true);
+        descriptionWebView.getSettings().setBuiltInZoomControls(true);
+        descriptionWebView.getSettings().setDisplayZoomControls(false);
+
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
@@ -195,6 +199,10 @@ public class TaskFragment extends Fragment {
         dialog.setContentView(R.layout.webview_dialog);
 
         WebView hintWebView = (WebView) dialog.findViewById(R.id.webview_dialog);
+        hintWebView.getSettings().setSupportZoom(true);
+        hintWebView.getSettings().setBuiltInZoomControls(true);
+        hintWebView.getSettings().setDisplayZoomControls(false);
+
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
         hintWebView.loadDataWithBaseURL("file:///android_asset/", data, mimeType,
