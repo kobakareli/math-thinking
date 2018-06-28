@@ -20,4 +20,5 @@
     <string name="choose_language">აირჩიეთ ენა…</string>
     <string name="hint">მითითება</string>
     <string name="answer">პასუხი</string>
+    <string name="rate_app">შეაფასეთ აპლიკაცია</string>
 </resources>

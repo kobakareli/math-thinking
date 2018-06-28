@@ -43,7 +43,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".SettingsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
     </application>
 
 </manifest>

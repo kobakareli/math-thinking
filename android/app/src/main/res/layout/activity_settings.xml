@@ -26,6 +26,15 @@
             android:layout_width="wrap_content"
             android:text="@string/language"/>
 
+        <Button
+            android:id="@+id/rate_button"
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/rate_app"/>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
