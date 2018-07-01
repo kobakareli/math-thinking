@@ -24,6 +24,9 @@ public interface ArticleCategoryDao {
     @Insert
     void insert(ArticleCategory articleCategory);
 
+    @Insert
+    void insertAll(ArticleCategory... articleCategories);
+
     @Delete
     void delete(ArticleCategory articleCategory);
 }

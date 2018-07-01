@@ -19,6 +19,9 @@ public interface SuperCategoryCategoryDao {
     @Insert
     void insert(SuperCategoryCategory superCategoryCategory);
 
+    @Insert
+    void insertAll(SuperCategoryCategory... superCategoryCategories);
+
     @Delete
     void delete(SuperCategoryCategory superCategoryCategory);
 }

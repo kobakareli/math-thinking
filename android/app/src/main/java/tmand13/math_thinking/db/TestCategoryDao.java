@@ -25,6 +25,9 @@ public interface TestCategoryDao {
     @Insert
     void insert(TestCategory testCategory);
 
+    @Insert
+    void insertAll(TestCategory... testCategories);
+
     @Delete
     void delete(TestCategory testCategory);
 }

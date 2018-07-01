@@ -26,6 +26,9 @@ public interface TestDao {
     @Insert
     void insert(Test test);
 
+    @Insert
+    void insertAll(Test... tests);
+
     @Delete
     void delete(Test test);
 

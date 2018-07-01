@@ -22,6 +22,9 @@ public interface TaskTestDao {
     @Insert
     void insert(TaskTest taskTest);
 
+    @Insert
+    void insertAll(TaskTest... taskTests);
+
     @Delete
     void delete(TaskTest taskTest);
 }

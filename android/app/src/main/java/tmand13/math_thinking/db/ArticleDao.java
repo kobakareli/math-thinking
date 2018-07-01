@@ -22,6 +22,9 @@ public interface ArticleDao {
     @Insert
     void insert(Article article);
 
+    @Insert
+    void insertAll(Article... articles);
+
     @Delete
     void delete(Article article);
 }
