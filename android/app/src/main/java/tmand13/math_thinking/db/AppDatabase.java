@@ -5,9 +5,15 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
-import java.util.concurrent.Executors;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by tmand on 4/17/2018.
@@ -17,6 +23,10 @@ import java.util.concurrent.Executors;
         TestCategory.class, ArticleCategory.class, SuperCategoryCategory.class, TaskTest.class},
         version = 1)
 public abstract class AppDatabase extends RoomDatabase {
+    private static final String FIRST_TIME_CALLED = "first_time_called";
+    private static final String DB_NAME = "app-db";
+    private static final boolean COPY_FILE = true;
+
     //TODO: https://github.com/googlesamples/android-architecture-components/blob/master/BasicSample/app/src/main/java/com/example/android/persistence/db/AppDatabase.java
     // https://developer.android.com/reference/java/util/concurrent/Executor.html
     private static AppDatabase INSTANCE;
@@ -39,32 +49,61 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TaskTestDao taskTestDao();
 
-    public synchronized static AppDatabase getAppDatabase(final Context context) {
+    public static void copyDBFileIfFirstTimeCalled(Context context) {
+        SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        if (preferences.getBoolean(FIRST_TIME_CALLED, true)) {
+            if (COPY_FILE) {
+                try {
+                    String db_out_path = context.getDatabasePath(DB_NAME).toString();
+                    File db_out_file = new File(db_out_path);
+                    InputStream db_in = context.getAssets().open(DB_NAME);
+                    FileOutputStream db_out = new FileOutputStream(db_out_file);
+
+                    boolean keepGoing = true;
+                    byte[] buffer = new byte[20000];
+
+                    while (keepGoing) {
+                        int bytesReturned = db_in.read(buffer);
+                        if (bytesReturned > 0) {
+                            db_out.write(buffer, 0, bytesReturned);
+                        } else {
+                            keepGoing = false;
+                        }
+                    }
+
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean(FIRST_TIME_CALLED, false);
+                    editor.apply();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                insertData(context);
+            }
+        }
+    }
+
+    private static void insertData(Context context) {
+        insertTasks(context);
+        insertTaskWithOptions(context);
+        insertTwoDummyTasks(context);
+        insertTests(context);
+        insertSuperCategories(context);
+        insertCategories(context);
+        insertSuperCategoryCategories(context);
+        insertArticles(context);
+        insertArticleCategories(context);
+        insertTestCategories(context);
+        insertTaskTests(context);
+    }
+
+    public static AppDatabase getAppDatabase(final Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "app-db")
-                            .addCallback(new Callback() {
-                                @Override
-                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    super.onCreate(db);
-                                    Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            insertTasks(context);
-                                            insertTaskWithOptions(context);
-                                            insertTwoDummyTasks(context);
-                                            insertTests(context);
-                                            insertSuperCategories(context);
-                                            insertCategories(context);
-                                            insertSuperCategoryCategories(context);
-                                            insertArticles(context);
-                                            insertArticleCategories(context);
-                                            insertTestCategories(context);
-                                            insertTaskTests(context);
-                                        }
-                                    });
-                                }
-                            })
+                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
                             // allow queries on the main thread.
                             // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .allowMainThreadQueries()
@@ -183,7 +222,7 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     private static void insertTasks(Context context) {
-        Task[] tasks = new Task[4];
+        Task[] tasks = new Task[100];
         for (int i = 1; i <= 100; i++) {
             tasks[i - 1] = new Task(i, "gela"+String.valueOf(i), "გელა",
                     "d", "დ", "g", "ჰინტი", "g",
@@ -197,7 +236,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static void insertTaskWithOptions(Context context) {
         getAppDatabase(context).taskDao().insertAll(
-            new Task(100, "gela"+String.valueOf(100), "გელსონა",
+            new Task(101, "gela"+String.valueOf(101), "გელსონა",
                     "d", "აეეეე", "g", "გგ", "g",
                     "პასუხი", 1, 2, 2, true,
                     "d", "დ", "D", "დდ", "D",
