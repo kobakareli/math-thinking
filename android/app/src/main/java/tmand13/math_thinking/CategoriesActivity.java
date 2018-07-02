@@ -88,10 +88,12 @@ public class CategoriesActivity extends BaseActivity {
     private class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
         private RecyclerView recyclerView;
         private List<Integer> categories;
+        private int superCategoryId;
 
         CategoriesAdapter(RecyclerView recyclerView, int superCategoryId) {
             this.recyclerView = recyclerView;
             this.categories = superCategoriesToCategories.get(superCategoryId);
+            this.superCategoryId = superCategoryId;
         }
 
         @NonNull
@@ -123,7 +125,8 @@ public class CategoriesActivity extends BaseActivity {
 
             void bind() {
                 int position = getAdapterPosition();
-                articleLink.setText(categoriesIdsToTitles.get(categories.get(position)));
+                articleLink.setText(getString(R.string.category_title, superCategoryId,
+                        position + 1, categoriesIdsToTitles.get(categories.get(position))));
             }
 
             @Override
@@ -182,7 +185,8 @@ public class CategoriesActivity extends BaseActivity {
                 int position = getAdapterPosition();
                 boolean isSelected = position == selectedItem;
 
-                expandButton.setText(superCategoriesIdsToTitles.get(superCategories.get(position)));
+                expandButton.setText(getString(R.string.super_category_title, position + 1,
+                        superCategoriesIdsToTitles.get(superCategories.get(position))));
                 expandButton.setSelected(isSelected);
 
                 recyclerViewCategories = expandableLayout.findViewById(R.id.categories);

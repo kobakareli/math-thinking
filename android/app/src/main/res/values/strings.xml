@@ -22,4 +22,6 @@
     <string name="hint">Hint</string>
     <string name="answer">Answer</string>
     <string name="rate_app">Rate app</string>
+    <string name="super_category_title" translatable="false">%d. %s</string>
+    <string name="category_title" translatable="false">%d.%d %s</string>
 </resources>
