@@ -20,4 +20,18 @@
     <string name="hint">მითითება</string>
     <string name="answer">პასუხი</string>
     <string name="rate_app">შეაფასეთ</string>
+    <string name="sort_by">დაალაგე: </string>
+    <string-array name="sort_by_parameters">
+        <item>დამატების დროით</item>
+        <item>შეცვლის დროით</item>
+        <item>ანბანის მიხედვით</item>
+    </string-array>
+    <string name="reset">გაასუფთავე</string>
+    <string name="apply">განაახლე</string>
+    <string name="options">სავარაუდო პასუხებით</string>
+    <string name="both">ორივე</string>
+    <string name="direct_answer">პირდაპირი პასუხებით</string>
+    <string name="solved">ამოხსნილი</string>
+    <string name="unsolved">ამოუხსნელი</string>
+    <string name="task_filter_sort">ამოცანების დალაგება/გაფილტვრა</string>
 </resources>

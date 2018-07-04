@@ -25,7 +25,7 @@ import java.io.InputStream;
 public abstract class AppDatabase extends RoomDatabase {
     private static final String FIRST_TIME_CALLED = "first_time_called";
     private static final String DB_NAME = "app-db";
-    private static final boolean COPY_FILE = true;
+    private static final boolean COPY_FILE = false;
 
     //TODO: https://github.com/googlesamples/android-architecture-components/blob/master/BasicSample/app/src/main/java/com/example/android/persistence/db/AppDatabase.java
     // https://developer.android.com/reference/java/util/concurrent/Executor.html
@@ -72,9 +72,6 @@ public abstract class AppDatabase extends RoomDatabase {
                         }
                     }
 
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean(FIRST_TIME_CALLED, false);
-                    editor.apply();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -83,6 +80,10 @@ public abstract class AppDatabase extends RoomDatabase {
             } else {
                 insertData(context);
             }
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(FIRST_TIME_CALLED, false);
+            editor.apply();
         }
     }
 
@@ -216,7 +217,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     2, i%2==0, "option pirveli",
                     "პირველი", "meore", "მეორე",
                     "mesame", "მესამე", "meotxe",
-                    "მეოთხე");
+                    "მეოთხე", false);
         }
         getAppDatabase(context).taskDao().insertAll(tasks);
     }
@@ -229,7 +230,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     "პასუხი", 1, 2, 2,
                     false, "d", "დ", "D",
                     "დდ", "d", "დდდ", "D",
-                    "დდდდ");
+                    "დდდდ", false);
         }
         getAppDatabase(context).taskDao().insertAll(tasks);
     }
@@ -240,7 +241,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     "d", "აეეეე", "g", "გგ", "g",
                     "პასუხი", 1, 2, 2, true,
                     "d", "დ", "D", "დდ", "D",
-                    "დდდ", "D", "დდდდ"));
+                    "დდდ", "D", "დდდდ", false));
     }
 
     private static void insertTests(Context context) {

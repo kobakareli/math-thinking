@@ -1,5 +1,7 @@
 package tmand13.math_thinking;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,11 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
+import android.widget.Spinner;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -29,6 +33,8 @@ public class TaskSearchActivity extends BaseActivity {
     public static final String TASK_ID = "task_id";
 
     CursorAdapter adapter;
+    TaskFilterSortParametersWrapper wrapper;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +67,70 @@ public class TaskSearchActivity extends BaseActivity {
 
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
+                wrapper = new TaskFilterSortParametersWrapper(getApplicationContext());
+                boolean hasOptions1, hasOptions2, solved1, solved2;
+                int sortBy = wrapper.getSortBy();
+                int answerSwitch = wrapper.getAnswerSwitch();
+                int solvedSwitch = wrapper.getSolveSwitch();
+
+                switch (answerSwitch) {
+                    case 0:
+                        hasOptions1 = hasOptions2 = true;
+                        break;
+                    case 1:
+                        hasOptions1 = true;
+                        hasOptions2 = false;
+                        break;
+                    default:
+                        hasOptions1 = hasOptions2 = false;
+                        break;
+                }
+
+                switch (solvedSwitch) {
+                    case 0:
+                        solved1 = solved2 = false;
+                        break;
+                    case 1:
+                        solved1 = true;
+                        solved2 = false;
+                        break;
+                    default:
+                        solved1 = solved2 = true;
+                        break;
+                }
+
+                String titlePrefix = constraint.toString() + "%";
+
                 if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
-                    return db.taskDao().getCursorEn(constraint + "%");
+                    switch (sortBy) {
+                        case 0:
+                            return db.taskDao().getCursorOrderByCreationTimeEn(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                        case 1:
+                            return db.taskDao().getCursorOrderByUpdateTimeEn(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                        default:
+                            return db.taskDao().getCursorOrderByTitleEn(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                    }
                 } else {
-                    return db.taskDao().getCursorGe(constraint + "%");
+                    switch (sortBy) {
+                        case 0:
+                            return db.taskDao().getCursorOrderByCreationTimeGe(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                        case 1:
+                            return db.taskDao().getCursorOrderByUpdateTimeGe(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                        default:
+                            return db.taskDao().getCursorOrderByTitleGe(titlePrefix,
+                                    hasOptions1, hasOptions2, solved1, solved2);
+                    }
                 }
             }
         });
 
         listView.setAdapter(adapter);
+        filterTasks("");
     }
 
     public void openTask(int taskId) {
@@ -84,7 +145,7 @@ public class TaskSearchActivity extends BaseActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) item.getActionView();
+        searchView = (SearchView) item.getActionView();
         searchView.setQueryHint("Search task");
         // Before this searchview did not span the whole width
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -96,10 +157,40 @@ public class TaskSearchActivity extends BaseActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(newText));
+                filterTasks(newText);
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void filterTasks(String titlePrefix) {
+        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titlePrefix));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_filter) {
+            openTaskFilterSort();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (wrapper.isChanged()) {
+                filterTasks(searchView.getQuery().toString());
+                wrapper.refresh();
+            }
+        }
+    }
+
+    private void openTaskFilterSort() {
+        Intent intent = new Intent(this, TaskFilterSortActivity.class);
+        wrapper = new TaskFilterSortParametersWrapper(getApplicationContext());
+        startActivityForResult(intent, 1);
     }
 }

@@ -24,4 +24,19 @@
     <string name="rate_app">Rate app</string>
     <string name="super_category_title" translatable="false">%d. %s</string>
     <string name="category_title" translatable="false">%d.%d %s</string>
+    <string name="filter" translatable="false">Filter</string>
+    <string name="sort_by">Sort by: </string>
+    <string-array name="sort_by_parameters">
+        <item>Creation time</item>
+        <item>Update time</item>
+        <item>Alphabetically</item>
+    </string-array>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+    <string name="options">With options</string>
+    <string name="both">Both</string>
+    <string name="direct_answer">Direct answer</string>
+    <string name="solved">Solved</string>
+    <string name="unsolved">Unsolved</string>
+    <string name="task_filter_sort">Tasks Sort/Filter</string>
 </resources>

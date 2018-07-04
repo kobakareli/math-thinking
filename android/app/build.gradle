@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "tmand13.math_thinking"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 7
         versionName "7"
@@ -27,6 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.llollox:androidtoggleswitch:2.0.1'
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.1"

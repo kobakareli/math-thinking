@@ -6,9 +6,9 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -26,7 +26,7 @@
             android:theme="@style/CategoriesTheme" />
         <activity
             android:name=".ArticleActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TaskSearchActivity"
             android:screenOrientation="portrait" />
@@ -40,11 +40,13 @@
         <activity
             android:name=".TestActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".TaskFilterSortActivity" />
     </application>
 
 </manifest>
