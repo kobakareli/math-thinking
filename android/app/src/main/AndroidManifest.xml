@@ -46,7 +46,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/SettingsTheme" />
         <activity
-            android:name=".TaskFilterSortActivity" />
+            android:name=".TaskFilterSortActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

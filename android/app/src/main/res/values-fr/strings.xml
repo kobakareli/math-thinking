@@ -33,5 +33,5 @@
     <string name="direct_answer">პირდაპირი პასუხებით</string>
     <string name="solved">ამოხსნილი</string>
     <string name="unsolved">ამოუხსნელი</string>
-    <string name="task_filter_sort">ამოცანების დალაგება/გაფილტვრა</string>
+    <string name="task_filter_sort">დალაგება/გაფილტვრა</string>
 </resources>

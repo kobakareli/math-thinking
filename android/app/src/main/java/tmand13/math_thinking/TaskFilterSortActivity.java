@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import com.llollox.androidtoggleswitch.widgets.ToggleSwitch;
 
-public class TaskFilterSortActivity extends AppCompatActivity {
+public class TaskFilterSortActivity extends BaseActivity {
     TaskFilterSortParametersWrapper wrapper;
     Spinner sortSpinner;
     ToggleSwitch answerSwitch;
