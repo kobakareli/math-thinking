@@ -34,12 +34,29 @@ public interface TestDao {
 
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
-    @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix)")
-    Cursor getCursorEn(String titlePrefix);
 
-    // TODO maybe change LIKE to MATCH and add indexes as described
-    // here: https://developer.android.com/guide/topics/search/search-dialog
-    @Query("SELECT test_id as _id, title_ge FROM test where title_ge LIKE (:titlePrefix)")
-    Cursor getCursorGe(String titlePrefix);
+    @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
+    Cursor getCursorOrderByCreationTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
+    Cursor getCursorOrderByUpdateTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_en")
+    Cursor getCursorOrderByTitleEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
+    Cursor getCursorOrderByCreationTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
+    Cursor getCursorOrderByUpdateTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_ge")
+    Cursor getCursorOrderByTitleGe(String titlePrefix, boolean solved1, boolean solved2);
 }
 

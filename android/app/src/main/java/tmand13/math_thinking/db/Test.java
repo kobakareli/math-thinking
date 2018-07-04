@@ -3,11 +3,13 @@ package tmand13.math_thinking.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,10 +33,22 @@ public class Test {
     @ColumnInfo(name = "title_ge")
     private String titleGe;
 
-    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe) {
+    @ColumnInfo(name = "solved")
+    private boolean solved;
+
+    @ColumnInfo(name = "creation_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date creationTime;
+
+    @ColumnInfo(name = "update_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date updateTime;
+
+    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe, boolean solved) {
         this.testId = testId;
         this.titleEn = titleEn;
         this.titleGe = titleGe;
+        this.solved = solved;
     }
 
     public int getTestId() {
@@ -61,6 +75,30 @@ public class Test {
 
     public void setTitleGe(@NonNull String titleGe) {
         this.titleGe = titleGe;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getTitle(Context context) {

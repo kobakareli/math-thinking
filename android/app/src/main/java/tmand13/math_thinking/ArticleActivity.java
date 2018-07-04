@@ -61,7 +61,7 @@ public class ArticleActivity extends BaseActivity {
         int categoryId = db.articleCategoryDao().getByArticleId(articleId).getCategoryId();
         int testId = db.testCategoryDao().getByCategoryId(categoryId).getTestId();
         Intent intent = new Intent(this, TestActivity.class);
-        intent.putExtra(TestActivity.TEST_ID, testId);
+        intent.putExtra(TestSearchActivity.TEST_ID, testId);
         startActivity(intent);
     }
 }

@@ -24,8 +24,6 @@ import tmand13.math_thinking.db.Test;
 //TODO show answer button gvinda?
 
 public class TestActivity extends BaseActivity {
-    public static final String TEST_ID = "test_id";
-
     ArrayList<TaskFragment> fragments;
     ArrayList<TaskFragment> removedFragments;
     int curId;
@@ -60,7 +58,7 @@ public class TestActivity extends BaseActivity {
         setContentView(R.layout.activity_test);
 
         Intent intent = getIntent();
-        int testId = intent.getIntExtra(TEST_ID, -1);
+        int testId = intent.getIntExtra(TestSearchActivity.TEST_ID, -1);
 
         AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
         Test test = db.testDao().getTest(testId);

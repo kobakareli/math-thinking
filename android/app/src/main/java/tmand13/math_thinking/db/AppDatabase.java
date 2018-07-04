@@ -248,7 +248,7 @@ public abstract class AppDatabase extends RoomDatabase {
         Test[] tests = new Test[100];
         for (int i = 1; i <= 100; i++) {
             tests[i - 1] = new Test(i, "test" + String.valueOf(i),
-                    "ტესტი" + String.valueOf(i));
+                    "ტესტი" + String.valueOf(i), false);
         }
         getAppDatabase(context).testDao().insertAll(tests);
     }
