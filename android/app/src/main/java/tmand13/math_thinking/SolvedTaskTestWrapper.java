@@ -40,11 +40,11 @@ public class SolvedTaskTestWrapper {
         return ret;
     }
 
-    private Set<Integer> getSolvedTasks() {
+    public Set<Integer> getSolvedTasks() {
         return toIntegerSet(prefs.getStringSet(SOLVED_TASKS, new HashSet<String>()));
     }
 
-    private Set<Integer> getSolvedTests() {
+    public Set<Integer> getSolvedTests() {
         return toIntegerSet(prefs.getStringSet(SOLVED_TESTS, new HashSet<String>()));
     }
 

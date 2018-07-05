@@ -70,6 +70,11 @@ public class MainActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    public void openProgress(View view) {
+        Intent intent = new Intent(this, ProgressActivity.class);
+        startActivity(intent);
+    }
+
     public void openSettings(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);

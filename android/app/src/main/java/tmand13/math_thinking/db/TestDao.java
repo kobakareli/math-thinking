@@ -64,4 +64,7 @@ public interface TestDao {
 
     @Query("UPDATE test SET solved = :solved WHERE test_id = :testId")
     void updateSolved(int testId, boolean solved);
+
+    @Query("SELECT COUNT(test_id) FROM test")
+    int getNumberOfTests();
 }

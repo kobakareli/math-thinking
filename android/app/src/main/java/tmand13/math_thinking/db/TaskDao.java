@@ -76,4 +76,7 @@ public interface TaskDao {
 
     @Query("UPDATE task SET solved = :solved WHERE task_id = :taskId")
     void updateSolved(int taskId, boolean solved);
+
+    @Query("SELECT COUNT(task_id) FROM task")
+    int getNumberOfTasks();
 }
