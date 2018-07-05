@@ -40,4 +40,5 @@
     <string name="unsolved">Unsolved</string>
     <string name="task_filter_sort">Tasks Sort/Filter</string>
     <string name="test_filter_sort">Tests Sort/Filter</string>
+    <string name="solved_task_test" translatable="false">%s\t✔</string>
 </resources>

@@ -77,14 +77,6 @@ public class Test {
         this.titleGe = titleGe;
     }
 
-    public boolean isSolved() {
-        return solved;
-    }
-
-    public void setSolved(boolean solved) {
-        this.solved = solved;
-    }
-
     public Date getCreationTime() {
         return creationTime;
     }
@@ -99,6 +91,14 @@ public class Test {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
     }
 
     public String getTitle(Context context) {

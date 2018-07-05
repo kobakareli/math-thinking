@@ -50,6 +50,10 @@ public class TestSearchActivity extends BaseActivity {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(Test.getTitleColumnName(getBaseContext())));
                 final int testId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
+                int solved = cursor.getInt(cursor.getColumnIndexOrThrow("solved"));
+                if (solved > 0) {
+                    button.setText(getString(R.string.solved_task_test, title));
+                }
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -116,7 +120,7 @@ public class TestSearchActivity extends BaseActivity {
     public void openTest(int testId) {
         Intent intent = new Intent(this, TestActivity.class);
         intent.putExtra(TEST_ID, testId);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 
     // TODO might use LoaderManager & CursorLoader to move away loading from UI thread
@@ -164,6 +168,13 @@ public class TestSearchActivity extends BaseActivity {
             if (wrapper.isChanged()) {
                 filterTests(searchView.getQuery().toString());
                 wrapper.refresh();
+            }
+        }
+        if (requestCode == 2) {
+            boolean allIsRight = data.getBooleanExtra(TestActivity.ALL_IS_RIGHT,
+                    false);
+            if (allIsRight) {
+                filterTests(searchView.getQuery().toString());
             }
         }
     }

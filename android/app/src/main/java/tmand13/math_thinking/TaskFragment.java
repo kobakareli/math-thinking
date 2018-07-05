@@ -29,7 +29,8 @@ public class TaskFragment extends Fragment {
     boolean alreadyAnswered;
     EditText answerField;
     ImageButton answerSelect;
-    boolean answerIsRight;
+    boolean answerIsRight = false;
+    AppDatabase db;
 
     public TaskFragment() {
         // Required empty public constructor
@@ -38,7 +39,7 @@ public class TaskFragment extends Fragment {
     public static TaskFragment newInstance(int taskId) {
         TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
-        args.putInt(TaskActivity.TASK_ID, taskId);
+        args.putInt(TaskSearchActivity.TASK_ID, taskId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,8 +48,9 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            taskId = getArguments().getInt(TaskActivity.TASK_ID);
+            taskId = getArguments().getInt(TaskSearchActivity.TASK_ID);
         }
+        db = AppDatabase.getAppDatabase(getContext());
     }
 
     @Override
@@ -57,7 +59,6 @@ public class TaskFragment extends Fragment {
         if (taskId == null) {
             return inflater.inflate(R.layout.empty, container, false);
         } else {
-            AppDatabase db = AppDatabase.getAppDatabase(getContext());
             task = db.taskDao().getTask(taskId);
 
             if (task.isHasOptions()) {
@@ -154,6 +155,7 @@ public class TaskFragment extends Fragment {
         if (numericAnswer == optionId) {
             option.setBackgroundColor(Color.GREEN);
             answerIsRight = true;
+            setSolved();
         } else {
             option.setBackgroundColor(Color.RED);
             getOptionButton(numericAnswer).setBackgroundColor(Color.GREEN);
@@ -180,10 +182,15 @@ public class TaskFragment extends Fragment {
         if (userAnswer.equals(task.getAnswer(getContext()))) {
             answerField.setBackgroundColor(Color.GREEN);
             answerIsRight = true;
+            setSolved();
         } else {
             answerField.setBackgroundColor(Color.RED);
             answerIsRight = false;
         }
+    }
+
+    private void setSolved() {
+        db.taskDao().updateSolved(taskId, true);
     }
 
     public void showHint() {

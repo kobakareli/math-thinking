@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class TaskActivity extends BaseActivity {
-    public static final String TASK_ID = "task_id";
+    public static final String ANSWER_IS_RIGHT = "answer_is_right";
 
     TaskFragment fragment;
 
@@ -21,7 +21,7 @@ public class TaskActivity extends BaseActivity {
         setTitle(R.string.task);
 
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra(TASK_ID, -1);
+        int taskId = intent.getIntExtra(TaskSearchActivity.TASK_ID, -1);
 
         fragment = TaskFragment.newInstance(taskId);
         FragmentManager fm = getSupportFragmentManager();
@@ -66,5 +66,14 @@ public class TaskActivity extends BaseActivity {
             fragment.showAnswer();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.putExtra(ANSWER_IS_RIGHT, fragment.answerIsRight());
+        setResult(RESULT_OK, data);
+        super.onBackPressed();
     }
 }

@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import tmand13.math_thinking.FirstTimeCalledWrapper;
+
 /**
  * Created by tmand on 4/17/2018.
  */
@@ -23,9 +25,8 @@ import java.io.InputStream;
         TestCategory.class, ArticleCategory.class, SuperCategoryCategory.class, TaskTest.class},
         version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String FIRST_TIME_CALLED = "first_time_called";
     private static final String DB_NAME = "app-db";
-    private static final boolean COPY_FILE = false;
+    private static final boolean COPY_FILE = true;
 
     //TODO: https://github.com/googlesamples/android-architecture-components/blob/master/BasicSample/app/src/main/java/com/example/android/persistence/db/AppDatabase.java
     // https://developer.android.com/reference/java/util/concurrent/Executor.html
@@ -50,9 +51,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TaskTestDao taskTestDao();
 
     public static void copyDBFileIfFirstTimeCalled(Context context) {
-        SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(context);
-        if (preferences.getBoolean(FIRST_TIME_CALLED, true)) {
+        FirstTimeCalledWrapper firstTimeCalledWrapper = new FirstTimeCalledWrapper(context);
+        if (firstTimeCalledWrapper.firstTimeCalled()) {
             if (COPY_FILE) {
                 try {
                     String db_out_path = context.getDatabasePath(DB_NAME).toString();
@@ -62,6 +62,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
                     boolean keepGoing = true;
                     byte[] buffer = new byte[20000];
+
+                    // TODO maybe delete db file to avoid double use of memory
 
                     while (keepGoing) {
                         int bytesReturned = db_in.read(buffer);
@@ -81,9 +83,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 insertData(context);
             }
 
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean(FIRST_TIME_CALLED, false);
-            editor.apply();
+            firstTimeCalledWrapper.setFirstTimeCalled(false);
         }
     }
 
@@ -101,16 +101,24 @@ public abstract class AppDatabase extends RoomDatabase {
         insertTaskTests(context);
     }
 
-    public static AppDatabase getAppDatabase(final Context context) {
+    private static void initializeInstance(Context context) {
+        INSTANCE =
+                Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
+                        // allow queries on the main thread.
+                        // Don't do this on a real app! See PersistenceBasicSample for an example.
+                        .allowMainThreadQueries()
+                        .build();
+    }
+
+    public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
-                            // allow queries on the main thread.
-                            // Don't do this on a real app! See PersistenceBasicSample for an example.
-                            .allowMainThreadQueries()
-                            .build();
+            initializeInstance(context);
         }
         return INSTANCE;
+    }
+
+    public static void rebuildAppDatabase(Context context) {
+        initializeInstance(context);
     }
 
     private static void insertTestCategories(Context context) {

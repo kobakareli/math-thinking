@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,6 +58,10 @@ public class TaskSearchActivity extends BaseActivity {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow(Task.getTitleColumnName(getBaseContext())));
                 final int taskId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
+                int solved = cursor.getInt(cursor.getColumnIndexOrThrow("solved"));
+                if (solved > 0) {
+                    button.setText(getString(R.string.solved_task_test, title));
+                }
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,7 +142,7 @@ public class TaskSearchActivity extends BaseActivity {
     public void openTask(int taskId) {
         Intent intent = new Intent(this, TaskActivity.class);
         intent.putExtra(TASK_ID, taskId);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 
     // TODO might use LoaderManager & CursorLoader to move away loading from UI thread
@@ -184,6 +190,13 @@ public class TaskSearchActivity extends BaseActivity {
             if (wrapper.isChanged()) {
                 filterTasks(searchView.getQuery().toString());
                 wrapper.refresh();
+            }
+        }
+        if (requestCode == 2) {
+            boolean answerIsRight = data.getBooleanExtra(TaskActivity.ANSWER_IS_RIGHT,
+                    false);
+            if (answerIsRight) {
+                filterTasks(searchView.getQuery().toString());
             }
         }
     }
