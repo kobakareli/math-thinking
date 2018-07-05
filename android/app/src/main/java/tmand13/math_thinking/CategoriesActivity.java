@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.TextView;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -19,16 +20,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CategoriesActivity extends AppCompatActivity {
+import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.ArticleCategory;
+import tmand13.math_thinking.db.Category;
+import tmand13.math_thinking.db.SuperCategory;
+import tmand13.math_thinking.db.SuperCategoryCategory;
+
+public class CategoriesActivity extends BaseActivity {
     public static final String ARTICLE_ID = "article_id";
 
-    Map<String, List<String>> superCategoriesToCategories;
-    List<String> superCategories;
+    List<Integer> superCategories;
+    Map<Integer, List<Integer>> superCategoriesToCategories;
+    Map<Integer, Integer> categoriesToArticles;
+    Map<Integer, String> superCategoriesIdsToTitles;
+    Map<Integer, String> categoriesIdsToTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.super_categories);
+        setTitle(R.string.articles);
 
         fetchDataFromDB();
 
@@ -38,40 +50,50 @@ public class CategoriesActivity extends AppCompatActivity {
     }
 
     private void fetchDataFromDB() {
-        // TODO dummy implementation
         superCategories = new ArrayList<>();
-        superCategories.add("1. Math");
-        superCategories.add("2. Logic");
-        superCategories.add("3. Common sense");
-
         superCategoriesToCategories = new HashMap<>();
+        categoriesToArticles = new HashMap<>();
+        superCategoriesIdsToTitles = new HashMap<>();
+        categoriesIdsToTitles = new HashMap<>();
 
-        List<String> math = new ArrayList<>();
-        math.add("1.1 math_1");
-        math.add("1.2 math_2");
-        math.add("1.3 math_3");
-        superCategoriesToCategories.put(superCategories.get(0), math);
-
-        List<String> logic = new ArrayList<>();
-        logic.add("2.1 logic_1");
-        logic.add("2.2 logic_2");
-        logic.add("2.3 logic_3");
-        superCategoriesToCategories.put(superCategories.get(1), logic);
-
-        List<String> commonSense = new ArrayList<>();
-        commonSense.add("3.1 commonsense_1");
-        commonSense.add("3.2 commonsense_2");
-        commonSense.add("3.3 commonsense_3");
-        superCategoriesToCategories.put(superCategories.get(2), commonSense);
+        final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+        for (ArticleCategory articleCategory : db.articleCategoryDao().getAll()) {
+            categoriesToArticles.put(articleCategory.getCategoryId(),
+                    articleCategory.getArticleId());
+        }
+        for (SuperCategoryCategory superCategoryCategory : db.superCategoryCategoryDao().getAll()) {
+            int superCategoryId = superCategoryCategory.getSuperCategoryId();
+            int categoryId = superCategoryCategory.getCategoryId();
+            if (!superCategoriesToCategories.containsKey(superCategoryId)) {
+                superCategoriesToCategories.put(superCategoryId, new ArrayList<Integer>());
+                superCategories.add(superCategoryId);
+            }
+            superCategoriesToCategories.get(superCategoryId).add(categoryId);
+        }
+        for (SuperCategory superCategory : db.superCategoryDao().getAll()) {
+            int superCategoryId = superCategory.getSuperCategoryId();
+            superCategoriesIdsToTitles.put(superCategory.getSuperCategoryId(),
+                    superCategory.getTitle(getBaseContext()));
+            if (!superCategoriesToCategories.containsKey(superCategoryId)) {
+                superCategoriesToCategories.put(superCategoryId, new ArrayList<Integer>());
+                superCategories.add(superCategoryId);
+            }
+        }
+        for (Category category : db.categoryDao().getAll()) {
+            categoriesIdsToTitles.put(category.getCategoryId(),
+                    category.getTitle(getBaseContext()));
+        }
     }
 
     private class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
         private RecyclerView recyclerView;
-        private List<String> categories;
+        private List<Integer> categories;
+        private int superCategoryId;
 
-        CategoriesAdapter(RecyclerView recyclerView, String superCategory) {
+        CategoriesAdapter(RecyclerView recyclerView, int superCategoryId) {
             this.recyclerView = recyclerView;
-            this.categories = superCategoriesToCategories.get(superCategory);
+            this.categories = superCategoriesToCategories.get(superCategoryId);
+            this.superCategoryId = superCategoryId;
         }
 
         @NonNull
@@ -93,7 +115,7 @@ public class CategoriesActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            private TextView articleLink;
+            private Button articleLink;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -103,13 +125,14 @@ public class CategoriesActivity extends AppCompatActivity {
 
             void bind() {
                 int position = getAdapterPosition();
-                articleLink.setText(getString(R.string.category_with_tabs, categories.get(position)));
+                articleLink.setText(getString(R.string.category_title, superCategoryId,
+                        position + 1, categoriesIdsToTitles.get(categories.get(position))));
             }
 
             @Override
             public void onClick(View view) {
                 int position = getAdapterPosition();
-                openArticle(categories.get(position));
+                openArticle(categoriesToArticles.get(categories.get(position)));
             }
         }
     }
@@ -145,7 +168,7 @@ public class CategoriesActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
             private ExpandableLayout expandableLayout;
             private RecyclerView recyclerViewCategories;
-            private TextView expandButton;
+            private Button expandButton;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -162,12 +185,14 @@ public class CategoriesActivity extends AppCompatActivity {
                 int position = getAdapterPosition();
                 boolean isSelected = position == selectedItem;
 
-                expandButton.setText(superCategories.get(position));
+                expandButton.setText(getString(R.string.super_category_title, position + 1,
+                        superCategoriesIdsToTitles.get(superCategories.get(position))));
                 expandButton.setSelected(isSelected);
 
                 recyclerViewCategories = expandableLayout.findViewById(R.id.categories);
                 recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories, superCategories.get(position)));
+                recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories,
+                        superCategories.get(position)));
 
                 expandableLayout.setExpanded(isSelected, false);
             }
@@ -193,13 +218,16 @@ public class CategoriesActivity extends AppCompatActivity {
             @Override
             public void onExpansionUpdate(float expansionFraction, int state) {
                 if (state == ExpandableLayout.State.EXPANDING) {
-                    recyclerView.smoothScrollToPosition(getAdapterPosition());
+                    // We need this, because sometimes selectedItem is -1 and
+                    // smoothScrollToPosition crashes.
+                    int scrollPosition = selectedItem < 0 ? 0 : selectedItem;
+                    recyclerView.smoothScrollToPosition(scrollPosition);
                 }
             }
         }
     }
 
-    public void openArticle(String articleId) {
+    public void openArticle(int articleId) {
         Intent intent = new Intent(this, ArticleActivity.class);
         intent.putExtra(ARTICLE_ID, articleId);
         startActivity(intent);

@@ -15,17 +15,26 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
+
+import java.util.Locale;
 
 import tmand13.math_thinking.db.AppDatabase;
+import tmand13.math_thinking.db.Test;
+
 /// TODO support list pagination
-public class TestSearchActivity extends AppCompatActivity {
+public class TestSearchActivity extends BaseActivity {
+    public static final String TEST_ID = "test_id";
+
     CursorAdapter adapter;
+    TestFilterSortParametersWrapper wrapper;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_search);
+        setTitle(R.string.tests);
 
         ListView listView = findViewById(R.id.list_view_tests);
         final AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
@@ -38,9 +47,13 @@ public class TestSearchActivity extends AppCompatActivity {
             @Override
             public void bindView(final View view, Context context, Cursor cursor) {
                 Button button = view.findViewById(R.id.test_search_item);
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title_en"));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(Test.getTitleColumnName(getBaseContext())));
                 final int testId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
                 button.setText(title);
+                int solved = cursor.getInt(cursor.getColumnIndexOrThrow("solved"));
+                if (solved > 0) {
+                    button.setText(getString(R.string.solved_task_test, title));
+                }
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -52,17 +65,62 @@ public class TestSearchActivity extends AppCompatActivity {
 
         adapter.setFilterQueryProvider(new FilterQueryProvider() {
             public Cursor runQuery(CharSequence constraint) {
-                return db.testDao().getCursor(constraint + "%");
+                wrapper = new TestFilterSortParametersWrapper(getApplicationContext());
+                boolean solved1, solved2;
+                int sortBy = wrapper.getSortBy();
+                int solvedSwitch = wrapper.getSolveSwitch();
+
+                switch (solvedSwitch) {
+                    case 0:
+                        solved1 = solved2 = false;
+                        break;
+                    case 1:
+                        solved1 = true;
+                        solved2 = false;
+                        break;
+                    default:
+                        solved1 = solved2 = true;
+                        break;
+                }
+
+                String titlePrefix = constraint.toString() + "%";
+
+                if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
+                    switch (sortBy) {
+                        case 0:
+                            return db.testDao().getCursorOrderByCreationTimeEn(titlePrefix,
+                                    solved1, solved2);
+                        case 1:
+                            return db.testDao().getCursorOrderByUpdateTimeEn(titlePrefix,
+                                    solved1, solved2);
+                        default:
+                            return db.testDao().getCursorOrderByTitleEn(titlePrefix,
+                                    solved1, solved2);
+                    }
+                } else {
+                    switch (sortBy) {
+                        case 0:
+                            return db.testDao().getCursorOrderByCreationTimeGe(titlePrefix,
+                                    solved1, solved2);
+                        case 1:
+                            return db.testDao().getCursorOrderByUpdateTimeGe(titlePrefix,
+                                    solved1, solved2);
+                        default:
+                            return db.testDao().getCursorOrderByTitleGe(titlePrefix,
+                                    solved1, solved2);
+                    }
+                }
             }
         });
 
         listView.setAdapter(adapter);
+        filterTests("");
     }
 
     public void openTest(int testId) {
         Intent intent = new Intent(this, TestActivity.class);
-        intent.putExtra(TestActivity.TEST_ID, testId);
-        startActivity(intent);
+        intent.putExtra(TEST_ID, testId);
+        startActivityForResult(intent, 2);
     }
 
     // TODO might use LoaderManager & CursorLoader to move away loading from UI thread
@@ -71,7 +129,7 @@ public class TestSearchActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
         MenuItem item = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) item.getActionView();
+        searchView = (SearchView) item.getActionView();
         searchView.setQueryHint("Search test");
         // Before this searchview did not span the whole width
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -83,10 +141,47 @@ public class TestSearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(newText));
+                filterTests(newText);
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void filterTests(String titlePrefix) {
+        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titlePrefix));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_filter) {
+            openTestFilterSort();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (wrapper.isChanged()) {
+                filterTests(searchView.getQuery().toString());
+                wrapper.refresh();
+            }
+        }
+        if (requestCode == 2) {
+            boolean allIsRight = data.getBooleanExtra(TestActivity.ALL_IS_RIGHT,
+                    false);
+            if (allIsRight) {
+                filterTests(searchView.getQuery().toString());
+            }
+        }
+    }
+
+    private void openTestFilterSort() {
+        Intent intent = new Intent(this, TestFilterSortActivity.class);
+        wrapper = new TestFilterSortParametersWrapper(getApplicationContext());
+        startActivityForResult(intent, 1);
     }
 }

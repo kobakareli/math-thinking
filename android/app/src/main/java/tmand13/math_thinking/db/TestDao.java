@@ -17,7 +17,7 @@ public interface TestDao {
     @Query("SELECT * FROM test")
     List<Test> getAll();
 
-    @Query("SELECT t.title_en as title_en,t.test_id as _id FROM test t")
+    @Query("SELECT t.title_en as title_en,t.solved as solved,t.title_ge as title_ge,t.test_id as _id FROM test t")
     Cursor getCursorAll();
 
     @Query("SELECT * FROM test where test_id = (:testId)")
@@ -26,11 +26,42 @@ public interface TestDao {
     @Insert
     void insert(Test test);
 
+    @Insert
+    void insertAll(Test... tests);
+
     @Delete
     void delete(Test test);
 
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
-    @Query("SELECT test_id as _id, title_en FROM test where title_en LIKE (:titlePrefix)")
-    Cursor getCursor(String titlePrefix);
+
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
+    Cursor getCursorOrderByCreationTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
+    Cursor getCursorOrderByUpdateTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_en")
+    Cursor getCursorOrderByTitleEn(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
+    Cursor getCursorOrderByCreationTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
+    Cursor getCursorOrderByUpdateTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+            "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_ge")
+    Cursor getCursorOrderByTitleGe(String titlePrefix, boolean solved1, boolean solved2);
+
+    @Query("SELECT * FROM test where solved > 0")
+    List<Test> getSolved();
+
+    @Query("UPDATE test SET solved = :solved WHERE test_id = :testId")
+    void updateSolved(int testId, boolean solved);
 }

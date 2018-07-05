@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">მათემატიკური აზროვნება</string>
+    <string name="main_menu_articles">თეორიები</string>
+    <string name="main_menu_tests">ტესტები</string>
+    <string name="main_menu_tasks">ამოცანები</string>
+    <string name="main_menu_settings">პარამეტრები</string>
+    <string name="tasks_search_hint">მოძებნე ამოცანა</string>
+    <string name="language">ენა</string>
+    <string name="settings">პარამეტრები</string>
+    <string name="test">ტესტი</string>
+    <string name="tests">ტესტები</string>
+    <string name="tasks">ამოცანები</string>
+    <string name="task">ამოცანა</string>
+    <string name="articles">თეორიები</string>
+    <string name="right">სწორი</string>
+    <string name="wrong">არასწორი</string>
+    <string name="tasks_number">ამოცანები</string>
+    <string name="zero">0</string>
+    <string name="choose_language">აირჩიეთ ენა…</string>
+    <string name="hint">მითითება</string>
+    <string name="answer">პასუხი</string>
+    <string name="rate_app">შეაფასეთ</string>
+    <string name="sort_by">დაალაგე: </string>
+    <string-array name="sort_by_parameters">
+        <item>დამატების დროით</item>
+        <item>შეცვლის დროით</item>
+        <item>ანბანის მიხედვით</item>
+    </string-array>
+    <string name="reset">გაასუფთავე</string>
+    <string name="apply">განაახლე</string>
+    <string name="options">სავარაუდო პასუხებით</string>
+    <string name="both">ორივე</string>
+    <string name="direct_answer">პირდაპირი პასუხებით</string>
+    <string name="solved">ამოხსნილი</string>
+    <string name="unsolved">ამოუხსნელი</string>
+    <string name="task_filter_sort">დალაგება/გაფილტვრა</string>
+    <string name="test_filter_sort">დალაგება/გაფილტვრა</string>
+</resources>

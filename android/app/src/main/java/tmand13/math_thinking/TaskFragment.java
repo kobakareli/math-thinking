@@ -3,9 +3,7 @@ package tmand13.math_thinking;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,8 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Task;
 // TODO remove unused libraries and solve all intellij idea
@@ -33,6 +29,8 @@ public class TaskFragment extends Fragment {
     boolean alreadyAnswered;
     EditText answerField;
     ImageButton answerSelect;
+    boolean answerIsRight = false;
+    AppDatabase db;
 
     public TaskFragment() {
         // Required empty public constructor
@@ -41,7 +39,7 @@ public class TaskFragment extends Fragment {
     public static TaskFragment newInstance(int taskId) {
         TaskFragment fragment = new TaskFragment();
         Bundle args = new Bundle();
-        args.putInt(TaskActivity.TASK_ID, taskId);
+        args.putInt(TaskSearchActivity.TASK_ID, taskId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,8 +48,9 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            taskId = getArguments().getInt(TaskActivity.TASK_ID);
+            taskId = getArguments().getInt(TaskSearchActivity.TASK_ID);
         }
+        db = AppDatabase.getAppDatabase(getContext());
     }
 
     @Override
@@ -60,7 +59,6 @@ public class TaskFragment extends Fragment {
         if (taskId == null) {
             return inflater.inflate(R.layout.empty, container, false);
         } else {
-            AppDatabase db = AppDatabase.getAppDatabase(getContext());
             task = db.taskDao().getTask(taskId);
 
             if (task.isHasOptions()) {
@@ -76,24 +74,26 @@ public class TaskFragment extends Fragment {
         if (taskId == null) {
             return;
         }
-        TextView titleTextView = view.findViewById(R.id.task_title);
         WebView descriptionWebView = view.findViewById(R.id.task_description);
+        descriptionWebView.getSettings().setSupportZoom(true);
+        descriptionWebView.getSettings().setBuiltInZoomControls(true);
+        descriptionWebView.getSettings().setDisplayZoomControls(false);
+
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        titleTextView.setText(task.getTitleEn());
         descriptionWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getDescriptionEn(), mimeType, encoding, "");
+                task.getDescription(getContext()), mimeType, encoding, "");
 
         if (task.isHasOptions()) {
             option1 = view.findViewById(R.id.option1);
             option2 = view.findViewById(R.id.option2);
             option3 = view.findViewById(R.id.option3);
             option4 = view.findViewById(R.id.option4);
-            option1.setText(task.getOption1En());
-            option2.setText(task.getOption2En());
-            option3.setText(task.getOption3En());
-            option4.setText(task.getOption4En());
+            option1.setText(task.getOption1(getContext()));
+            option2.setText(task.getOption2(getContext()));
+            option3.setText(task.getOption3(getContext()));
+            option4.setText(task.getOption4(getContext()));
         } else {
             answerField = view.findViewById(R.id.answer_field);
             answerField.addTextChangedListener(new TextWatcher() {
@@ -154,9 +154,12 @@ public class TaskFragment extends Fragment {
         int numericAnswer = task.getNumericAnswer();
         if (numericAnswer == optionId) {
             option.setBackgroundColor(Color.GREEN);
+            answerIsRight = true;
+            setSolved();
         } else {
             option.setBackgroundColor(Color.RED);
             getOptionButton(numericAnswer).setBackgroundColor(Color.GREEN);
+            answerIsRight = false;
         }
     }
 
@@ -169,32 +172,57 @@ public class TaskFragment extends Fragment {
     }
 
     public void answerSelected(View view) {
+        if (alreadyAnswered) {
+            return;
+        }
         alreadyAnswered = true;
         removeKeyboardAndFocus();
         //todo close keyboard
         String userAnswer = answerField.getText().toString();
-        if (userAnswer.equals(task.getAnswerEn())) {
+        if (userAnswer.equals(task.getAnswer(getContext()))) {
             answerField.setBackgroundColor(Color.GREEN);
+            answerIsRight = true;
+            setSolved();
         } else {
             answerField.setBackgroundColor(Color.RED);
+            answerIsRight = false;
         }
     }
 
-    public void showHint() {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.hint_dialog);
-        dialog.setTitle("Hint");
+    private void setSolved() {
+        db.taskDao().updateSolved(taskId, true);
+    }
 
-        WebView hintWebView = (WebView) dialog.findViewById(R.id.hint_webview);
+    public void showHint() {
+        showWebviewDialog(task.getHint(getContext()));
+    }
+
+    public void showAnswer() {
+        showWebviewDialog(task.getAnswer(getContext()));
+    }
+
+    private void showWebviewDialog(String data) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.webview_dialog);
+
+        WebView hintWebView = (WebView) dialog.findViewById(R.id.webview_dialog);
+        hintWebView.getSettings().setSupportZoom(true);
+        hintWebView.getSettings().setBuiltInZoomControls(true);
+        hintWebView.getSettings().setDisplayZoomControls(false);
+
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        hintWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getHintEn(), mimeType, encoding, "");
+        hintWebView.loadDataWithBaseURL("file:///android_asset/", data, mimeType,
+                encoding, "");
 
         dialog.show();
     }
 
     public boolean alreadyAnswered() {
         return alreadyAnswered;
+    }
+    
+    public boolean answerIsRight() {
+        return answerIsRight;
     }
 }

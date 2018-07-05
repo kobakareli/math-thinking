@@ -1,32 +1,16 @@
 package tmand13.math_thinking;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.SearchView;
 
-import tmand13.math_thinking.db.AppDatabase;
-import tmand13.math_thinking.db.Task;
-
-public class TaskActivity extends AppCompatActivity {
-    public static final String TASK_ID = "task_id";
+public class TaskActivity extends BaseActivity {
+    public static final String ANSWER_IS_RIGHT = "answer_is_right";
 
     TaskFragment fragment;
 
@@ -34,9 +18,10 @@ public class TaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        setTitle(R.string.task);
 
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra(TASK_ID, -1);
+        int taskId = intent.getIntExtra(TaskSearchActivity.TASK_ID, -1);
 
         fragment = TaskFragment.newInstance(taskId);
         FragmentManager fm = getSupportFragmentManager();
@@ -68,16 +53,27 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.hint, menu);
+        inflater.inflate(R.menu.menu_task, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_hint) {
+        if (id == R.id.menu_task_hint) {
             fragment.showHint();
+        } else if (id == R.id.menu_task_answer) {
+            fragment.showAnswer();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        data.putExtra(ANSWER_IS_RIGHT, fragment.answerIsRight());
+        setResult(RESULT_OK, data);
+        super.onBackPressed();
     }
 }

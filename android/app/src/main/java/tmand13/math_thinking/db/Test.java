@@ -3,11 +3,17 @@ package tmand13.math_thinking.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import tmand13.math_thinking.LocaleHelper;
 
 /**
  * Created by tmand on 4/19/2018.
@@ -27,34 +33,22 @@ public class Test {
     @ColumnInfo(name = "title_ge")
     private String titleGe;
 
-    @NonNull
-    @ColumnInfo(name = "tasks_ids")
-    private String tasksIds;
+    @ColumnInfo(name = "solved")
+    private boolean solved;
 
-    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe, @NonNull String tasksIds) {
+    @ColumnInfo(name = "creation_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date creationTime;
+
+    @ColumnInfo(name = "update_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date updateTime;
+
+    public Test(int testId, @NonNull String titleEn, @NonNull String titleGe, boolean solved) {
         this.testId = testId;
         this.titleEn = titleEn;
         this.titleGe = titleGe;
-        this.tasksIds = tasksIds;
-    }
-
-    public static String listToString(List<Integer> taskIds) {
-        StringBuilder sb = new StringBuilder();
-        String delimiter = "";
-        for(Integer taskId : taskIds){
-            sb.append(delimiter).append(String.valueOf(taskId));
-            delimiter = ",";
-        }
-        return sb.toString();
-    }
-
-    public static List<Integer> stringToList(String taskIds) {
-        List<String> taskIdsListStr = Arrays.asList(taskIds.split(","));
-        List<Integer> taskIdsListInt = new ArrayList<>(taskIdsListStr.size());
-        for (String taskId : taskIdsListStr) {
-            taskIdsListInt.add(Integer.valueOf(taskId));
-        }
-        return taskIdsListInt;
+        this.solved = solved;
     }
 
     public int getTestId() {
@@ -83,16 +77,45 @@ public class Test {
         this.titleGe = titleGe;
     }
 
-    @NonNull
-    public String getTasksIds() {
-        return tasksIds;
+    public Date getCreationTime() {
+        return creationTime;
     }
 
-    public void setTasksIds(@NonNull String tasksIds) {
-        this.tasksIds = tasksIds;
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
     }
 
-    public List<Integer> getTasksIdsList() {
-        return stringToList(tasksIds);
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    public String getTitle(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return titleEn;
+        } else {
+            return titleGe;
+        }
+    }
+
+    public static String getTitleColumnName(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return "title_en";
+        } else {
+            return "title_ge";
+        }
     }
 }

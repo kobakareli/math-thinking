@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_task_answer"
+        android:title="@string/hint"
+        android:icon="@drawable/ic_teacher_show_answer"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_task_hint"
+        android:title="@string/answer"
+        android:icon="@drawable/ic_bulb"
+        app:showAsAction="always" />
+
+</menu>

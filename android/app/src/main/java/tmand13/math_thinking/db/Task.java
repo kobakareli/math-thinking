@@ -3,7 +3,14 @@ package tmand13.math_thinking.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.content.Context;
 import android.support.annotation.NonNull;
+
+import java.util.Date;
+import java.util.Locale;
+
+import tmand13.math_thinking.LocaleHelper;
 
 /**
  * Created by tmand on 4/19/2018.
@@ -90,13 +97,25 @@ public class Task {
     @ColumnInfo(name = "option_4_ge")
     private String option4Ge;
 
+    @ColumnInfo(name = "solved")
+    private boolean solved;
+
+    @ColumnInfo(name = "creation_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date creationTime;
+
+    @ColumnInfo(name = "update_time")
+    @TypeConverters({DateTypeConverter.class})
+    private Date updateTime;
+
     public Task(int taskId, @NonNull String titleEn, @NonNull String titleGe,
                 @NonNull String descriptionEn, @NonNull String descriptionGe,
                 @NonNull String hintEn, @NonNull String hintGe, @NonNull String answerEn,
                 @NonNull String answerGe, int numericAnswer, int totalAnswers, int correctAnswers,
                 boolean hasOptions, @NonNull String option1En, @NonNull String option1Ge,
                 @NonNull String option2En, @NonNull String option2Ge, @NonNull String option3En,
-                @NonNull String option3Ge, @NonNull String option4En, @NonNull String option4Ge) {
+                @NonNull String option3Ge, @NonNull String option4En, @NonNull String option4Ge,
+                boolean solved) {
         this.taskId = taskId;
         this.titleEn = titleEn;
         this.titleGe = titleGe;
@@ -118,6 +137,9 @@ public class Task {
         this.option3Ge = option3Ge;
         this.option4En = option4En;
         this.option4Ge = option4Ge;
+        this.solved = solved;
+        this.creationTime = new Date(System.currentTimeMillis());
+        this.updateTime = new Date(System.currentTimeMillis());
     }
 
     public int getTaskId() {
@@ -302,5 +324,110 @@ public class Task {
 
     public void setOption4Ge(@NonNull String option4Ge) {
         this.option4Ge = option4Ge;
+    }
+
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getTitle(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return titleEn;
+        } else {
+            return titleGe;
+        }
+    }
+
+    public String getDescription(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return descriptionEn;
+        } else {
+            return descriptionGe;
+        }
+    }
+
+    public String getHint(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return hintEn;
+        } else {
+            return hintGe;
+        }
+    }
+
+    public String getAnswer(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return answerEn;
+        } else {
+            return answerGe;
+        }
+    }
+
+    public String getOption1(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option1En;
+        } else {
+            return option1Ge;
+        }
+    }
+
+    public String getOption2(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option2En;
+        } else {
+            return option2Ge;
+        }
+    }
+
+    public String getOption3(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option3En;
+        } else {
+            return option3Ge;
+        }
+    }
+
+    public String getOption4(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return option4En;
+        } else {
+            return option4Ge;
+        }
+    }
+
+    public static String getTitleColumnName(Context context) {
+        String language = LocaleHelper.getLanguage(context);
+        if (language.equals(Locale.ENGLISH.getLanguage())) {
+            return "title_en";
+        } else {
+            return "title_ge";
+        }
     }
 }

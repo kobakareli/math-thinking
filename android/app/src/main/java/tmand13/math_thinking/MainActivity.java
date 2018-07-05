@@ -1,73 +1,58 @@
 package tmand13.math_thinking;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Article;
+import tmand13.math_thinking.db.ArticleCategory;
+import tmand13.math_thinking.db.Category;
+import tmand13.math_thinking.db.SuperCategory;
+import tmand13.math_thinking.db.SuperCategoryCategory;
 import tmand13.math_thinking.db.Task;
+import tmand13.math_thinking.db.TaskTest;
 import tmand13.math_thinking.db.Test;
+import tmand13.math_thinking.db.TestCategory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //insertData();
-    }
-
-    private void insertData() {
-        insertTasks();
-        insertTaskWithOptions();
-        insertTwoDummyTasks();
-        insertTests();
-    }
-
-    private void insertTwoDummyTasks() {
-        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 102; i <= 105; i++) {
-            String iStr = String.valueOf(i);
-            db.taskDao().insert(new Task(i, "magari amocana"+String.valueOf(i), "gela",
-                    "es aris descriptioni",
-                    "d", "g", "g", "pasuxii",
-                    "pasxii", 1, 2, 2, i%2==0,
-                    "option pirveli", "d", "meore", "D",
-                    "mesame", "D", "meotxe", "D"));
+        setTitle(R.string.app_name);
+        Context context = getApplicationContext();
+        AppVersionCodeWrapper versionCodeWrapper = new AppVersionCodeWrapper(context);
+        FirstTimeCalledWrapper firstTimeCalledWrapper = new FirstTimeCalledWrapper(context);
+        SolvedTaskTestWrapper solvedTaskTestWrapper = new SolvedTaskTestWrapper(context);
+        if (versionCodeWrapper.appIsUpdated()) {
+            firstTimeCalledWrapper.setFirstTimeCalled(true);
+            solvedTaskTestWrapper.fetchFromDB(context);
+            AppDatabase.copyDBFileIfFirstTimeCalled(context);
+            AppDatabase.rebuildAppDatabase(context);
+            solvedTaskTestWrapper.saveInDB(context);
+        } else {
+            AppDatabase.copyDBFileIfFirstTimeCalled(context);
         }
-    }
-
-    private void insertTasks() {
-        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 1; i <= 100; i++) {
-            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
-                    "d", "d", "g", "g", "g",
-                    "g", 1, 2, 2, false,
-                    "d", "d", "D", "D", "D",
-                    "D", "D", "D"));
-        }
-    }
-
-    private void insertTaskWithOptions() {
-        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 101; i <= 101; i++) {
-            db.taskDao().insert(new Task(i, "gela"+String.valueOf(i), "gela",
-                    "d", "d", "g", "g", "g",
-                    "g", 1, 2, 2, true,
-                    "d", "d", "D", "D", "D",
-                    "D", "D", "D"));
-        }
-    }
-
-    private void insertTests() {
-        AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
-        for (int i = 1; i <= 100; i++) {
-            db.testDao().insert(new Test(i, "test" + String.valueOf(i),
-                    "ტესტი" + String.valueOf(i), "1,2,104"));
-        }
+        versionCodeWrapper.updateVersionCode();
     }
 
     public void openCategories(View view) {
@@ -82,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openTests(View view) {
         Intent intent = new Intent(this, TestSearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSettings(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

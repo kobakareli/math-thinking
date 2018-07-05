@@ -4,6 +4,41 @@
     <string name="main_menu_tests">Tests</string>
     <string name="main_menu_tasks">Tasks</string>
     <string name="main_menu_settings">Settings</string>
-    <string name="category_with_tabs">\u0009\u0009\u0009%s</string>
     <string name="tasks_search_hint">Search task</string>
+    <string name="language">Language</string>
+    <string name="settings">Settings</string>
+    <string name="test">Test</string>
+    <string name="tests">Tests</string>
+    <string name="tasks">Tasks</string>
+    <string name="task">Task</string>
+    <string name="articles">Articles</string>
+    <string name="right">right</string>
+    <string name="wrong">wrong</string>
+    <string name="tasks_number">tasks</string>
+    <string name="zero">0</string>
+    <string name="choose_language">Choose language…</string>
+    <string name="english" translatable="false">English</string>
+    <string name="georgian" translatable="false">ქართული</string>
+    <string name="hint">Hint</string>
+    <string name="answer">Answer</string>
+    <string name="rate_app">Rate app</string>
+    <string name="super_category_title" translatable="false">%d. %s</string>
+    <string name="category_title" translatable="false">%d.%d %s</string>
+    <string name="filter" translatable="false">Filter</string>
+    <string name="sort_by">Sort by: </string>
+    <string-array name="sort_by_parameters">
+        <item>Creation time</item>
+        <item>Update time</item>
+        <item>Alphabetically</item>
+    </string-array>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+    <string name="options">With options</string>
+    <string name="both">Both</string>
+    <string name="direct_answer">Direct answer</string>
+    <string name="solved">Solved</string>
+    <string name="unsolved">Unsolved</string>
+    <string name="task_filter_sort">Tasks Sort/Filter</string>
+    <string name="test_filter_sort">Tests Sort/Filter</string>
+    <string name="solved_task_test" translatable="false">%s\t✔</string>
 </resources>
