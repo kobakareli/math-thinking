@@ -199,7 +199,7 @@ class TaskController extends Controller
             $task = Task::find($data['task']);
             if($answer == $task->numeric_answer) {
                 $iscorrect = 1;
-                if($user->level_progress == $user->level*5 - 1) {
+                if($user->level_progress == $user->level - 1) {
                     $user->level += 1;
                     $user->level_progress = 0;
                 }
