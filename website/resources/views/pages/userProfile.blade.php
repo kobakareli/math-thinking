@@ -33,7 +33,7 @@
                 </tr>
                 @foreach($user->tasksHistory as $entry)
                     <tr>
-                        <td>{{ $entry->created_at }}</td>
+                        <td>{{ $entry->pivot->created_at }}</td>
                         <td>{{ $entry->{'title_' . App::getLocale()} }}</td>
                         <td>{{ $entry->pivot->submitted_answer }}</td>
                         <td>{{ $entry->pivot->status }}</td>

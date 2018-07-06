@@ -30,10 +30,10 @@
                 <p class="fs-18">{{ trans('web.submit_answer') }}</p>
                 @if($task->has_options)
                     <div class="open fs-16">
-                        <input class="answer" type="radio" name="answer" value="1"> <span class="answer-1">{{ $task->{'option_1_' . App::getLocale()} }}<span><br>
-                        <input class="answer" type="radio" name="answer" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span><br>
-                        <input class="answer" type="radio" name="answer" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span><br>
-                        <input class="answer" type="radio" name="answer" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span>
+                        <input class="answer" type="radio" name="answer" value="1"> <span class="answer-1">{{ $task->{'option_1_' . App::getLocale()} }}</span></input><br>
+                        <input class="answer" type="radio" name="answer" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span></input><br>
+                        <input class="answer" type="radio" name="answer" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span></input><br>
+                        <input class="answer" type="radio" name="answer" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span></input>
                     </div>
                 @else
                     <div class="closed fs-16">
@@ -49,6 +49,29 @@
 
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}" data-numposts="5"></div>
+
+        <div class="response-popup">
+            <div class="popup-filter"></div>
+            <div class="correct">
+                <img class="status-image" src="/images/check.png"/>
+                <p class="status-text fs-18">{{ trans('web.correct_answer') }}</p>
+                <div class="level-up">
+                    <p class="level-text fs-18">
+                        {{ trans('web.level_up') }}
+                    </p>
+                    <div class="flex-container">
+                        <p class="prev-level fs-20">{{ Auth::user()->level - 1 }}</p>
+                        <img class="next-level-image" src="/images/next-level.svg"/>
+                        <p class="next-level fs-20">{{ Auth::user()->level }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="incorrect">
+                <img class="status-image" src="/images/cross.png"/>
+                <p class="status-text fs-18">{{ trans('web.wrong_answer') }}</p>
+            </div>
+        </div>
+
     </div>
 @endsection
 

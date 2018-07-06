@@ -22,11 +22,29 @@ $(document).ready(function() {
             if($( ".answer:checked" ).length > 0) {
                 var value = $(".answer:checked").val();
                 $.post( "ajax/submit/answer", {user: user, task: task, answer: value}, function( data ) {
-                    if(data == '1') {
+                    $('.response-popup').addClass('active');
+                    if(parseInt(data) > 0) {
                         $('.submit-answer .open .answer-' + value).css('color', 'green');
+                        $('.response-popup .correct').addClass('active');
+                        if(parseInt(data) == 2) {
+                            $('.response-popup .level-up').addClass('active');
+                            setTimeout(function() {
+                                $('.response-popup').removeClass('active');
+                            }, 3000);
+                        }
+                        else {
+                            setTimeout(function() {
+                                $('.response-popup').removeClass('active');
+                            }, 2000);
+                        }
                     }
                     else {
                         $('.submit-answer .open .answer-' + value).css('color', 'red');
+                        $('.response-popup .correct').removeClass('active');
+                        $('.response-popup .incorrect').addClass('active');
+                        setTimeout(function() {
+                            $('.response-popup').removeClass('active');
+                        }, 2000);
                     }
                 });
             }

@@ -160,7 +160,7 @@
                     <div class="logged-in active">
                         <p class="greet fs-20">{{ trans('web.hello') }}, <span class="user-name">{{ Auth::user()->name }}</span></p>
 
-                        <a href="{{ url('/user') }}" class="profile-link link fs-17">
+                        <a href="{{ url('/user/' . Auth::user()->id) }}" class="profile-link link fs-17">
                             {{ trans('web.profile') }}
                         </a>
                         <a href="/logout" class="logout-link link fs-17">
