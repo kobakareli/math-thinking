@@ -35,4 +35,8 @@
     <string name="unsolved">ამოუხსნელი</string>
     <string name="task_filter_sort">დალაგება/გაფილტვრა</string>
     <string name="test_filter_sort">დალაგება/გაფილტვრა</string>
+    <string name="main_menu_progress">პროგრესი</string>
+    <string name="progress_tasks_solved">ამოხსნილი ამოცანები: %d/%d</string>
+    <string name="progress_tests_solved">ამოხსნილი ტესტები: %d/%d</string>
+    <string name="progress_level">დონე: %d</string>
 </resources>

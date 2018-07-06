@@ -53,6 +53,15 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/main_menu_progress"
+            android:onClick="openProgress"
+            android:padding="4dp"/>
+        <Button
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/main_menu_settings"
             android:onClick="openSettings"
             android:padding="4dp"/>
