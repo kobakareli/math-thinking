@@ -17,11 +17,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.udojava.evalex.Expression;
+
+import java.math.BigDecimal;
+
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Task;
 // TODO remove unused libraries and solve all intellij idea
 // advice
 public class TaskFragment extends Fragment {
+    private static final double EPS = 1e-8;
+
     Integer taskId;
     //TODO control edittext based on answer type
     Task task;
@@ -177,13 +183,18 @@ public class TaskFragment extends Fragment {
         }
         alreadyAnswered = true;
         removeKeyboardAndFocus();
-        //todo close keyboard
         String userAnswer = answerField.getText().toString();
-        if (userAnswer.equals(task.getAnswer(getContext()))) {
-            answerField.setBackgroundColor(Color.GREEN);
-            answerIsRight = true;
-            setSolved();
-        } else {
+        try {
+            BigDecimal userAnswerValue = new Expression(userAnswer).eval();
+            if (Math.abs(userAnswerValue.doubleValue() - task.getNumericAnswer()) < EPS) {
+                answerField.setBackgroundColor(Color.GREEN);
+                answerIsRight = true;
+                setSolved();
+            } else {
+                answerField.setBackgroundColor(Color.RED);
+                answerIsRight = false;
+            }
+        } catch (Expression.ExpressionException e) {
             answerField.setBackgroundColor(Color.RED);
             answerIsRight = false;
         }
