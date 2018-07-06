@@ -32,25 +32,25 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->belongsToMany('App\Task', 'user_tasks',
-                'user_id', 'task_id')->withPivot('status')->withTimestamps();;
+                'user_id', 'task_id')->withPivot('status')->withTimestamps();
     }
 
     public function tasksHistory()
     {
         return $this->belongsToMany('App\Task', 'user_tasks_history',
-                'user_id', 'task_id')->withPivot('status', 'submitted_answer')->withTimestamps();;
+                'user_id', 'task_id')->withPivot('status', 'submitted_answer')->withTimestamps()->orderBy('created_at');
     }
 
     public function tests()
     {
         return $this->belongsToMany('App\Test', 'user_tests',
-                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps();;
+                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps();
     }
 
     public function testsHistory()
     {
         return $this->belongsToMany('App\Test', 'user_tests_history',
-                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps();;
+                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps()->orderBy('created_at');
     }
 
     public function addTask($task_id, $status)
@@ -70,7 +70,7 @@ class User extends Authenticatable
     }
 
     public function getTaskHistory($task_id) {
-        return $this->tasksHistory()->where('task_id', $task_id)->where('user_id', auth()->user()->id)->orderBy('created_at', 'ASC')->get();
+        return $this->tasksHistory()->orderBy('created_at', 'DESC')->where('task_id', $task_id)->where('user_id', auth()->user()->id)->get();
     }
 
     public function addTest($test_id, $status, $score)
@@ -90,6 +90,6 @@ class User extends Authenticatable
     }
 
     public function getTestHistory($test_id) {
-        return $this->testsHistory()->where('test_id', $test_id)->where('user_id', auth()->user()->id)->orderBy('created_at', 'ASC')->get();
+        return $this->testsHistory()->orderBy('created_at', 'DESC')->where('test_id', $test_id)->where('user_id', auth()->user()->id)->get();
     }
 }

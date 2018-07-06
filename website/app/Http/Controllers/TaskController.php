@@ -199,19 +199,28 @@ class TaskController extends Controller
             $task = Task::find($data['task']);
             if($answer == $task->numeric_answer) {
                 $iscorrect = 1;
-                if($user->level_progress == $user->level - 1) {
-                    $user->level += 1;
-                    $user->level_progress = 0;
+                if(!$user->tasks->contains($data['task'])) {
+                    if($user->level_progress == $user->level - 1) {
+                        $user->level += 1;
+                        $user->level_progress = 0;
+                        $iscorrect = 2;
+                    }
+                    else {
+                        $user->level_progress += 1;
+                    }
+                    $user->update();
                 }
-                else {
-                    $user->level_progress += 1;
-                }
-                $user->update();
             }
-            $user->addTask($task->id, $iscorrect);
-            $user->addTaskHistory($task->id, $iscorrect, $answer);
+            if($iscorrect > 0) {
+                $user->addTask($task->id, $iscorrect);
+                $user->addTaskHistory($task->id, 1, $answer);
+                $task->correct_answers += 1;
+            }
+            else {
+                $user->addTask($task->id, $iscorrect);
+                $user->addTaskHistory($task->id, 0, $answer);
+            }
             $task->total_answers += 1;
-            $task->correct_answers += $iscorrect;
             $task->update();
         }
         return $iscorrect;

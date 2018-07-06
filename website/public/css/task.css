@@ -80,3 +80,120 @@
   background: #f36624;
 }
 
+.response-popup {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.response-popup.active {
+  display: block;
+}
+
+.response-popup .popup-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.6;
+}
+
+.response-popup .correct,
+.response-popup .incorrect {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: auto;
+  background-color: white;
+  padding: 20px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.response-popup .correct.active,
+.response-popup .incorrect.active {
+  display: block;
+}
+
+.response-popup .correct .status-image,
+.response-popup .incorrect .status-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-55%);
+          transform: translateX(-55%);
+}
+
+.response-popup .correct .status-text,
+.response-popup .incorrect .status-text {
+  width: 100%;
+  text-align: center;
+  color: #263238;
+  margin-bottom: 20px;
+}
+
+.response-popup .level-up {
+  display: none;
+  padding: 20px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: lightgreen;
+}
+
+.response-popup .level-up.active {
+  display: block;
+  /** {
+                opacity: 1 !important;
+            }
+
+            img {
+                transform: translateX(0) !important;
+            }*/
+}
+
+.response-popup .level-up .level-text {
+  width: 100%;
+  text-align: center;
+  color: #263238;
+  margin-bottom: 20px;
+}
+
+.response-popup .level-up .flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.response-popup .level-up .flex-container p {
+  display: inline-block;
+  width: auto;
+  margin-bottom: 0;
+}
+
+.response-popup .level-up .flex-container p.next-level {
+  font-weight: bold;
+  color: #263238;
+}
+
+.response-popup .level-up .flex-container img {
+  width: 30px;
+  height: 30px;
+}
+

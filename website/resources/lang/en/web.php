@@ -53,4 +53,10 @@ return [
     'tasks_history' => 'Tasks History',
     'tests_history' => 'Tests History',
     'share_page' => 'Share This Page',
+    'correct_answer' => 'Your answer is correct',
+    'wrong_answer' => 'Your answer is wrong',
+    'level_up' => 'You\'ve leveled up',
+    'test_passed' => 'You\'ve passed the test',
+    'test_failed' => 'You\'ve failed the test',
+
 ];
