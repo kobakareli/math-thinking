@@ -40,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:onClick="answerSelected"
+            android:background="@color/colorYellow"
             android:src="@drawable/ic_check_black_24dp"
             android:text="" />
 
