@@ -36,6 +36,8 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="option1"
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
             android:text="" />
 
         <Button
@@ -48,6 +50,8 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="option2"
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
             android:text="" />
 
         <Button
@@ -60,6 +64,8 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="option3"
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
             android:text="" />
 
         <Button
@@ -72,6 +78,8 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
             android:onClick="option4"
+            android:background="@color/colorYellow"
+            android:textColor="@color/colorWhite"
             android:text="" />
 
     </LinearLayout>
