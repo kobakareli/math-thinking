@@ -70,9 +70,10 @@
 
         <section class="header">
             <div class="nav-container">
-                <a class="logo-link" href="{{ url('/' . App::getLocale()) }}">
-                    <img class="logo desktop active" src="{{ url('/images/bog.svg') }}" />
-                    <img class="logo mobile" src="{{ url('/images/bog-logo.svg') }}" />
+                <a class="logo-link fs-24" href="{{ url('/' . App::getLocale()) }}">
+                    <img class="logo desktop active" src="{{ url('/images/logo.svg') }}" />
+                    <img class="logo mobile" src="{{ url('/images/logo.svg') }}" />
+                    <span><firstletter>M</firstletter>ath <firstletter>T</firstletter>hinking</span>
                 </a>
 
                 <div class="nav">

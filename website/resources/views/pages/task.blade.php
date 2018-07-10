@@ -50,27 +50,29 @@
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}" data-numposts="5"></div>
 
-        <div class="response-popup">
-            <div class="popup-filter"></div>
-            <div class="correct">
-                <img class="status-image" src="/images/check.png"/>
-                <p class="status-text fs-18">{{ trans('web.correct_answer') }}</p>
-                <div class="level-up">
-                    <p class="level-text fs-18">
-                        {{ trans('web.level_up') }}
-                    </p>
-                    <div class="flex-container">
-                        <p class="prev-level fs-20">{{ Auth::user()->level - 1 }}</p>
-                        <img class="next-level-image" src="/images/next-level.svg"/>
-                        <p class="next-level fs-20">{{ Auth::user()->level }}</p>
+        @if(Auth::check())
+            <div class="response-popup">
+                <div class="popup-filter"></div>
+                <div class="correct">
+                    <img class="status-image" src="/images/check.png"/>
+                    <p class="status-text fs-18">{{ trans('web.correct_answer') }}</p>
+                    <div class="level-up">
+                        <p class="level-text fs-18">
+                            {{ trans('web.level_up') }}
+                        </p>
+                        <div class="flex-container">
+                            <p class="prev-level fs-20">{{ Auth::user()->level - 1 }}</p>
+                            <img class="next-level-image" src="/images/next-level.svg"/>
+                            <p class="next-level fs-20">{{ Auth::user()->level }}</p>
+                        </div>
                     </div>
                 </div>
+                <div class="incorrect">
+                    <img class="status-image" src="/images/cross.png"/>
+                    <p class="status-text fs-18">{{ trans('web.wrong_answer') }}</p>
+                </div>
             </div>
-            <div class="incorrect">
-                <img class="status-image" src="/images/cross.png"/>
-                <p class="status-text fs-18">{{ trans('web.wrong_answer') }}</p>
-            </div>
-        </div>
+        @endif
 
     </div>
 @endsection

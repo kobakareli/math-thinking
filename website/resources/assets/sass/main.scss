@@ -7,6 +7,22 @@ body, html {
     @media screen and (min-width: 961px) {
         height: 100vh;
     }
+
+    * {
+        outline: #FFCA4F;
+    }
+
+    .btn-primary {
+        background-color: #FFCA4F;
+
+        &:hover {
+            background-color: #FFCA4F;
+        }
+    }
+
+    .panel-heading {
+        background-color: #FFCA4F !important;
+    }
 }
 
 
@@ -34,7 +50,7 @@ body, html {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0 8.33%;
+        padding: 0 2.5%;
         width: 100%;
         height: 100%;
 
@@ -88,13 +104,29 @@ body, html {
         }
 
         .logo-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             height: 50%;
+            color: #FFCA4F;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+
+            span {
+
+                display: inherit;
+
+                firstletter {
+                    font-size: 150%;
+                    color: #FF5B61;
+                }
+            }
 
             .logo {
                 display: none;
                 height: 100%;
                 width: auto;
+                margin-right: 10px;
 
                 &.desktop {
                     @media screen and (min-width: 960px) {
@@ -160,7 +192,8 @@ body, html {
             }
 
             .nav-item {
-                color: #cfcedc;
+                color: #FFCA4F;
+                font-weight: bold;
                 margin-right: 60px;
                 padding: 10px 20px;
                 cursor: pointer;
@@ -168,7 +201,7 @@ body, html {
 
                 &:hover {
                     background-color: $color-darker;
-                    color: white;
+                    color: #FFCA4F;
 
                     @media screen and (max-width: 960px) {
                         background-color: transparent;
@@ -455,7 +488,7 @@ body, html {
             left: 0;
             width: 100%;
             height: auto;
-            padding: 4.16% 8.33%;
+            padding: 4.16% 2.5%;
             background-color: $color-darker;
             z-index: 2;
             max-height: 100%;
@@ -568,7 +601,7 @@ body, html {
                     border-style: none;
                     border-bottom-style: solid;
                     border-bottom-width: 1px;
-                    border-bottom-color: #8e8b98;
+                    border-bottom-color: #FFCA4F;
                     outline: none;
                     color: #ffffff;
                 }
@@ -752,6 +785,20 @@ body, html {
         margin: 20px;
         width: calc(100% - 40px);
     }
+
+    .title {
+        font-weight: bold;
+    }
+
+    & > .title {
+        display: inline-block;
+        color: #FFCA4F;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+        border-bottom-style: solid;
+        border-bottom-color: #FFCA4F;
+        border-bottom-width: 2px;
+    }
 }
 
 .left-content {
@@ -798,6 +845,11 @@ body, html {
             display: block;
         }
 
+        .user-name {
+            color: #FFCA4F;
+            font-weight: bold;
+        }
+
         .input-parent {
             position: relative;
             width: 100%;
@@ -840,7 +892,7 @@ body, html {
         .sign-in-button {
             display: block;
             color: white;
-            background: $color-secondary;
+            background: #FFCA4F;
             width: 50%;
             border-radius: 10px;
             cursor: pointer;
@@ -855,6 +907,16 @@ body, html {
 
         .password-recovery-link, .logout-link {
             float: right;
+        }
+
+        .logout-link {
+            color: #FF5B61 !important;
+            font-weight: bold;
+        }
+
+        .register-link {
+            color: #FF5B61 !important;
+            font-weight: bold;
         }
 
         .link {

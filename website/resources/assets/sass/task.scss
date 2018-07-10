@@ -1,5 +1,16 @@
 @import "_variables.scss";
 
+.task-page {
+    & > .title {
+        color: #FFCA4F;
+        border-bottom-style: solid;
+        border-bottom-color: #FFCA4F;
+        border-bottom-width: 2px;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+    }
+}
+
 .collapsible {
     position: relative;
     background-color: #78909C;

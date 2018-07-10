@@ -96,7 +96,8 @@
 .tasks-page .post p.post-see-more,
 .tasks-page .post div.post-see-more {
   margin-top: 10px;
-  color: #ff9d1b;
+  color: #FFCA4F;
+  font-weight: bold;
 }
 
 .tasks-page .post .post-category {

@@ -11,6 +11,26 @@ html {
   }
 }
 
+body *,
+html * {
+  outline: #FFCA4F;
+}
+
+body .btn-primary,
+html .btn-primary {
+  background-color: #FFCA4F;
+}
+
+body .btn-primary:hover,
+html .btn-primary:hover {
+  background-color: #FFCA4F;
+}
+
+body .panel-heading,
+html .panel-heading {
+  background-color: #FFCA4F !important;
+}
+
 #app {
   height: 100%;
 }
@@ -49,7 +69,7 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 8.33%;
+  padding: 0 2.5%;
   width: 100%;
   height: 100%;
 }
@@ -111,14 +131,33 @@ html {
 }
 
 .header .nav-container .logo-link {
-  display: inline-block;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 50%;
+  color: #FFCA4F;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.header .nav-container .logo-link span {
+  display: inherit;
+}
+
+.header .nav-container .logo-link span firstletter {
+  font-size: 150%;
+  color: #FF5B61;
 }
 
 .header .nav-container .logo-link .logo {
   display: none;
   height: 100%;
   width: auto;
+  margin-right: 10px;
   /*&.active {
                     display: inline-block;
                 }*/
@@ -199,7 +238,8 @@ html {
 }
 
 .header .nav-container .nav .nav-item {
-  color: #cfcedc;
+  color: #FFCA4F;
+  font-weight: bold;
   margin-right: 60px;
   padding: 10px 20px;
   cursor: pointer;
@@ -207,7 +247,7 @@ html {
 
 .header .nav-container .nav .nav-item:hover {
   background-color: #263238;
-  color: white;
+  color: #FFCA4F;
 }
 
 @media screen and (max-width: 960px) {
@@ -541,7 +581,7 @@ html {
   left: 0;
   width: 100%;
   height: auto;
-  padding: 4.16% 8.33%;
+  padding: 4.16% 2.5%;
   background-color: #263238;
   z-index: 2;
   max-height: 100%;
@@ -736,7 +776,7 @@ html {
   border-style: none;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #8e8b98;
+  border-bottom-color: #FFCA4F;
   outline: none;
   color: #ffffff;
 }
@@ -955,6 +995,20 @@ html {
   }
 }
 
+.central-content .title {
+  font-weight: bold;
+}
+
+.central-content > .title {
+  display: inline-block;
+  color: #FFCA4F;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom-style: solid;
+  border-bottom-color: #FFCA4F;
+  border-bottom-width: 2px;
+}
+
 .left-content {
   display: inline-block;
   position: fixed;
@@ -1012,6 +1066,12 @@ html {
   display: block;
 }
 
+.left-content .login-form .user-name,
+.left-content .logged-in .user-name {
+  color: #FFCA4F;
+  font-weight: bold;
+}
+
 .left-content .login-form .input-parent,
 .left-content .logged-in .input-parent {
   position: relative;
@@ -1066,7 +1126,7 @@ html {
 .left-content .logged-in .sign-in-button {
   display: block;
   color: white;
-  background: #455A64;
+  background: #FFCA4F;
   width: 50%;
   border-radius: 10px;
   cursor: pointer;
@@ -1087,6 +1147,18 @@ html {
 .left-content .logged-in .password-recovery-link,
 .left-content .logged-in .logout-link {
   float: right;
+}
+
+.left-content .login-form .logout-link,
+.left-content .logged-in .logout-link {
+  color: #FF5B61 !important;
+  font-weight: bold;
+}
+
+.left-content .login-form .register-link,
+.left-content .logged-in .register-link {
+  color: #FF5B61 !important;
+  font-weight: bold;
 }
 
 .left-content .login-form .link,
