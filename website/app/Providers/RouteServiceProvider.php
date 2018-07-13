@@ -8,9 +8,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Routing\Router;
 use Illuminate\Http\Request;
 
-use App\SuperCategory;
-use App\Task;
-
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -32,9 +29,6 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
-        view()->share('supercategories', SuperCategory::all());
-        $tasks = Task::orderBy('total_answers', 'DESC')->take(5)->get();
-        view()->share('popular', $tasks);
     }
 
     /**
