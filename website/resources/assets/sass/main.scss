@@ -27,6 +27,7 @@ body, html {
 
 
 #app {
+    position: static;
     height: 100%;
 }
 
@@ -753,7 +754,7 @@ body, html {
 
 .central-content {
     display: inline-block;
-    position: relative;
+    position: absolute;
     top: 130px;
     width: 40%;
     left: 30%;
