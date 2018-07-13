@@ -22,7 +22,7 @@
 
         <meta name="description"  content="" />
 
-        <meta class="og_image" property="og:image" content="" id="meta_image">
+        <meta class="og_image" property="og:image" content="{{ url('/images/og.png') }}" id="meta_image">
 
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="1026007677546401" />
