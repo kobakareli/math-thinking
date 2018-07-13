@@ -165,12 +165,12 @@
                         <a href="{{ url('/user/' . Auth::user()->id) }}" class="profile-link link fs-17">
                             {{ trans('web.profile') }}
                         </a>
-                        <a href="/logout" class="logout-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale()) . '/logout'}}" class="logout-link link fs-17">
                             {{ trans('web.logout') }}
                         </a>
                     </div>
                 @else
-                    <form class="login-form active" method="post" action="/login">
+                    <form class="login-form active" method="post" action="{{ url('/' . App::getLocale()) . '/login' }}">
 
                         {{ csrf_field() }}
 
@@ -185,10 +185,10 @@
 
                         <button type="submit" class="sign-in-button fs-17">{{ trans('web.signin') }}</button>
 
-                        <a href="/register" class="register-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale() . '/register') }}" class="register-link link fs-17">
                             {{ trans('web.register') }}
                         </a>
-                        <a href="/password/reset" class="password-recovery-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale()) . '/password/reset' }}" class="password-recovery-link link fs-17">
                             {{ trans('web.recover') }}
                         </a>
                     </form>
