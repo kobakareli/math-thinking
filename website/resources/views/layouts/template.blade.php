@@ -18,6 +18,7 @@
             <meta class="og_title" property="og:title" content="Math Thinking">
         @endif
 
+        <meta class="og_url" property="og:url" content="{{ url('/') }}" id="meta_image">
         <meta class="og_description" property="og:description" content="">
 
         <meta name="description"  content="" />
