@@ -1,7 +1,5 @@
 <?php
 
-use App\SuperCategory;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +12,7 @@ use App\SuperCategory;
 */
 
 Route::get('/', function () {
-    $supercategories = SuperCategory::all();
+    $supercategories = App\SuperCategory::all();
     return view('pages.index', compact('supercategories'));
 })->name('main');
 
