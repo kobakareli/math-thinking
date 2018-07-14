@@ -82,4 +82,19 @@ class ImageController extends Controller
             'files' => $files
         ]);
     }
+
+    public function getImage($image)
+    {
+        return redirect('/storage/ckuploads/' . $image);
+    }
+
+    public function getEnImage($image)
+    {
+        return redirect('/storage/ckuploads/en/' . $image);
+    }
+
+    public function getGeImage($image)
+    {
+        return redirect('/storage/ckuploads/ge/' . $image);
+    }
 }

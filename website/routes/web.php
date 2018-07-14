@@ -38,6 +38,12 @@ Route::get('/search/{type}/{term}/{category}/{datefrom?}/{dateto?}', 'MainContro
 
 Route::get('/user/{user}', 'UserController@showProfile');
 
+Route::get('/img/{image}', 'ImageController@getImage');
+
+Route::get('/img/en/{image}', 'ImageController@getEnImage');
+
+Route::get('/img/ge/{image}', 'ImageController@getGeImage');
+
 // ajax
 
 Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
