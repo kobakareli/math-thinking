@@ -97,9 +97,27 @@ jQuery(document).ready(function() {
         }
     });
 
+    $('.copy').on('click', function(e) {
+        e.preventDefault();
+        copyToClipboard($(this).attr('href'));
+        $(this).text('Copied');
+        var ref = $(this);
+        setTimeout(function() {
+            ref.text('Copy');
+        }, 5000);
+    });
+
     uploadsScroll();
 
 });
+
+function copyToClipboard(text) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 
 function uploadsScroll() {
     var timeout;
