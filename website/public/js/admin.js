@@ -1,5 +1,6 @@
-jQuery(document).ready(function() {
+var start = 1;
 
+jQuery(document).ready(function() {
     // set select values
 
     var categoryIds = [];
@@ -96,4 +97,30 @@ jQuery(document).ready(function() {
         }
     });
 
+    uploadsScroll();
+
 });
+
+function uploadsScroll() {
+    var timeout;
+    var finished = false;
+    console.log('called');
+    if($('.uploads').length > 0) {
+        console.log(" >0");
+        $(window).on('scroll', function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height() - 100 && !finished) {
+                clearTimeout(timeout);
+                var ref = $('.uploads');
+                timeout = setTimeout(function() {
+                    $.get( ref.data('url') + '/' + start, function( data ) {
+                        ref.append(data);
+                        start += 1;
+                        if(ref.children().length < start*8) {
+                            finished = true;
+                        }
+                    });
+                }, 100);
+            }
+        });
+    }
+}

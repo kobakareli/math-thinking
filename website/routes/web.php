@@ -105,4 +105,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('users/levelprogress/inc/{user}/{dif}', 'UserController@incLevelProgress');
     Route::get('users/history/task/{user}/{task}/{status}', 'UserController@addTask');
     Route::get('users/history/test/{user}/{test}/{status}/{score}', 'UserController@addTest');
+
+    // image upload routes
+
+    Route::get('/image', 'ImageController@uploadPage')->name('uploads');
+    Route::get('/image/ajax/{page}', 'ImageController@fetchUploads');
+    Route::post('/image/store', 'ImageController@upload');
+    Route::get('/image/delete/{image}', 'ImageController@deleteUpload');
 });
