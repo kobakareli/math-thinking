@@ -83,8 +83,10 @@
 @endsection
 
 @push('scripts')
+    @if(count($task->categories) > 0)
     <script>
         var testSuperCategories = @json($task->categories[0]->supercategories);
         var testCategories = @json($task->categories);
     </script>
+    @endif
 @endpush
