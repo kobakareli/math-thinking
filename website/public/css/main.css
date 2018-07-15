@@ -1021,6 +1021,10 @@ html .panel-heading {
   }
 }
 
+.central-content .description img {
+  max-width: 100%;
+}
+
 .left-content {
   display: inline-block;
   position: fixed;

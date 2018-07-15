@@ -808,6 +808,10 @@ body, html {
         @media screen and (max-width: 1450px) {
             line-height: 18px;
         }
+
+        img {
+            max-width: 100%;
+        }
     }
 }
 
