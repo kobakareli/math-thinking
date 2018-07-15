@@ -81,12 +81,13 @@ class TaskController extends Controller
         }
         else {
             $validatedData['has_options'] = 0;
-            if(isset($request['answer_en'])) {
-                $validatedData['answer_en'] = $request['answer_en'];
-            }
-            if(isset($request['answer_ge'])) {
-                $validatedData['answer_ge'] = $request['answer_ge'];
-            }
+        }
+
+        if(isset($request['answer_en'])) {
+            $validatedData['answer_en'] = $request['answer_en'];
+        }
+        if(isset($request['answer_ge'])) {
+            $validatedData['answer_ge'] = $request['answer_ge'];
         }
 
         if(isset($request['hint_en'])) {
@@ -235,7 +236,12 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $categories = SuperCategory::all();
-        $subcategories = $task->categories[0]->supercategories[0]->categories;
+        $subcategories = collect();
+        if(count($task->categories) > 0) {
+            if(count($task->categories[0]->supercategories) > 0) {
+                $subcategories = $task->categories[0]->supercategories[0]->categories;
+            }
+        }
         return view('admin/task/editTask', [
             'task' => $task,
             'categories' => $categories,
@@ -289,12 +295,13 @@ class TaskController extends Controller
         }
         else {
             $validatedData['has_options'] = 0;
-            if(isset($request['answer_en'])) {
-                $validatedData['answer_en'] = $request['answer_en'];
-            }
-            if(isset($request['answer_ge'])) {
-                $validatedData['answer_ge'] = $request['answer_ge'];
-            }
+        }
+
+        if(isset($request['answer_en'])) {
+            $validatedData['answer_en'] = $request['answer_en'];
+        }
+        if(isset($request['answer_ge'])) {
+            $validatedData['answer_ge'] = $request['answer_ge'];
         }
 
         if(isset($request['hint_en'])) {

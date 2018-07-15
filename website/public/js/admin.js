@@ -58,7 +58,6 @@ jQuery(document).ready(function() {
 
     $('#supercategories').on('change', function() {
         $.get('/admin/ajax/tests/categories/' + $(this).val(), function(data) {
-            console.log(data);
             $('.categories-container').html(data);
             $('#categories').select2();
             $('#categories').on('change', function() {
@@ -81,20 +80,20 @@ jQuery(document).ready(function() {
 
     if($('input[name="has_options"]').is(':checked')){
         setTimeout(function() {
-            $('.hide:not(.cke)').toggleClass('show');
-            $('.cke').addClass('hide');
-            $('#cke_rich1, #cke_rich4').removeClass('hide');
+            $('.hide:not(.cke)').addClass('show');
+            //$('.cke').addClass('hide');
+            //$('#cke_rich1, #cke_rich4').removeClass('hide');
         }, 1000);
     }
 
     $('input[name="has_options"]').click(function(){
-        $('.hide:not(.cke)').toggleClass('show');
-        if($(this).is(':checked')){
+        $('.hide:not(.cke)').addClass('show');
+        /*if($(this).is(':checked')){
             $('.cke').addClass('hide');
             $('#cke_rich1, #cke_rich4').removeClass('hide');
         } else {
             $('.cke').removeClass('hide');
-        }
+        }*/
     });
 
     $('.copy').on('click', function(e) {

@@ -24,7 +24,7 @@
                             <textarea id="rich2" name="hint_en" class="hide show rich1 form-control about-text" placeholder="English hint">{{ $task->hint_en }}</textarea>
                             <span class="language-marker hide show">Solution:</span>
                             <textarea id="rich3" name="answer_en" class="hide show rich1 form-control about-text" placeholder="English answer">{{ $task->answer_en }}</textarea>
-                            <input name="option_1_en" class="hide form-control about-title" placeholder="English optional answer 1" value="{{ $task->option_1_en }}"></input>
+                            <input name="option_1_en" style="margin-top: 20px;" class="hide form-control about-title" placeholder="English optional answer 1" value="{{ $task->option_1_en }}"></input>
                             <input name="option_2_en" class="hide form-control about-title" placeholder="English optional answer 2" value="{{ $task->option_2_en }}"></input>
                             <input name="option_3_en" class="hide form-control about-title" placeholder="English optional answer 3" value="{{ $task->option_3_en }}"></input>
                             <input name="option_4_en" class="hide form-control about-title" placeholder="English optional answer 4" value="{{ $task->option_4_en }}"></input>
@@ -39,7 +39,7 @@
                             <textarea id="rich5" name="hint_ge" class="hide show rich1 form-control about-text" placeholder="Georgian hint">{{ $task->hint_ge }}</textarea>
                             <span class="language-marker hide show">Solution:</span>
                             <textarea id="rich6" name="answer_ge" class="hide show rich1 form-control about-text" placeholder="Georgian answer">{{ $task->answer_ge }}</textarea>
-                            <input name="option_1_ge" class="hide form-control about-title" placeholder="Georgian optional answer 1" value="{{ $task->option_1_ge }}"></input>
+                            <input name="option_1_ge" style="margin-top: 20px;" class="hide form-control about-title" placeholder="Georgian optional answer 1" value="{{ $task->option_1_ge }}"></input>
                             <input name="option_2_ge" class="hide form-control about-title" placeholder="Georgian optional answer 2" value="{{ $task->option_2_ge }}"></input>
                             <input name="option_3_ge" class="hide form-control about-title" placeholder="Georgian optional answer 3" value="{{ $task->option_3_ge }}"></input>
                             <input name="option_4_ge" class="hide form-control about-title" placeholder="Georgian optional answer 4" value="{{ $task->option_4_ge }}"></input>
