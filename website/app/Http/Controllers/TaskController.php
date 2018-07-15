@@ -186,7 +186,7 @@ class TaskController extends Controller
 
         if($sort != 'category') {
             $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-            $islast = (count(Task::skip(($pageno)*10)->take(10)) == 0);
+            $islast = (count(Task::skip(($pageno)*10)->take(10)->get()) == 0);
         }
         else {
             $tasks = $tasks->slice(($pageno-1)*10)->take(10);

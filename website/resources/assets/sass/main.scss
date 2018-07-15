@@ -800,6 +800,14 @@ body, html {
         border-bottom-color: #FFCA4F;
         border-bottom-width: 2px;
     }
+
+    .description {
+        line-height: 24px;
+
+        @media screen and (max-width: 1450px) {
+            line-height: 18px;
+        }
+    }
 }
 
 .left-content {
