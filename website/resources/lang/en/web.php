@@ -24,6 +24,7 @@ return [
     'oldest' => 'Oldest First',
     'az' => 'A-Z',
     'za' => 'Z-A',
+    'category_sort' => 'By categories',
     'description' => 'Description',
     'hint' => 'Hint',
     'solution' => 'Solution',

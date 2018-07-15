@@ -24,6 +24,7 @@ return [
     'oldest' => 'ძველი',
     'az' => 'ა-ჰ',
     'za' => 'ჰ-ა',
+    'category_sort' => 'კატეგორიებით',
     'description' => 'პირობა',
     'hint' => 'მინიშნება',
     'solution' => 'ამოხსნა',

@@ -8,10 +8,11 @@
     <div class="tests-page tasks-page">
 
         <select type="select" class="select" name="sort" id="sort" placeholder="{{ trans('web.newest') }}" data-url="{{ url('/') }}">
-            <option default value="new">{{ trans('web.newest') }}</option>
-            <option value="old">{{ trans('web.oldest') }}</option>
-            <option value="az">{{ trans('web.az') }}</option>
-            <option value="za">{{ trans('web.za') }}</option>
+            <option @if($sort == 'new'){{ "selected" }}@endif default value="new">{{ trans('web.newest') }}</option>
+            <option @if($sort == 'old'){{ "selected" }}@endif value="old">{{ trans('web.oldest') }}</option>
+            <option @if($sort == 'az'){{ "selected" }}@endif value="az">{{ trans('web.az') }}</option>
+            <option @if($sort == 'za'){{ "selected" }}@endif value="za">{{ trans('web.za') }}</option>
+            <option @if($sort == 'category'){{ "selected" }}@endif value="category">{{ trans('web.category_sort') }}</option>
         </select>
 
         <div class="content">
@@ -29,11 +30,14 @@
                         <p class="title fs-24 @if(isset($status) && $status == 1){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
                             {{ $test->{'title_' . App::getLocale()} }}
                         </p>
-                        @foreach($test->categories as $category)
+                        <!--@foreach($test->categories as $category)
                             <span class="post-category">
                                 {{ $category->{'title_' . App::getLocale()} }}
                             </span>
-                        @endforeach
+                        @endforeach-->
+                        <span class="post-category">
+                            {{ $test->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
+                        </span>
                         </br>
                         <p class="post-see-more">{{ trans('web.see_more') }}</p>
                     </a>

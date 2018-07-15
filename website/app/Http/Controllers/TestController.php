@@ -116,6 +116,7 @@ class TestController extends Controller
         }
         $key = 'created_at';
         $order = 'desc';
+        $tests = collect();
         if($sort == 'old') {
             $order = 'asc';
         }
@@ -127,8 +128,26 @@ class TestController extends Controller
             $key = 'title_' . app()->getLocale();
             $order = 'desc';
         }
-        $tests = Test::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Test::skip(($pageno)*10)->take(10)->get()) == 0);
+        else if($sort == 'category') {
+            $categories = SuperCategory::orderBy('id', 'asc')->with('categories')->get();
+            $subcategories = collect();
+            foreach($categories as $category) {
+                $subcategories = $subcategories->merge($category->categories);
+            }
+            $tests = collect();
+            foreach($subcategories as $category) {
+                $tests = $tests->merge($category->tests);
+            }
+        }
+
+        if($sort != 'category') {
+            $tests = Test::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+            $islast = (count(Test::skip(($pageno)*10)->take(10)->get()) == 0);
+        }
+        else {
+            $tests = $tests->slice(($pageno-1)*10)->take(10)->get();
+            $islast = (count($tests->slice($pageno*10)->take(10)) == 0);
+        }
         $supercategories = SuperCategory::all();
         return view('pages.tests', [
             'tests' => $tests,

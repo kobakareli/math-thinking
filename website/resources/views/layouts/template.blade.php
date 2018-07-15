@@ -224,7 +224,7 @@
                                     <div class="info">
                                         <span class="category fs-15">
                                             @if(count($ptask->categories))
-                                                {{ $ptask->categories[0]->{'title_' . App::getLocale()} }}
+                                                {{ $ptask->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
                                             @endif
                                         </span>
                                         <div class="circle">

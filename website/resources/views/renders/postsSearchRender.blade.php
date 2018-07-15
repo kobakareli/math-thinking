@@ -8,7 +8,7 @@
                     <div class="post-texts">
                         <p class="offer-category fs-14">
                             @if(count($tasks[0]->categories) > 0)
-                                {{ $tasks[0]->categories[0]->{'title_' . App::getLocale()} }}
+                                {{ $tasks[0]->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
                             @endif
                         </p>
                         <p class="offer-title fs-17">
@@ -39,7 +39,7 @@
                     <div class="post-texts">
                         <p class="offer-category fs-14">
                             @if(count($articles[0]->categories) > 0)
-                                {{ $articles[0]->categories[0]->{'title_' . App::getLocale()} }}
+                                {{ $articles[0]->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
                             @endif
                         </p>
                         <p class="offer-title fs-17">
@@ -70,7 +70,7 @@
                     <div class="post-texts">
                         <p class="offer-category fs-14">
                             @if(count($tests[0]->categories) > 0)
-                                {{ $tests[0]->categories[0]->{'title_' . App::getLocale()} }}
+                                {{ $tests[0]->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
                             @endif
                         </p>
                         <p class="offer-title fs-17">

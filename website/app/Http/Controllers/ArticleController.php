@@ -77,6 +77,7 @@ class ArticleController extends Controller
         }
         $key = 'created_at';
         $order = 'desc';
+        $articles = collect();
         if($sort == 'old') {
             $order = 'asc';
         }
@@ -88,9 +89,26 @@ class ArticleController extends Controller
             $key = 'title_' . app()->getLocale();
             $order = 'desc';
         }
+        else if($sort == 'category') {
+            $categories = SuperCategory::orderBy('id', 'asc')->with('categories')->get();
+            $subcategories = collect();
+            foreach($categories as $category) {
+                $subcategories = $subcategories->merge($category->categories);
+            }
+            $articles = collect();
+            foreach($subcategories as $category) {
+                $articles = $articles->merge($category->articles);
+            }
+        }
 
-        $articles = Article::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Article::skip(($pageno)*10)->take(10)->get()) == 0);
+        if($sort != 'category') {
+            $articles = Article::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+            $islast = (count(Article::skip(($pageno)*10)->take(10)->get()) == 0);
+        }
+        else {
+            $articles = $articles->slice(($pageno-1)*10)->take(10);
+            $islast = (count($articles->slice($pageno*10)->take(10)) == 0);
+        }
         $supercategories = SuperCategory::all();
         return view('pages.articles', [
             'articles' => $articles,

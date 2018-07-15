@@ -144,6 +144,7 @@ class TaskController extends Controller
         }
         $key = 'created_at';
         $order = 'desc';
+        $tasks = collect();
         if($sort == 'old') {
             $order = 'asc';
         }
@@ -171,8 +172,26 @@ class TaskController extends Controller
             $key = 'correct_answers';
             $order = 'asc';
         }
-        $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Task::skip(($pageno)*10)->take(10)->get()) == 0);
+        else if($sort == 'category') {
+            $categories = SuperCategory::orderBy('id', 'asc')->with('categories')->get();
+            $subcategories = collect();
+            foreach($categories as $category) {
+                $subcategories = $subcategories->merge($category->categories);
+            }
+            $tasks = collect();
+            foreach($subcategories as $category) {
+                $tasts = $tasks->merge($category->tasks);
+            }
+        }
+
+        if($sort != 'category') {
+            $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+            $islast = (count(Task::skip(($pageno)*10)->take(10)) == 0);
+        }
+        else {
+            $tasks = $tasks->slice(($pageno-1)*10)->take(10);
+            $islast = (count($tasks->slice($pageno*10)->take(10)) == 0);
+        }
         $supercategories = SuperCategory::all();
         return view('pages.tasks', [
             'tasks' => $tasks,
