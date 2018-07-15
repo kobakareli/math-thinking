@@ -29,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = SuperCategory::all();
         return view('admin/article/createArticle', compact('categories'));
     }
 
