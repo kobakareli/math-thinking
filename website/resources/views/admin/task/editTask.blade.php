@@ -58,7 +58,7 @@
                         </div>
 
                         <span class="language-marker">Select Category:</span>
-                        <div class="form-group categories-wrapper">
+                        <div class="form-group categories-container">
                             <select class="form-control" id="categories" name="categories[]" multiple>
                                 @foreach($subcategories as $category)
                                     <option multiple="true" value="{{ $category->id }}">{{ $category->title_en }}</option>

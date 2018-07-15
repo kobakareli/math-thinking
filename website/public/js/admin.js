@@ -5,6 +5,14 @@ jQuery(document).ready(function() {
 
     var categoryIds = [];
 
+    if(typeof articleSuperCategories != 'undefined') {
+        for(var i = 0; i < articleSuperCategories.length; i++) {
+            categoryIds.push(articleSuperCategories[i]['id']);
+        }
+        jQuery('#supercategories').val(categoryIds);
+        categoryIds = [];
+    }
+
     if(typeof articleCategories != 'undefined') {
         for(var i = 0; i < articleCategories.length; i++) {
             categoryIds.push(articleCategories[i]['id']);
@@ -52,11 +60,16 @@ jQuery(document).ready(function() {
     }
 
     $('#categories').select2();
-    $('#supercategories').select2();
+    $('#supercategories').select2({
+        maximumSelectionLength: 1,
+    });
     $('#tasks').select2();
 
 
     $('#supercategories').on('change', function() {
+        if($(this).val() == '') {
+            return;
+        }
         $.get('/admin/ajax/tests/categories/' + $(this).val(), function(data) {
             $('.categories-container').html(data);
             $('#categories').select2();
@@ -72,6 +85,9 @@ jQuery(document).ready(function() {
     if($('.rich1').length) {
         CKEDITOR.replace( 'rich1' );
         CKEDITOR.replace( 'rich2' );
+    }
+
+    if($('.rich3').length) {
         CKEDITOR.replace( 'rich3' );
         CKEDITOR.replace( 'rich4' );
         CKEDITOR.replace( 'rich5' );
@@ -121,9 +137,7 @@ function copyToClipboard(text) {
 function uploadsScroll() {
     var timeout;
     var finished = false;
-    console.log('called');
     if($('.uploads').length > 0) {
-        console.log(" >0");
         $(window).on('scroll', function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height() - 100 && !finished) {
                 clearTimeout(timeout);

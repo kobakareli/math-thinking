@@ -24,13 +24,17 @@
                             <textarea id="rich2" name="text_ge" class="rich2 form-control about-text" placeholder="Georgian description">{{ old('text_ge') }}</textarea>
                         </div>
 
-                        <span class="language-marker">Categories:</span>
+                        <span class="language-marker">Supercategories:</span>
                         <div class="form-group">
-                            <select class="form-control" id="categories" name="categories[]" multiple>
+                            <select class="form-control" id="supercategories" name="supercategories[]" multiple>
                                 @foreach($categories as $category)
                                     <option multiple="true" value="{{ $category->id }}">{{ $category->title_en }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <span class="language-marker">Subcategories:</span>
+                        <div class="form-group categories-container">
                         </div>
 
                         <div class="form-group">

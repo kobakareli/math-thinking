@@ -127,10 +127,17 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories = Category::all();
+        $categories = SuperCategory::all();
+        $subcategories = collect();
+        if(count($article->categories) > 0) {
+            if(count($article->categories[0]->supercategories) > 0) {
+                $subcategories = $article->categories[0]->supercategories[0]->categories;
+            }
+        }
         return view('admin/article/editArticle', [
             'article' => $article,
-            'categories' => $categories
+            'categories' => $categories,
+            'subcategories' => $subcategories
         ]);
     }
 
