@@ -1011,6 +1011,7 @@ html .panel-heading {
 }
 
 .central-content .description {
+  font-family: 'Open Sans', sans-serif;
   line-height: 24px;
 }
 

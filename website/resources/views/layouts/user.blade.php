@@ -44,6 +44,7 @@
 
         <link href="{{ asset('css/picker.classic.css') }}" rel="stylesheet">
         <link href="{{ asset('css/picker.classic.date.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         @yield('styles')
     </head>
