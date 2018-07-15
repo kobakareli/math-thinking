@@ -87,7 +87,7 @@ jQuery(document).ready(function() {
         CKEDITOR.replace( 'rich2' );
     }
 
-    if($('.rich3').length) {
+    if($('#rich3').length) {
         CKEDITOR.replace( 'rich3' );
         CKEDITOR.replace( 'rich4' );
         CKEDITOR.replace( 'rich5' );
