@@ -76,6 +76,10 @@ $(document).ready(function () {
             $('#categories').select2();
 
             ajaxSearch();
+
+            $('#categories').on('select2:select', function(e) {
+                ajaxSearch();
+            });
         });
     });
 

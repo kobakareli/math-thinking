@@ -59,9 +59,7 @@ jQuery(document).ready(function() {
         subCategoryIds = [];
     }
 
-    $('#categories').select2({
-        maximumSelectionLength: 1,
-    });
+    $('#categories').select2();
     $('#supercategories').select2({
         maximumSelectionLength: 1,
     });
