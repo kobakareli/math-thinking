@@ -1025,6 +1025,12 @@ html .panel-heading {
   max-width: 100%;
 }
 
+.central-content .hint,
+.central-content .answer {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 24px;
+}
+
 .left-content {
   display: inline-block;
   position: fixed;

@@ -146,7 +146,7 @@ class TestController extends Controller
         }
         else {
             $tests = $tests->slice(($pageno-1)*10)->take(10)->get();
-            $islast = (count($tests->slice($pageno*10)->take(10)) == 0);
+            $islast = (count($tests) <= $pageno*10);
         }
         $supercategories = SuperCategory::all();
         return view('pages.tests', [

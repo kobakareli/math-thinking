@@ -813,6 +813,11 @@ body, html {
             max-width: 100%;
         }
     }
+
+    .hint, .answer {
+        font-family: 'Open Sans', sans-serif;
+        line-height: 24px;
+    }
 }
 
 .left-content {

@@ -18,7 +18,7 @@
         <div class="content">
             @foreach($articles as $article)
                 <div class="post">
-                    <a href="{{ url('/article/' . $article->id) }}">
+                    <a href="{{ url('/' . App::getLocale() . '/article/' . $article->id) }}">
                         <p class="title fs-24">
                             {{ $article->{'title_' . App::getLocale()} }}
                         </p>

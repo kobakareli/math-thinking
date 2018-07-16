@@ -107,7 +107,7 @@ class ArticleController extends Controller
         }
         else {
             $articles = $articles->slice(($pageno-1)*10)->take(10);
-            $islast = (count($articles->slice($pageno*10)->take(10)) == 0);
+            $islast = (count($articles) <= $pageno*10);
         }
         $supercategories = SuperCategory::all();
         return view('pages.articles', [

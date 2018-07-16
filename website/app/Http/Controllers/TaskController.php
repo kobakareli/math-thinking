@@ -190,7 +190,7 @@ class TaskController extends Controller
         }
         else {
             $tasks = $tasks->slice(($pageno-1)*10)->take(10);
-            $islast = (count($tasks->slice($pageno*10)->take(10)) == 0);
+            $islast = (count($tasks) <= $pageno*10);
         }
         $supercategories = SuperCategory::all();
         return view('pages.tasks', [

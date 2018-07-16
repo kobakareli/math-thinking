@@ -26,7 +26,7 @@
                     }
                 ?>
                 <div class="post">
-                    <a href="{{ url('/test/' . $test->id) }}">
+                    <a href="{{ url('/' . App::getLocale() . '/test/' . $test->id) }}">
                         <p class="title fs-24 @if(isset($status) && $status == 1){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
                             {{ $test->{'title_' . App::getLocale()} }}
                         </p>
