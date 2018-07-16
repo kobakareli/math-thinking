@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
     }
 
     $('input[name="has_options"]').click(function(){
-        $('.hide:not(.cke)').addClass('show');
+        $('.hide:not(.cke)').toggleClass('show');
         /*if($(this).is(':checked')){
             $('.cke').addClass('hide');
             $('#cke_rich1, #cke_rich4').removeClass('hide');
