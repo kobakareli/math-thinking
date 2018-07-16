@@ -14,8 +14,9 @@ class MainController extends Controller
      * @param  \App\SuperCategory  $superCategory
      * @return \Illuminate\Http\Response
      */
-    public function categories(SuperCategory $superCategory)
+    public function categories(Request $request, SuperCategory $superCategory)
     {
+        \App::setLocale($request->lang);
         return view('renders/categoriesRender', compact('superCategory'))->render();
     }
 
@@ -26,8 +27,9 @@ class MainController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function ajaxSearch(Category $category, $term, $datefrom=null, $dateto=null)
+    public function ajaxSearch(Request $request, Category $category, $term, $datefrom=null, $dateto=null)
     {
+        \App::setLocale($request->lang);
         if($term == '-1') {
             $term = '';
         }
