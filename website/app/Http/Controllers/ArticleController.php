@@ -106,8 +106,8 @@ class ArticleController extends Controller
             $islast = (count(Article::skip(($pageno)*10)->take(10)->get()) == 0);
         }
         else {
-            $articles = $articles->slice(($pageno-1)*10)->take(10);
             $islast = (count($articles) <= $pageno*10);
+            $articles = $articles->slice(($pageno-1)*10)->take(10);
         }
         $supercategories = SuperCategory::all();
         return view('pages.articles', [
