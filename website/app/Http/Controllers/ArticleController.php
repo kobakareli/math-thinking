@@ -130,8 +130,11 @@ class ArticleController extends Controller
     {
         $supercategories = SuperCategory::all();
         $tasks = collect();
-        foreach($article->categories as $category) {
-            $tasks = $tasks->merge($category->tasks);
+        $articleCategories = $article->categories;
+        if(count($articleCategories) > 0) {
+            foreach($articleCategories as $category) {
+                $tasks = $tasks->merge($category->tasks);
+            }
         }
         $moreTasks = count($tasks) > 3;
         return view('pages.article', [

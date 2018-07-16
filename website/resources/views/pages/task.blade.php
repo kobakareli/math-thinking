@@ -47,6 +47,30 @@
             </div>
         @endif
 
+        <div class="trending article-tasks">
+            <span class="blog-section-title fs-20">{{ trans('web.learn_more') }}</span>
+            @if($morearticles)
+                <a href="{{ url('/' . App::getLocale() . '/search/articles/-1/' . $article->categories[0]->id) }}" class="see-more-link fs-20">{{ trans('web.see_more') }}</a>
+            @endif
+            <div class="trends">
+                @foreach($articles as $article)
+                    <a href="{{ url('/' . App::getLocale() . '/article/' . $article->id) }}">
+                        <div class="trend">
+
+                            <p class="title fs-16">
+                                {{ $article->{'title_' . App::getLocale()} }}
+                            </p>
+                            <div class="info">
+                                <span class="date fs-15">
+                                    {{ \Carbon\Carbon::parse(explode(" ",$article->created_at)[0])->format('d/m/Y') }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}" data-numposts="5"></div>
 

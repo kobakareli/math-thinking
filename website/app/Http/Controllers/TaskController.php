@@ -121,9 +121,19 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $supercategories = SuperCategory::all();
+        $articles = collect();
+        $taskCategories = $task->categories;
+        if(count($taskCategories) > 0) {
+            foreach($taskCategories as $category) {
+                $articles = $articles->merge($category->articles);
+            }
+        }
+        $moreArticles = count($articles) > 3;
         return view('pages.task', [
             'supercategories' => $supercategories,
             'task' => $task,
+            'articles' => $articles,
+            'morearticles' => $moreArticles,
             'page_title' => $task->title_en,
             'has_share' => true
         ]);
