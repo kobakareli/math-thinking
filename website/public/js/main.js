@@ -45,6 +45,8 @@ $(document).ready(function () {
         });
     }
 
+    hideTrends();
+
     $('.input-parent input').focusin(function() {
         $(this).parent().addClass('active');
     });
@@ -152,4 +154,15 @@ $(document).ready(function () {
             }
         );
     });
+});
+
+function hideTrends() {
+    if($(window).width() < 1451 && $(window).width() > 960) {
+        $('.trends a').eq(3).hide();
+        $('.trends a').eq(4).hide();
+    }
+}
+
+$(window).resize(function() {
+    hideTrends();
 });
