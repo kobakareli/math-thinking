@@ -14,7 +14,9 @@
 
         <div class="trending article-tasks">
             <span class="blog-section-title fs-20">{{ trans('web.problems') }}</span>
-            <a href="{{ url('/' . App::getLocale() . '/search/tasks/-1/' . $article->categories[0]->id) }}" class="see-more-link fs-20">{{ trans('web.see_more') }}</a>
+            @if($moretasks)
+                <a href="{{ url('/' . App::getLocale() . '/search/tasks/-1/' . $article->categories[0]->id) }}" class="see-more-link fs-20">{{ trans('web.see_more') }}</a>
+            @endif
             <div class="trends">
                 @foreach($tasks as $ptask)
                     <a href="{{ url('/' . App::getLocale() . '/task/' . $ptask->id) }}">

@@ -133,11 +133,11 @@ class ArticleController extends Controller
         foreach($article->categories as $category) {
             $tasks = $tasks->merge($category->tasks);
         }
-        $moreTasks = count($tasks) > 5;
+        $moreTasks = count($tasks) > 3;
         return view('pages.article', [
             'supercategories' => $supercategories,
             'article' => $article,
-            'tasks' => $tasks->take(5),
+            'tasks' => $tasks->take(3),
             'moretasks' => $moreTasks,
             'page_title' => $article->title_en,
             'has_share' => true
