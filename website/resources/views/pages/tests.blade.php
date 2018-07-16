@@ -7,7 +7,7 @@
 @section('content')
     <div class="tests-page tasks-page">
 
-        <select type="select" class="select" name="sort" id="sort" placeholder="{{ trans('web.newest') }}" data-url="{{ url('/') }}">
+        <select type="select" class="select" name="sort" id="sort" placeholder="{{ trans('web.newest') }}" data-url="{{ url('/' . App::getLocale()) }}">
             <option @if($sort == 'new'){{ "selected" }}@endif default value="new">{{ trans('web.newest') }}</option>
             <option @if($sort == 'old'){{ "selected" }}@endif value="old">{{ trans('web.oldest') }}</option>
             <option @if($sort == 'az'){{ "selected" }}@endif value="az">{{ trans('web.az') }}</option>
