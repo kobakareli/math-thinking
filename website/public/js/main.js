@@ -73,9 +73,7 @@ $(document).ready(function () {
             $('.categories-wrapper').html(data);
             $('#categories').removeClass('form-control');
             $('#categories').addClass('select');
-            $('#categories').select2({
-                maximumSelectionLength: 1
-            });
+            $('#categories').select2();
 
             ajaxSearch();
         });
