@@ -216,7 +216,7 @@
 
                     <div class="trends">
                         @foreach($popular as $ptask)
-                            <a href="{{ url('/tasks/' . $ptask->id) }}">
+                            <a href="{{ url('/' . App::getLocale() . '/task/' . $ptask->id) }}">
                                 <div class="trend">
 
                                     <p class="title fs-16">
