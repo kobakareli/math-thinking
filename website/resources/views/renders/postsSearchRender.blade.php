@@ -1,8 +1,8 @@
 @if(count($tasks) > 0)
-    <div class="task-results result" data-url="{{ url('/') . '/' . App::getLocale() . '/ajax/search/' }}">
+    <div class="task-results result" data-url="{{ url('/' . App::getLocale() . '/ajax/search/') }}">
         <p class="title fs-22">{{ trans('web.problems') }}:</p>
         <div class="posts">
-            <a href="{{ url('/') . '/' . App::getLocale() . '/task/' . $tasks[0]->id}}">
+            <a href="{{ url('/' . App::getLocale() . '/task/' . $tasks[0]->id) }}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">
@@ -29,11 +29,11 @@
     </div>
 @endif
 @if(count($articles) > 0)
-    <div class="article-results result" data-url="{{ url('/') . '/' . App::getLocale() . '/ajax/search/' }}">
+    <div class="article-results result" data-url="{{ url('/' . App::getLocale() . '/ajax/search/') }}">
         <p class="title fs-22">{{ trans('web.articles') }}:</p>
         <div class="posts">
 
-            <a href="{{ url('/') . '/' . App::getLocale() . '/article/' . $articles[0]->id}}">
+            <a href="{{ url('/' . App::getLocale() . '/article/' . $articles[0]->id) }}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">
@@ -45,7 +45,7 @@
                         <p class="offer-title fs-17">
                             {{ $articles[0]->{'title_' . App::getLocale()} }}
                         </p>
-                        <span class="desciption fs-16">
+                        <span class="description fs-16">
                             @if(strlen(strip_tags($articles[0]->{'text_' . App::getLocale()})) > 145)
                                 {{ mb_substr(strip_tags($articles[0]->{'text_' . App::getLocale()}), 0, 145, 'utf-8') }}...
                             @else
@@ -61,10 +61,10 @@
     </div>
 @endif
 @if(count($tests) > 0)
-    <div class="test-results result" data-url="{{ url('/') . '/' . App::getLocale() . '/ajax/search/' }}">
+    <div class="test-results result" data-url="{{ url('/' . App::getLocale() . '/ajax/search/') }}">
         <p class="title fs-22">{{ trans('web.tests') }}:</p>
         <div class="posts">
-            <a href="{{ url('/') . '/' . App::getLocale() . '/test/' . $tests[0]->id}}">
+            <a href="{{ url('/' . App::getLocale() . '/test/' . $tests[0]->id) }}">
                 <div class="post small next carousel-slide">
 
                     <div class="post-texts">

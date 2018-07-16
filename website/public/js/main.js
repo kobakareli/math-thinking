@@ -5,6 +5,8 @@ $(document).ready(function () {
         }
     });
 
+    $('.row').parent().addClass('push-down');
+
     $('input[name=search]').val('');
 
     $('.header-button.search-button').on('click', function() {
@@ -19,6 +21,8 @@ $(document).ready(function () {
                 $('#categories').removeClass('form-control');
                 $('#categories').addClass('select');
                 $('#categories').select2();
+
+                ajaxSearch();
             });
         }, 200);
     });
@@ -74,10 +78,12 @@ $(document).ready(function () {
             $('#categories').select2({
                 maximumSelectionLength: 1
             });
+
+            ajaxSearch();
         });
     });
 
-    $('.search-input input').on('change', function() {
+    $('.search-container input').on('change', function() {
         ajaxSearch();
     });
 
@@ -104,7 +110,7 @@ $(document).ready(function () {
         }
         $.get(url, function(data) {
             $('.results').html(data);
-            $('.results a').on('click', function(e) {
+            $('.results a.see-more').on('click', function(e) {
                 e.preventDefault();
                 var type = "tasks";
                 if($(this).parent().hasClass('article-results')) {

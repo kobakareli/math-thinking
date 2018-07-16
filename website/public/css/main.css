@@ -996,6 +996,18 @@ html .panel-heading {
   }
 }
 
+@media screen and (max-width: 960px) {
+  .central-content.push-down {
+    margin-top: 90px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .central-content.push-down {
+    margin-top: 60px;
+  }
+}
+
 .central-content .title {
   font-weight: bold;
 }
@@ -1253,7 +1265,7 @@ html .panel-heading {
   }
 }
 
-.right-content .trending {
+.trending {
   display: inline-block;
   height: auto;
   width: 100%;
@@ -1266,41 +1278,41 @@ html .panel-heading {
 }
 
 @media screen and (max-width: 1450px) {
-  .right-content .trending {
+  .trending {
     padding-top: 14px;
     padding-bottom: 20px;
   }
 }
 
-.right-content .trending .blog-section-title {
+.trending .blog-section-title {
   margin-left: 20px;
   text-transform: uppercase;
 }
 
-.right-content .trending .trends {
+.trending .trends {
   position: relative;
   width: 100%;
   max-height: 60vh;
 }
 
-.right-content .trending .trends:before {
+.trending .trends:before {
   left: 0;
 }
 
-.right-content .trending .trends:after {
+.trending .trends:after {
   right: 0;
 }
 
-.right-content .trending .trends a {
+.trending .trends a {
   text-decoration: none !important;
 }
 
-.right-content .trending .trends a:last-child .trend {
+.trending .trends a:last-child .trend {
   border-bottom-style: none;
   margin-bottom: 0;
 }
 
-.right-content .trending .trends .trend {
+.trending .trends .trend {
   position: relative;
   width: 100%;
   height: auto;
@@ -1315,12 +1327,12 @@ html .panel-heading {
 }
 
 @media screen and (max-width: 1450px) {
-  .right-content .trending .trends .trend {
+  .trending .trends .trend {
     padding: 14px 20px;
   }
 }
 
-.right-content .trending .trends .trend:hover {
+.trending .trends .trend:hover {
   border-bottom-color: transparent;
   -webkit-box-shadow: 0px 0px 40px 3px #ccc;
           box-shadow: 0px 0px 40px 3px #ccc;
@@ -1328,13 +1340,13 @@ html .panel-heading {
 }
 
 @media screen and (max-width: 960px) {
-  .right-content .trending .trends .trend:hover {
+  .trending .trends .trend:hover {
     -webkit-box-shadow: none;
             box-shadow: none;
   }
 }
 
-.right-content .trending .trends .trend .image {
+.trending .trends .trend .image {
   position: absolute;
   width: 18%;
   padding-top: 18%;
@@ -1344,11 +1356,11 @@ html .panel-heading {
   background-position: center;
 }
 
-.right-content .trending .trends .trend .title {
+.trending .trends .trend .title {
   color: #5b576b;
 }
 
-.right-content .trending .trends .trend .info {
+.trending .trends .trend .info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1360,18 +1372,18 @@ html .panel-heading {
           align-items: center;
 }
 
-.right-content .trending .trends .trend .info .category {
+.trending .trends .trend .info .category {
   color: #a6a4b0;
   max-width: 48%;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.right-content .trending .trends .trend .info .date {
+.trending .trends .trend .info .date {
   color: #a6a4b0;
 }
 
-.right-content .trending .trends .trend .info .circle {
+.trending .trends .trend .info .circle {
   width: 3px;
   height: 3px;
   background-color: #a6a4b0;
@@ -1379,9 +1391,34 @@ html .panel-heading {
 }
 
 @media screen and (max-width: 1280px) {
-  .right-content .trending .trends .trend .info .circle {
+  .trending .trends .trend .info .circle {
     display: none;
   }
+}
+
+.trending.article-tasks {
+  margin-top: 100px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 1450px) {
+  .trending.article-tasks {
+    margin-top: 70px;
+  }
+}
+
+.trending.article-tasks .see-more-link {
+  float: right;
+  color: #FFCA4F;
+  text-decoration: none;
+}
+
+.trending.article-tasks .blog-section-title {
+  color: #5b576b;
+}
+
+.trending.article-tasks .trends {
+  margin-top: 20px;
 }
 
 .fb-comments {

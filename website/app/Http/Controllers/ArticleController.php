@@ -129,9 +129,16 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $supercategories = SuperCategory::all();
+        $tasks = collect();
+        foreach($article->categories as $category) {
+            $tasks = $tasks->merge($category->tasks);
+        }
+        $moreTasks = count($tasks) > 5;
         return view('pages.article', [
             'supercategories' => $supercategories,
             'article' => $article,
+            'tasks' => $tasks->take(5),
+            'moretasks' => $moreTasks,
             'page_title' => $article->title_en,
             'has_share' => true
         ]);
