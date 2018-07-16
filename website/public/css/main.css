@@ -1234,6 +1234,13 @@ html .panel-heading {
   background: white;
 }
 
+@media screen and (max-width: 1450px) {
+  .right-content .share-div {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
 .right-content .share-div .fb-button {
   width: 50px;
   height: auto;
@@ -1260,8 +1267,8 @@ html .panel-heading {
 
 @media screen and (max-width: 1450px) {
   .right-content .trending {
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 14px;
+    padding-bottom: 20px;
   }
 }
 
@@ -1305,6 +1312,12 @@ html .panel-heading {
   border-bottom-color: #edeaea;
   border-bottom-width: 1px;
   overflow: hidden;
+}
+
+@media screen and (max-width: 1450px) {
+  .right-content .trending .trends .trend {
+    padding: 14px 20px;
+  }
 }
 
 .right-content .trending .trends .trend:hover {
