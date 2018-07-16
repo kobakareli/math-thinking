@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('supercategories', SuperCategory::all());
         //}
         //if(Schema::hasTable('tasks')) {
-        $tasks = Task::orderBy('total_answers', 'DESC')->take(5)->get();
+        $tasks = Task::orderBy('total_answers', 'DESC')->take(3)->get();
         view()->share('popular', $tasks);
         //}
     }
