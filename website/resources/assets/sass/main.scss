@@ -1180,3 +1180,11 @@ hr {
         }
     }
 }
+
+.fb-login-button {
+    margin-top: 20px;
+
+    @media screen and (max-width: 1450px) {
+        margin-top: 14px;
+    }
+}

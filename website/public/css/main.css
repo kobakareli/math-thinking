@@ -1458,3 +1458,13 @@ hr {
   width: 100% !important;
 }
 
+.fb-login-button {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1450px) {
+  .fb-login-button {
+    margin-top: 14px;
+  }
+}
+
