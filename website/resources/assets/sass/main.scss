@@ -827,6 +827,10 @@ body, html {
     .hint, .answer {
         font-family: 'Open Sans', sans-serif;
         line-height: 24px;
+
+        img {
+            max-width: 100%;
+        }
     }
 }
 

@@ -1043,6 +1043,11 @@ html .panel-heading {
   line-height: 24px;
 }
 
+.central-content .hint img,
+.central-content .answer img {
+  max-width: 100%;
+}
+
 .left-content {
   display: inline-block;
   position: fixed;
