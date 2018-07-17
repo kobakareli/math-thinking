@@ -1458,12 +1458,18 @@ hr {
   width: 100% !important;
 }
 
-.fb-login-button {
+.fb-button {
+  display: inline-block;
   margin-top: 20px;
+  padding: 5px 10px;
+  color: white !important;
+  background-color: #4267b2;
+  text-decoration: none !important;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 1450px) {
-  .fb-login-button {
+  .fb-button {
     margin-top: 14px;
   }
 }

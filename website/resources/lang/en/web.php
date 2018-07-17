@@ -59,5 +59,6 @@ return [
     'level_up' => 'You\'ve leveled up',
     'test_passed' => 'You\'ve passed the test',
     'test_failed' => 'You\'ve failed the test',
-    'learn_more' => 'Learn more about this subject:'
+    'learn_more' => 'Learn more about this subject:',
+    'fb_login' => 'Login with Facebook',
 ];
