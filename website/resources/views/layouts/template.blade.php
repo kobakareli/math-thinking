@@ -200,7 +200,7 @@
                         <a href="{{ url('/' . App::getLocale()) . '/password/reset' }}" class="password-recovery-link link fs-17">
                             {{ trans('web.recover') }}
                         </a>
-                        <a href="{{url('/redirect')}}" class="fb-button">
+                        <a href="{{url('/redirect')}}" class="fb-login-btn">
                             {{ trans('web.fb_login') }}
                         </a>
                     </form>
