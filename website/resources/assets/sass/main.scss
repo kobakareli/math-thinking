@@ -1013,6 +1013,14 @@ body, html {
     }
 }
 
+hr {
+    margin: 20px;
+
+    @media screen and (max-width: 1450px) {
+        margin: 10px;
+    }
+}
+
 .trending {
     display: inline-block;
     height: auto;
@@ -1154,6 +1162,7 @@ body, html {
 }
 
 .fb-comments {
+    display: inline-block !important;
     width: 100%;
     background-color: white;
     border-radius: 20px;
