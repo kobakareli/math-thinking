@@ -50,6 +50,10 @@ Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
 
 Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@ajaxSearch');
 
+// fb
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');
+
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
