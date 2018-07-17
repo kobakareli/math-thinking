@@ -61,4 +61,5 @@ return [
     'test_failed' => 'თქვენ ვერ ჩააბარეთ ტესტი',
     'learn_more' => 'გაიგე მეტი ამ თემაზე:',
     'fb_login' => 'შესვლა Facebook-ით',
+    'google_login' => 'შესვლა Google-ით',
 ];

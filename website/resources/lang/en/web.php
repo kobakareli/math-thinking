@@ -61,4 +61,5 @@ return [
     'test_failed' => 'You\'ve failed the test',
     'learn_more' => 'Learn more about this subject:',
     'fb_login' => 'Login with Facebook',
+    'google_login' => 'Login with Google',
 ];

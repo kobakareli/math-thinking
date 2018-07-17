@@ -1181,7 +1181,8 @@ hr {
     }
 }
 
-.fb-login-btn {
+.fb-login-btn,
+.google-login-btn {
     display: inline-block;
     margin-top: 20px;
     padding: 5px 10px;
@@ -1193,4 +1194,8 @@ hr {
     @media screen and (max-width: 1450px) {
         margin-top: 14px;
     }
+}
+
+.google-login-btn {
+    background-color: #db4437;
 }

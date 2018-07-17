@@ -203,6 +203,9 @@
                         <a href="{{url('/redirect')}}" class="fb-login-btn">
                             {{ trans('web.fb_login') }}
                         </a>
+                        <a href="{{url('/google/redirect')}}" class="google-login-btn">
+                            {{ trans('web.google_login') }}
+                        </a>
                     </form>
                 @endif
             </div>

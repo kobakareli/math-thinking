@@ -54,6 +54,10 @@ Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainControll
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 
+// google
+Route::get('/google/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/google/callback', 'SocialAuthGoogleController@callback');
+
 
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
