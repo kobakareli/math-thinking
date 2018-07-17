@@ -208,7 +208,7 @@
                             data-show-faces="false"
                             data-auto-logout-link="false"
                             data-use-continue-as="false"
-                            onlogin="checkLoginState();>
+                            onlogin="checkLoginState();">
                         </div>
                     </form>
                 @endif
