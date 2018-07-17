@@ -58,7 +58,6 @@
         @yield('styles')
     </head>
     <body>
-
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -201,6 +200,16 @@
                         <a href="{{ url('/' . App::getLocale()) . '/password/reset' }}" class="password-recovery-link link fs-17">
                             {{ trans('web.recover') }}
                         </a>
+                        <div
+                            class="fb-login-button"
+                            data-max-rows="1"
+                            data-size="medium"
+                            data-button-type="login_with"
+                            data-show-faces="false"
+                            data-auto-logout-link="false"
+                            data-use-continue-as="false"
+                            onlogin="checkLoginState();>
+                        </div>
                     </form>
                 @endif
             </div>
