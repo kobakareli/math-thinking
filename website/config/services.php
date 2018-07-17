@@ -35,9 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id' => '1026007677546401',
-        'client_secret' => '1558e269d38d392cd48818a943a75840',
-        'redirect' => 'https://maththinking.tk/callback',
+        'client_id' => env('FB_ID'),
+        'client_secret' => env('FB_SECRET'),
+        'redirect' => env('FB_REDIRECT'),
     ],
 
 ];
