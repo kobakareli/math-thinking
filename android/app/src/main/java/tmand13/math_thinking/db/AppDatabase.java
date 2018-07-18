@@ -54,7 +54,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static void copyDBFileIfFirstTimeCalled(Context context) {
         FirstTimeCalledWrapper firstTimeCalledWrapper = new FirstTimeCalledWrapper(context);
-        firstTimeCalledWrapper.setFirstTimeCalled(true);
         if (firstTimeCalledWrapper.firstTimeCalled()) {
             if (COPY_FILE) {
                 try {
