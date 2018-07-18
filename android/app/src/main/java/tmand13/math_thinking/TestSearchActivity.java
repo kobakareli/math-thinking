@@ -83,30 +83,30 @@ public class TestSearchActivity extends BaseActivity {
                         break;
                 }
 
-                String titlePrefix = constraint.toString() + "%";
+                String titleConstraint = "%" + constraint.toString() + "%";
 
                 if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
                     switch (sortBy) {
                         case 0:
-                            return db.testDao().getCursorOrderByCreationTimeEn(titlePrefix,
+                            return db.testDao().getCursorOrderByCreationTimeEn(titleConstraint,
                                     solved1, solved2);
                         case 1:
-                            return db.testDao().getCursorOrderByUpdateTimeEn(titlePrefix,
+                            return db.testDao().getCursorOrderByUpdateTimeEn(titleConstraint,
                                     solved1, solved2);
                         default:
-                            return db.testDao().getCursorOrderByTitleEn(titlePrefix,
+                            return db.testDao().getCursorOrderByTitleEn(titleConstraint,
                                     solved1, solved2);
                     }
                 } else {
                     switch (sortBy) {
                         case 0:
-                            return db.testDao().getCursorOrderByCreationTimeGe(titlePrefix,
+                            return db.testDao().getCursorOrderByCreationTimeGe(titleConstraint,
                                     solved1, solved2);
                         case 1:
-                            return db.testDao().getCursorOrderByUpdateTimeGe(titlePrefix,
+                            return db.testDao().getCursorOrderByUpdateTimeGe(titleConstraint,
                                     solved1, solved2);
                         default:
-                            return db.testDao().getCursorOrderByTitleGe(titlePrefix,
+                            return db.testDao().getCursorOrderByTitleGe(titleConstraint,
                                     solved1, solved2);
                     }
                 }
@@ -148,8 +148,8 @@ public class TestSearchActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void filterTests(String titlePrefix) {
-        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titlePrefix));
+    private void filterTests(String titleConstraint) {
+        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titleConstraint));
     }
 
     @Override

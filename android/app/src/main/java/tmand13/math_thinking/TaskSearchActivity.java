@@ -105,30 +105,30 @@ public class TaskSearchActivity extends BaseActivity {
                         break;
                 }
 
-                String titlePrefix = constraint.toString() + "%";
+                String titleConstraint = "%" + constraint.toString() + "%";
 
                 if (LocaleHelper.getLanguage(getBaseContext()).equals(Locale.ENGLISH.getLanguage())) {
                     switch (sortBy) {
                         case 0:
-                            return db.taskDao().getCursorOrderByCreationTimeEn(titlePrefix,
+                            return db.taskDao().getCursorOrderByCreationTimeEn(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                         case 1:
-                            return db.taskDao().getCursorOrderByUpdateTimeEn(titlePrefix,
+                            return db.taskDao().getCursorOrderByUpdateTimeEn(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                         default:
-                            return db.taskDao().getCursorOrderByTitleEn(titlePrefix,
+                            return db.taskDao().getCursorOrderByTitleEn(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                     }
                 } else {
                     switch (sortBy) {
                         case 0:
-                            return db.taskDao().getCursorOrderByCreationTimeGe(titlePrefix,
+                            return db.taskDao().getCursorOrderByCreationTimeGe(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                         case 1:
-                            return db.taskDao().getCursorOrderByUpdateTimeGe(titlePrefix,
+                            return db.taskDao().getCursorOrderByUpdateTimeGe(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                         default:
-                            return db.taskDao().getCursorOrderByTitleGe(titlePrefix,
+                            return db.taskDao().getCursorOrderByTitleGe(titleConstraint,
                                     hasOptions1, hasOptions2, solved1, solved2);
                     }
                 }
@@ -170,8 +170,8 @@ public class TaskSearchActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void filterTasks(String titlePrefix) {
-        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titlePrefix));
+    private void filterTasks(String titleConstraint) {
+        adapter.changeCursor(adapter.getFilterQueryProvider().runQuery(titleConstraint));
     }
 
     @Override

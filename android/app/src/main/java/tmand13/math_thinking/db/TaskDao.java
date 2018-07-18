@@ -35,40 +35,40 @@ public interface TaskDao {
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
-    Cursor getCursorOrderByCreationTimeEn(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByCreationTimeEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                        boolean solved1, boolean solved2);
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
-    Cursor getCursorOrderByUpdateTimeEn(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByUpdateTimeEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                                           boolean solved1, boolean solved2);
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_en")
-    Cursor getCursorOrderByTitleEn(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByTitleEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                                           boolean solved1, boolean solved2);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
-    Cursor getCursorOrderByCreationTimeGe(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByCreationTimeGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                                             boolean solved1, boolean solved2);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
-    Cursor getCursorOrderByUpdateTimeGe(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByUpdateTimeGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                                           boolean solved1, boolean solved2);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_ge")
-    Cursor getCursorOrderByTitleGe(String titlePrefix, boolean hasOptions1, boolean hasOptions2,
+    Cursor getCursorOrderByTitleGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
                                      boolean solved1, boolean solved2);
 
     @Query("SELECT * FROM task where solved > 0")
