@@ -87,8 +87,10 @@ public class TaskFragment extends Fragment {
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        descriptionWebView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
-                WebViewHelper.FIT_IMAGE + task.getDescription(getContext()), mimeType,
+        String data = WebViewHelper.FIT_IMAGE +
+                WebViewHelper.getCenteredText(task.getTitle(getContext())) +
+                task.getDescription(getContext());
+        descriptionWebView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER, data, mimeType,
                 encoding, "");
 
         if (task.isHasOptions()) {
