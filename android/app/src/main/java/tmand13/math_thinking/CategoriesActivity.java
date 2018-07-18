@@ -89,11 +89,13 @@ public class CategoriesActivity extends BaseActivity {
         private RecyclerView recyclerView;
         private List<Integer> categories;
         private int superCategoryId;
+        private int superCategoryPosition;
 
-        CategoriesAdapter(RecyclerView recyclerView, int superCategoryId) {
+        CategoriesAdapter(RecyclerView recyclerView, int superCategoryId, int superCategoryPosition) {
             this.recyclerView = recyclerView;
             this.categories = superCategoriesToCategories.get(superCategoryId);
             this.superCategoryId = superCategoryId;
+            this.superCategoryPosition = superCategoryPosition;
         }
 
         @NonNull
@@ -125,7 +127,7 @@ public class CategoriesActivity extends BaseActivity {
 
             void bind() {
                 int position = getAdapterPosition();
-                articleLink.setText(getString(R.string.category_title, superCategoryId,
+                articleLink.setText(getString(R.string.category_title, superCategoryPosition,
                         position + 1, categoriesIdsToTitles.get(categories.get(position))));
             }
 
@@ -192,7 +194,7 @@ public class CategoriesActivity extends BaseActivity {
                 recyclerViewCategories = expandableLayout.findViewById(R.id.categories);
                 recyclerViewCategories.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerViewCategories.setAdapter(new CategoriesAdapter(recyclerViewCategories,
-                        superCategories.get(position)));
+                        superCategories.get(position), position + 1));
 
                 expandableLayout.setExpanded(isSelected, false);
             }

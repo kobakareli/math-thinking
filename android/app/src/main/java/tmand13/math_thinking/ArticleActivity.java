@@ -1,7 +1,6 @@
 package tmand13.math_thinking;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,8 +35,9 @@ public class ArticleActivity extends BaseActivity {
 
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        webView.loadDataWithBaseURL("file:///android_asset/", articleTitle, mimeType, encoding,
-                "");
+        webView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
+                WebViewHelper.FIT_IMAGE + article.getText(getBaseContext()), mimeType,
+                encoding, "");
     }
 
     @Override

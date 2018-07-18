@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122465332-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-122465332-1');
+        </script>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,7 +58,6 @@
         @yield('styles')
     </head>
     <body>
-
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -191,6 +199,12 @@
                         </a>
                         <a href="{{ url('/' . App::getLocale()) . '/password/reset' }}" class="password-recovery-link link fs-17">
                             {{ trans('web.recover') }}
+                        </a>
+                        <a href="{{url('/redirect')}}" class="fb-login-btn">
+                            {{ trans('web.fb_login') }}
+                        </a>
+                        <a href="{{url('/google/redirect')}}" class="google-login-btn">
+                            {{ trans('web.google_login') }}
                         </a>
                     </form>
                 @endif

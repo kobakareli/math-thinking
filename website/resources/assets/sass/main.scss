@@ -832,6 +832,10 @@ body, html {
     .hint, .answer {
         font-family: 'Open Sans', sans-serif;
         line-height: 24px;
+
+        img {
+            max-width: 100%;
+        }
     }
 }
 
@@ -1014,6 +1018,14 @@ body, html {
     }
 }
 
+hr {
+    margin: 20px;
+
+    @media screen and (max-width: 1450px) {
+        margin: 10px;
+    }
+}
+
 .trending {
     display: inline-block;
     height: auto;
@@ -1155,6 +1167,7 @@ body, html {
 }
 
 .fb-comments {
+    display: inline-block !important;
     width: 100%;
     background-color: white;
     border-radius: 20px;
@@ -1171,4 +1184,25 @@ body, html {
             width: 100% !important
         }
     }
+}
+
+.fb-login-btn,
+.google-login-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px 10px;
+    color: white !important;
+    background-color: #4267b2;
+    text-decoration: none !important;
+    border-radius: 2px;
+
+    @media screen and (max-width: 1450px) {
+        margin-top: 14px;
+    }
+}
+
+.google-login-btn {
+    background-color: #db4437;
 }

@@ -35,29 +35,29 @@ public interface TestDao {
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
 
-    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
-    Cursor getCursorOrderByCreationTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByCreationTimeEn(String titleConstraint, boolean solved1, boolean solved2);
 
-    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
-    Cursor getCursorOrderByUpdateTimeEn(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByUpdateTimeEn(String titleConstraint, boolean solved1, boolean solved2);
 
-    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_en FROM test where title_en LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_en")
-    Cursor getCursorOrderByTitleEn(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByTitleEn(String titleConstraint, boolean solved1, boolean solved2);
 
-    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
-    Cursor getCursorOrderByCreationTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByCreationTimeGe(String titleConstraint, boolean solved1, boolean solved2);
 
-    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
-    Cursor getCursorOrderByUpdateTimeGe(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByUpdateTimeGe(String titleConstraint, boolean solved1, boolean solved2);
 
-    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titlePrefix) AND " +
+    @Query("SELECT test_id as _id, solved, title_ge FROM test where title_ge LIKE (:titleConstraint) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_ge")
-    Cursor getCursorOrderByTitleGe(String titlePrefix, boolean solved1, boolean solved2);
+    Cursor getCursorOrderByTitleGe(String titleConstraint, boolean solved1, boolean solved2);
 
     @Query("SELECT * FROM test where solved > 0")
     List<Test> getSolved();
@@ -67,4 +67,7 @@ public interface TestDao {
 
     @Query("SELECT COUNT(test_id) FROM test")
     int getNumberOfTests();
+
+    @Query("SELECT COUNT(test_id) FROM test WHERE test_id = (:testId)")
+    int contains(int testId);
 }

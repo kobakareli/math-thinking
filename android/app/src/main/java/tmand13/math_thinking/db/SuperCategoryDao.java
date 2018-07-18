@@ -24,4 +24,7 @@ public interface SuperCategoryDao {
 
     @Delete
     void delete(SuperCategory superCategory);
+
+    @Query("SELECT COUNT(super_category_id) FROM super_category WHERE super_category_id = (:superCategoryId)")
+    int contains(int superCategoryId);
 }

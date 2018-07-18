@@ -1048,6 +1048,11 @@ html .panel-heading {
   line-height: 24px;
 }
 
+.central-content .hint img,
+.central-content .answer img {
+  max-width: 100%;
+}
+
 .left-content {
   display: inline-block;
   position: fixed;
@@ -1270,6 +1275,16 @@ html .panel-heading {
   }
 }
 
+hr {
+  margin: 20px;
+}
+
+@media screen and (max-width: 1450px) {
+  hr {
+    margin: 10px;
+  }
+}
+
 .trending {
   display: inline-block;
   height: auto;
@@ -1427,6 +1442,7 @@ html .panel-heading {
 }
 
 .fb-comments {
+  display: inline-block !important;
   width: 100%;
   background-color: white;
   border-radius: 20px;
@@ -1445,5 +1461,29 @@ html .panel-heading {
 
 .fb-comments > span iframe {
   width: 100% !important;
+}
+
+.fb-login-btn,
+.google-login-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding: 5px 10px;
+  color: white !important;
+  background-color: #4267b2;
+  text-decoration: none !important;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 1450px) {
+  .fb-login-btn,
+  .google-login-btn {
+    margin-top: 14px;
+  }
+}
+
+.google-login-btn {
+  background-color: #db4437;
 }
 
