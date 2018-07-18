@@ -35,7 +35,7 @@ $(document).ready(function() {
                         else {
                             setTimeout(function() {
                                 $('.response-popup').removeClass('active');
-                            }, 2000);
+                            }, 1000);
                         }
                     }
                     else {
@@ -44,7 +44,7 @@ $(document).ready(function() {
                         $('.response-popup .incorrect').addClass('active');
                         setTimeout(function() {
                             $('.response-popup').removeClass('active');
-                        }, 2000);
+                        }, 1000);
                     }
                 });
             }

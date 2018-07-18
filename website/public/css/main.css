@@ -1022,6 +1022,11 @@ html .panel-heading {
   border-bottom-width: 2px;
 }
 
+.central-content .content {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 24px;
+}
+
 .central-content .description {
   font-family: 'Open Sans', sans-serif;
   line-height: 24px;

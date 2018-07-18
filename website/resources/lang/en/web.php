@@ -59,5 +59,11 @@ return [
     'level_up' => 'You\'ve leveled up',
     'test_passed' => 'You\'ve passed the test',
     'test_failed' => 'You\'ve failed the test',
-    'learn_more' => 'Learn more about this subject:'
+    'learn_more' => 'Learn more about this subject:',
+    'submit_warn' => '* Don\'t click "Submit" until you answer all the questions',
+    'website_description' => 'This website helps people develop mathematical
+                            thinking. It consists of very interesting, beautiful
+                            and fun parts of math. The knowledge and thinking
+                            style, you study here, will help you solve the
+                            problems, you might meet in life.',
 ];
