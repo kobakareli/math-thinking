@@ -50,7 +50,6 @@ class SuperCategoryController extends Controller
         $category->save();
 
         if($request['categories'] != null && count($request['categories']) > 0) {
-            dd($request['categories']);
             $category->removeAllCategories();
             foreach ($request['categories'] as $cat) {
                 $category->addCategory($cat);

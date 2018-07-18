@@ -24,6 +24,7 @@ return [
     'oldest' => 'Oldest First',
     'az' => 'A-Z',
     'za' => 'Z-A',
+    'category_sort' => 'By categories',
     'description' => 'Description',
     'hint' => 'Hint',
     'solution' => 'Solution',
@@ -58,5 +59,7 @@ return [
     'level_up' => 'You\'ve leveled up',
     'test_passed' => 'You\'ve passed the test',
     'test_failed' => 'You\'ve failed the test',
-
+    'learn_more' => 'Learn more about this subject:',
+    'fb_login' => 'Login with Facebook',
+    'google_login' => 'Login with Google',
 ];

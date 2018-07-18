@@ -25,7 +25,7 @@
                             <textarea id="rich2" name="text_ge" class="rich2 form-control about-text" placeholder="Georgian description">{{ $article->text_ge }}</textarea>
                         </div>
 
-                        <span class="language-marker">Categories:</span>
+                        <!--<span class="language-marker">Categories:</span>
                         @foreach($article->categories as $category)
                             <div class="about-container" style="margin-bottom: 20px">
                                 <span class="about-title">{{ $category->title_en }}</span>
@@ -34,6 +34,24 @@
                         <div class="form-group">
                             <select class="form-control" id="categories" name="categories[]" multiple>
                                 @foreach($categories as $category)
+                                    <option multiple="true" value="{{ $category->id }}">{{ $category->title_en }}</option>
+                                @endforeach
+                            </select>
+                        </div>-->
+
+                        <span class="language-marker">Supercategories:</span>
+                        <div class="form-group">
+                            <select class="form-control" id="supercategories" name="supercategories[]" multiple>
+                                @foreach($categories as $category)
+                                    <option multiple="true" value="{{ $category->id }}">{{ $category->title_en }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <span class="language-marker">Subcategories:</span>
+                        <div class="form-group categories-container">
+                            <select class="form-control" id="categories" name="categories[]" multiple>
+                                @foreach($subcategories as $category)
                                     <option multiple="true" value="{{ $category->id }}">{{ $category->title_en }}</option>
                                 @endforeach
                             </select>
@@ -56,7 +74,10 @@
 @endsection
 
 @push('scripts')
+    @if(count($article->categories) > 0)
     <script>
+        var articleSuperCategories = @json($article->categories[0]->supercategories);
         var articleCategories = @json($article->categories);
     </script>
+    @endif
 @endpush

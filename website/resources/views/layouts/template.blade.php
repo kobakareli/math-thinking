@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122465332-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-122465332-1');
+        </script>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,11 +27,12 @@
             <meta class="og_title" property="og:title" content="Math Thinking">
         @endif
 
+        <meta class="og_url" property="og:url" content="{{ url('/') }}" id="meta_image">
         <meta class="og_description" property="og:description" content="">
 
         <meta name="description"  content="" />
 
-        <meta class="og_image" property="og:image" content="" id="meta_image">
+        <meta class="og_image" property="og:image" content="{{ url('/images/og.png') }}" id="meta_image">
 
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="1026007677546401" />
@@ -43,11 +53,11 @@
 
         <link href="{{ asset('css/picker.classic.css') }}" rel="stylesheet">
         <link href="{{ asset('css/picker.classic.date.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         @yield('styles')
     </head>
     <body>
-
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -77,9 +87,10 @@
         <div id="app">
             <section class="header">
                 <div class="nav-container">
-                    <a class="logo-link" href="{{ url('/' . App::getLocale()) }}">
-                        <img class="logo desktop active" src="{{ url('/images/logo.png') }}" />
-                        <img class="logo mobile" src="{{ url('/images/logo.png') }}" />
+                    <a class="logo-link fs-24" href="{{ url('/' . App::getLocale()) }}">
+                        <img class="logo desktop active" src="{{ url('/images/logo.svg') }}" />
+                        <img class="logo mobile" src="{{ url('/images/logo.svg') }}" />
+                        <span><firstletter>M</firstletter>ath<firstletter>T</firstletter>hinking</span>
                     </a>
 
                     <div class="nav">
@@ -160,15 +171,15 @@
                     <div class="logged-in active">
                         <p class="greet fs-20">{{ trans('web.hello') }}, <span class="user-name">{{ Auth::user()->name }}</span></p>
 
-                        <a href="{{ url('/user/' . Auth::user()->id) }}" class="profile-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale() . '/user/' . Auth::user()->id) }}" class="profile-link link fs-17">
                             {{ trans('web.profile') }}
                         </a>
-                        <a href="/logout" class="logout-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale()) . '/logout'}}" class="logout-link link fs-17">
                             {{ trans('web.logout') }}
                         </a>
                     </div>
                 @else
-                    <form class="login-form active" method="post" action="/login">
+                    <form class="login-form active" method="post" action="{{ url('/' . App::getLocale()) . '/login' }}">
 
                         {{ csrf_field() }}
 
@@ -183,11 +194,17 @@
 
                         <button type="submit" class="sign-in-button fs-17">{{ trans('web.signin') }}</button>
 
-                        <a href="/register" class="register-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale() . '/register') }}" class="register-link link fs-17">
                             {{ trans('web.register') }}
                         </a>
-                        <a href="/password/reset" class="password-recovery-link link fs-17">
+                        <a href="{{ url('/' . App::getLocale()) . '/password/reset' }}" class="password-recovery-link link fs-17">
                             {{ trans('web.recover') }}
+                        </a>
+                        <a href="{{url('/redirect')}}" class="fb-login-btn">
+                            {{ trans('web.fb_login') }}
+                        </a>
+                        <a href="{{url('/google/redirect')}}" class="google-login-btn">
+                            {{ trans('web.google_login') }}
                         </a>
                     </form>
                 @endif
@@ -213,7 +230,7 @@
 
                     <div class="trends">
                         @foreach($popular as $ptask)
-                            <a href="{{ url('/tasks/' . $ptask->id) }}">
+                            <a href="{{ url('/' . App::getLocale() . '/task/' . $ptask->id) }}">
                                 <div class="trend">
 
                                     <p class="title fs-16">
@@ -222,7 +239,7 @@
                                     <div class="info">
                                         <span class="category fs-15">
                                             @if(count($ptask->categories))
-                                                {{ $ptask->categories[0]->{'title_' . App::getLocale()} }}
+                                                {{ $ptask->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
                                             @endif
                                         </span>
                                         <div class="circle">

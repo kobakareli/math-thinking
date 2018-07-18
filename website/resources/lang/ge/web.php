@@ -24,6 +24,7 @@ return [
     'oldest' => 'ძველი',
     'az' => 'ა-ჰ',
     'za' => 'ჰ-ა',
+    'category_sort' => 'კატეგორიებით',
     'description' => 'პირობა',
     'hint' => 'მინიშნება',
     'solution' => 'ამოხსნა',
@@ -58,4 +59,7 @@ return [
     'level_up' => 'თქვენ გადახვედით შემდეგ დონეზე',
     'test_passed' => 'თქვენ ჩააბარეთ ტესტი',
     'test_failed' => 'თქვენ ვერ ჩააბარეთ ტესტი',
+    'learn_more' => 'გაიგე მეტი ამ თემაზე:',
+    'fb_login' => 'შესვლა Facebook-ით',
+    'google_login' => 'შესვლა Google-ით',
 ];

@@ -5,6 +5,8 @@ $(document).ready(function () {
         }
     });
 
+    $('.row').parent().addClass('push-down');
+
     $('input[name=search]').val('');
 
     $('.header-button.search-button').on('click', function() {
@@ -14,11 +16,8 @@ $(document).ready(function () {
         $(this).toggleClass('active');
 
         setTimeout(function() {
-            $.get('/ajax/categories/' + $('#super-category').val(), function(data) {
-                $('.categories-wrapper').html(data);
-                $('#categories').removeClass('form-control');
-                $('#categories').addClass('select');
-                $('#categories').select2();
+            $.get('/ajax/categories/' + $('#super-category').val(), {"lang":$('html').attr('lang')}, function(data) {
+                buildCategoriesSelect(data)
             });
         }, 200);
     });
@@ -65,19 +64,27 @@ $(document).ready(function () {
     $('#date-from, #date-to').pickadate();
 
     $('#super-category').on('change', function() {
-        $.get('/ajax/categories/' + $(this).val(), function(data) {
-            $('.categories-wrapper').html(data);
-            $('#categories').removeClass('form-control');
-            $('#categories').addClass('select');
-            $('#categories').select2({
-                maximumSelectionLength: 1
-            });
+        $.get('/ajax/categories/' + $(this).val(), {"lang":$('html').attr('lang')}, function(data) {
+            buildCategoriesSelect(data)
         });
     });
 
-    $('.search-input input').on('change', function() {
+    $('.search-container input').on('change', function() {
         ajaxSearch();
     });
+
+    function buildCategoriesSelect(data) {
+        $('.categories-wrapper').html(data);
+        $('#categories').removeClass('form-control');
+        $('#categories').addClass('select');
+        $('#categories').select2();
+
+        ajaxSearch();
+
+        $('#categories').on('select2:select', function(e) {
+            ajaxSearch();
+        });
+    }
 
     function ajaxSearch() {
         var term = $('.search-input input').val();
@@ -100,9 +107,9 @@ $(document).ready(function () {
             }
             url += '/' + $('#date-to').val();
         }
-        $.get(url, function(data) {
+        $.get(url, {"lang":$('html').attr('lang')}, function(data) {
             $('.results').html(data);
-            $('.results a').on('click', function(e) {
+            $('.results a.see-more').on('click', function(e) {
                 e.preventDefault();
                 var type = "tasks";
                 if($(this).parent().hasClass('article-results')) {

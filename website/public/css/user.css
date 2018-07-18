@@ -3,14 +3,11 @@ html {
   max-height: 100vh;
 }
 
-body {
-  overflow: hidden;
-}
-
 .central-content {
   width: 80%;
   left: 10%;
   margin: 0 !important;
+  margin-bottom: 50px !important;
 }
 
 @media screen and (max-width: 960px) {
@@ -49,6 +46,7 @@ body {
   display: inline-block;
   font-weight: bold;
   min-width: 150px;
+  padding: 10px 0;
 }
 
 @media screen and (max-width: 1450px) {
@@ -62,7 +60,11 @@ body {
 .central-content .mail,
 .central-content .name,
 .central-content .level {
-  color: #ff9d1b;
+  color: #FFCA4F;
+  padding: 10px 0px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FF5B61;
 }
 
 .central-content .table-title {

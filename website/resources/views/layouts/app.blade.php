@@ -53,6 +53,9 @@
                         <a class="navbar-brand menu-item" href="{{ url('/admin/tasks') }}">
                             Tasks
                         </a>
+                        <a class="navbar-brand menu-item" href="{{ url('/admin/image') }}">
+                            Image Uploads
+                        </a>
                     @endif
                 </div>
 

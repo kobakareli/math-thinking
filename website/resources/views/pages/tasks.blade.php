@@ -7,15 +7,16 @@
 @section('content')
     <div class="tasks-page">
 
-        <select type="select" class="select" name="sort" id="sort" placeholder="{{ trans('web.newest') }}" data-url="{{ url('/') }}">
-            <option default value="new">{{ trans('web.newest') }}</option>
-            <option value="old">{{ trans('web.oldest') }}</option>
-            <option value="az">{{ trans('web.az') }}</option>
-            <option value="za">{{ trans('web.za') }}</option>
-            <option value="ma">{{ trans('web.most_answered') }}</option>
-            <option value="la">{{ trans('web.least_answered') }}</option>
-            <option value="mc">{{ trans('web.most_correct') }}</option>
-            <option value="lc">{{ trans('web.least_correct') }}</option>
+        <select type="select" class="select" name="sort" id="sort" placeholder="{{ trans('web.newest') }}" data-url="{{ url('/' . App::getLocale()) }}">
+            <option @if($sort == 'new'){{ "selected" }}@endif default value="new">{{ trans('web.newest') }}</option>
+            <option @if($sort == 'old'){{ "selected" }}@endif value="old">{{ trans('web.oldest') }}</option>
+            <option @if($sort == 'az'){{ "selected" }}@endif value="az">{{ trans('web.az') }}</option>
+            <option @if($sort == 'za'){{ "selected" }}@endif value="za">{{ trans('web.za') }}</option>
+            <option @if($sort == 'ma'){{ "selected" }}@endif value="ma">{{ trans('web.most_answered') }}</option>
+            <option @if($sort == 'la'){{ "selected" }}@endif value="la">{{ trans('web.least_answered') }}</option>
+            <option @if($sort == 'mc'){{ "selected" }}@endif value="mc">{{ trans('web.most_correct') }}</option>
+            <option @if($sort == 'lc'){{ "selected" }}@endif value="lc">{{ trans('web.least_correct') }}</option>
+            <option @if($sort == 'category'){{ "selected" }}@endif value="category">{{ trans('web.category_sort') }}</option>
         </select>
 
         <div class="content">
@@ -29,15 +30,18 @@
                     }
                 ?>
                 <div class="post">
-                    <a href="{{ url('/task/' . $task->id) }}">
+                    <a href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}">
                         <p class="title fs-24 @if(isset($status) && $status == 1){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
                             {{ $task->{'title_' . App::getLocale()} }}
                         </p>
-                        @foreach($task->categories as $category)
+                        <!--@foreach($task->categories as $category)
                             <span class="post-category">
                                 {{ $category->{'title_' . App::getLocale()} }}
                             </span>
-                        @endforeach
+                        @endforeach-->
+                        <span class="post-category">
+                            {{ $task->categories[0]->supercategories[0]->{'title_' . App::getLocale()} }}
+                        </span>
                         </br>
                         <div class="text fs-16">
                             @if(strlen(strip_tags($task->{'description_' . App::getLocale()})) > 300)

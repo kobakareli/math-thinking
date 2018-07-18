@@ -81,12 +81,13 @@ class TaskController extends Controller
         }
         else {
             $validatedData['has_options'] = 0;
-            if(isset($request['answer_en'])) {
-                $validatedData['answer_en'] = $request['answer_en'];
-            }
-            if(isset($request['answer_ge'])) {
-                $validatedData['answer_ge'] = $request['answer_ge'];
-            }
+        }
+
+        if(isset($request['answer_en'])) {
+            $validatedData['answer_en'] = $request['answer_en'];
+        }
+        if(isset($request['answer_ge'])) {
+            $validatedData['answer_ge'] = $request['answer_ge'];
         }
 
         if(isset($request['hint_en'])) {
@@ -120,9 +121,19 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $supercategories = SuperCategory::all();
+        $articles = collect();
+        $taskCategories = $task->categories;
+        if(count($taskCategories) > 0) {
+            foreach($taskCategories as $category) {
+                $articles = $articles->merge($category->articles);
+            }
+        }
+        $moreArticles = count($articles) > 3;
         return view('pages.task', [
             'supercategories' => $supercategories,
             'task' => $task,
+            'articles' => $articles,
+            'morearticles' => $moreArticles,
             'page_title' => $task->title_en,
             'has_share' => true
         ]);
@@ -143,6 +154,7 @@ class TaskController extends Controller
         }
         $key = 'created_at';
         $order = 'desc';
+        $tasks = collect();
         if($sort == 'old') {
             $order = 'asc';
         }
@@ -170,8 +182,26 @@ class TaskController extends Controller
             $key = 'correct_answers';
             $order = 'asc';
         }
-        $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Task::skip(($pageno)*10)->take(10)->get()) == 0);
+        else if($sort == 'category') {
+            $categories = SuperCategory::orderBy('id', 'asc')->with('categories')->get();
+            $subcategories = collect();
+            foreach($categories as $category) {
+                $subcategories = $subcategories->merge($category->categories);
+            }
+            $tasks = collect();
+            foreach($subcategories as $category) {
+                $tasts = $tasks->merge($category->tasks);
+            }
+        }
+
+        if($sort != 'category') {
+            $tasks = Task::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+            $islast = (count(Task::skip(($pageno)*10)->take(10)->get()) == 0);
+        }
+        else {
+            $islast = (count($tasks) <= $pageno*10);
+            $tasks = $tasks->slice(($pageno-1)*10)->take(10);
+        }
         $supercategories = SuperCategory::all();
         return view('pages.tasks', [
             'tasks' => $tasks,
@@ -235,7 +265,12 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $categories = SuperCategory::all();
-        $subcategories = $task->categories[0]->supercategories[0]->categories;
+        $subcategories = collect();
+        if(count($task->categories) > 0) {
+            if(count($task->categories[0]->supercategories) > 0) {
+                $subcategories = $task->categories[0]->supercategories[0]->categories;
+            }
+        }
         return view('admin/task/editTask', [
             'task' => $task,
             'categories' => $categories,
@@ -289,12 +324,13 @@ class TaskController extends Controller
         }
         else {
             $validatedData['has_options'] = 0;
-            if(isset($request['answer_en'])) {
-                $validatedData['answer_en'] = $request['answer_en'];
-            }
-            if(isset($request['answer_ge'])) {
-                $validatedData['answer_ge'] = $request['answer_ge'];
-            }
+        }
+
+        if(isset($request['answer_en'])) {
+            $validatedData['answer_en'] = $request['answer_en'];
+        }
+        if(isset($request['answer_ge'])) {
+            $validatedData['answer_ge'] = $request['answer_ge'];
         }
 
         if(isset($request['hint_en'])) {

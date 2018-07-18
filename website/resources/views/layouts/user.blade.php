@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122465332-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-122465332-1');
+        </script>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +32,7 @@
 
         <meta name="description"  content="" />
 
-        <meta class="og_image" property="og:image" content="" id="meta_image">
+        <meta class="og_image" property="og:image" content="{{ url('/images/og.png') }}" id="meta_image">
 
         <meta property="og:type" content="website" />
         <meta property="fb:app_id" content="1026007677546401" />
@@ -44,6 +53,7 @@
 
         <link href="{{ asset('css/picker.classic.css') }}" rel="stylesheet">
         <link href="{{ asset('css/picker.classic.date.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         @yield('styles')
     </head>
@@ -70,9 +80,10 @@
 
         <section class="header">
             <div class="nav-container">
-                <a class="logo-link" href="{{ url('/' . App::getLocale()) }}">
-                    <img class="logo desktop active" src="{{ url('/images/bog.svg') }}" />
-                    <img class="logo mobile" src="{{ url('/images/bog-logo.svg') }}" />
+                <a class="logo-link fs-24" href="{{ url('/' . App::getLocale()) }}">
+                    <img class="logo desktop active" src="{{ url('/images/logo.svg') }}" />
+                    <img class="logo mobile" src="{{ url('/images/logo.svg') }}" />
+                    <span><firstletter>M</firstletter>ath <firstletter>T</firstletter>hinking</span>
                 </a>
 
                 <div class="nav">

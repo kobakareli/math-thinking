@@ -11,7 +11,28 @@ html {
   }
 }
 
+body *,
+html * {
+  outline: #FFCA4F;
+}
+
+body .btn-primary,
+html .btn-primary {
+  background-color: #FFCA4F;
+}
+
+body .btn-primary:hover,
+html .btn-primary:hover {
+  background-color: #FFCA4F;
+}
+
+body .panel-heading,
+html .panel-heading {
+  background-color: #FFCA4F !important;
+}
+
 #app {
+  position: static;
   height: 100%;
 }
 
@@ -49,7 +70,7 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 8.33%;
+  padding: 0 2.5%;
   width: 100%;
   height: 100%;
 }
@@ -111,14 +132,33 @@ html {
 }
 
 .header .nav-container .logo-link {
-  display: inline-block;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 50%;
+  color: #FFCA4F;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.header .nav-container .logo-link span {
+  display: inherit;
+}
+
+.header .nav-container .logo-link span firstletter {
+  font-size: 150%;
+  color: #FF5B61;
 }
 
 .header .nav-container .logo-link .logo {
   display: none;
   height: 100%;
   width: auto;
+  margin-right: 10px;
   /*&.active {
                     display: inline-block;
                 }*/
@@ -199,7 +239,8 @@ html {
 }
 
 .header .nav-container .nav .nav-item {
-  color: #cfcedc;
+  color: #FFCA4F;
+  font-weight: bold;
   margin-right: 60px;
   padding: 10px 20px;
   cursor: pointer;
@@ -207,7 +248,7 @@ html {
 
 .header .nav-container .nav .nav-item:hover {
   background-color: #263238;
-  color: white;
+  color: #FFCA4F;
 }
 
 @media screen and (max-width: 960px) {
@@ -541,7 +582,7 @@ html {
   left: 0;
   width: 100%;
   height: auto;
-  padding: 4.16% 8.33%;
+  padding: 4.16% 2.5%;
   background-color: #263238;
   z-index: 2;
   max-height: 100%;
@@ -736,7 +777,7 @@ html {
   border-style: none;
   border-bottom-style: solid;
   border-bottom-width: 1px;
-  border-bottom-color: #8e8b98;
+  border-bottom-color: #FFCA4F;
   outline: none;
   color: #ffffff;
 }
@@ -915,7 +956,7 @@ html {
 
 .central-content {
   display: inline-block;
-  position: relative;
+  position: absolute;
   top: 130px;
   width: 40%;
   left: 30%;
@@ -953,6 +994,58 @@ html {
     margin: 20px;
     width: calc(100% - 40px);
   }
+}
+
+@media screen and (max-width: 960px) {
+  .central-content.push-down {
+    margin-top: 90px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .central-content.push-down {
+    margin-top: 60px;
+  }
+}
+
+.central-content .title {
+  font-weight: bold;
+}
+
+.central-content > .title {
+  display: inline-block;
+  color: #FFCA4F;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  border-bottom-style: solid;
+  border-bottom-color: #FFCA4F;
+  border-bottom-width: 2px;
+}
+
+.central-content .description {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 1450px) {
+  .central-content .description {
+    line-height: 18px;
+  }
+}
+
+.central-content .description img {
+  max-width: 100%;
+}
+
+.central-content .hint,
+.central-content .answer {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 24px;
+}
+
+.central-content .hint img,
+.central-content .answer img {
+  max-width: 100%;
 }
 
 .left-content {
@@ -1012,6 +1105,12 @@ html {
   display: block;
 }
 
+.left-content .login-form .user-name,
+.left-content .logged-in .user-name {
+  color: #FFCA4F;
+  font-weight: bold;
+}
+
 .left-content .login-form .input-parent,
 .left-content .logged-in .input-parent {
   position: relative;
@@ -1066,7 +1165,7 @@ html {
 .left-content .logged-in .sign-in-button {
   display: block;
   color: white;
-  background: #455A64;
+  background: #FFCA4F;
   width: 50%;
   border-radius: 10px;
   cursor: pointer;
@@ -1087,6 +1186,18 @@ html {
 .left-content .logged-in .password-recovery-link,
 .left-content .logged-in .logout-link {
   float: right;
+}
+
+.left-content .login-form .logout-link,
+.left-content .logged-in .logout-link {
+  color: #FF5B61 !important;
+  font-weight: bold;
+}
+
+.left-content .login-form .register-link,
+.left-content .logged-in .register-link {
+  color: #FF5B61 !important;
+  font-weight: bold;
 }
 
 .left-content .login-form .link,
@@ -1140,6 +1251,13 @@ html {
   background: white;
 }
 
+@media screen and (max-width: 1450px) {
+  .right-content .share-div {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
 .right-content .share-div .fb-button {
   width: 50px;
   height: auto;
@@ -1152,7 +1270,17 @@ html {
   }
 }
 
-.right-content .trending {
+hr {
+  margin: 20px;
+}
+
+@media screen and (max-width: 1450px) {
+  hr {
+    margin: 10px;
+  }
+}
+
+.trending {
   display: inline-block;
   height: auto;
   width: 100%;
@@ -1165,41 +1293,41 @@ html {
 }
 
 @media screen and (max-width: 1450px) {
-  .right-content .trending {
-    padding-top: 20px;
-    padding-bottom: 30px;
+  .trending {
+    padding-top: 14px;
+    padding-bottom: 20px;
   }
 }
 
-.right-content .trending .blog-section-title {
+.trending .blog-section-title {
   margin-left: 20px;
   text-transform: uppercase;
 }
 
-.right-content .trending .trends {
+.trending .trends {
   position: relative;
   width: 100%;
   max-height: 60vh;
 }
 
-.right-content .trending .trends:before {
+.trending .trends:before {
   left: 0;
 }
 
-.right-content .trending .trends:after {
+.trending .trends:after {
   right: 0;
 }
 
-.right-content .trending .trends a {
+.trending .trends a {
   text-decoration: none !important;
 }
 
-.right-content .trending .trends a:last-child .trend {
+.trending .trends a:last-child .trend {
   border-bottom-style: none;
   margin-bottom: 0;
 }
 
-.right-content .trending .trends .trend {
+.trending .trends .trend {
   position: relative;
   width: 100%;
   height: auto;
@@ -1213,7 +1341,13 @@ html {
   overflow: hidden;
 }
 
-.right-content .trending .trends .trend:hover {
+@media screen and (max-width: 1450px) {
+  .trending .trends .trend {
+    padding: 14px 20px;
+  }
+}
+
+.trending .trends .trend:hover {
   border-bottom-color: transparent;
   -webkit-box-shadow: 0px 0px 40px 3px #ccc;
           box-shadow: 0px 0px 40px 3px #ccc;
@@ -1221,13 +1355,13 @@ html {
 }
 
 @media screen and (max-width: 960px) {
-  .right-content .trending .trends .trend:hover {
+  .trending .trends .trend:hover {
     -webkit-box-shadow: none;
             box-shadow: none;
   }
 }
 
-.right-content .trending .trends .trend .image {
+.trending .trends .trend .image {
   position: absolute;
   width: 18%;
   padding-top: 18%;
@@ -1237,11 +1371,11 @@ html {
   background-position: center;
 }
 
-.right-content .trending .trends .trend .title {
+.trending .trends .trend .title {
   color: #5b576b;
 }
 
-.right-content .trending .trends .trend .info {
+.trending .trends .trend .info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1253,18 +1387,18 @@ html {
           align-items: center;
 }
 
-.right-content .trending .trends .trend .info .category {
+.trending .trends .trend .info .category {
   color: #a6a4b0;
   max-width: 48%;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.right-content .trending .trends .trend .info .date {
+.trending .trends .trend .info .date {
   color: #a6a4b0;
 }
 
-.right-content .trending .trends .trend .info .circle {
+.trending .trends .trend .info .circle {
   width: 3px;
   height: 3px;
   background-color: #a6a4b0;
@@ -1272,12 +1406,38 @@ html {
 }
 
 @media screen and (max-width: 1280px) {
-  .right-content .trending .trends .trend .info .circle {
+  .trending .trends .trend .info .circle {
     display: none;
   }
 }
 
+.trending.article-tasks {
+  margin-top: 100px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 1450px) {
+  .trending.article-tasks {
+    margin-top: 70px;
+  }
+}
+
+.trending.article-tasks .see-more-link {
+  float: right;
+  color: #FFCA4F;
+  text-decoration: none;
+}
+
+.trending.article-tasks .blog-section-title {
+  color: #5b576b;
+}
+
+.trending.article-tasks .trends {
+  margin-top: 20px;
+}
+
 .fb-comments {
+  display: inline-block !important;
   width: 100%;
   background-color: white;
   border-radius: 20px;
@@ -1296,5 +1456,27 @@ html {
 
 .fb-comments > span iframe {
   width: 100% !important;
+}
+
+.fb-login-btn,
+.google-login-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 5px 10px;
+  color: white !important;
+  background-color: #4267b2;
+  text-decoration: none !important;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 1450px) {
+  .fb-login-btn,
+  .google-login-btn {
+    margin-top: 14px;
+  }
+}
+
+.google-login-btn {
+  background-color: #db4437;
 }
 

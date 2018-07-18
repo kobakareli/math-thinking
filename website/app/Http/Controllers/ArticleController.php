@@ -29,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = SuperCategory::all();
         return view('admin/article/createArticle', compact('categories'));
     }
 
@@ -77,6 +77,7 @@ class ArticleController extends Controller
         }
         $key = 'created_at';
         $order = 'desc';
+        $articles = collect();
         if($sort == 'old') {
             $order = 'asc';
         }
@@ -88,9 +89,26 @@ class ArticleController extends Controller
             $key = 'title_' . app()->getLocale();
             $order = 'desc';
         }
+        else if($sort == 'category') {
+            $categories = SuperCategory::orderBy('id', 'asc')->with('categories')->get();
+            $subcategories = collect();
+            foreach($categories as $category) {
+                $subcategories = $subcategories->merge($category->categories);
+            }
+            $articles = collect();
+            foreach($subcategories as $category) {
+                $articles = $articles->merge($category->articles);
+            }
+        }
 
-        $articles = Article::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
-        $islast = (count(Article::skip(($pageno)*10)->take(10)->get()) == 0);
+        if($sort != 'category') {
+            $articles = Article::skip(($pageno-1)*10)->orderBy($key, $order)->take(10)->get();
+            $islast = (count(Article::skip(($pageno)*10)->take(10)->get()) == 0);
+        }
+        else {
+            $islast = (count($articles) <= $pageno*10);
+            $articles = $articles->slice(($pageno-1)*10)->take(10);
+        }
         $supercategories = SuperCategory::all();
         return view('pages.articles', [
             'articles' => $articles,
@@ -111,9 +129,19 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $supercategories = SuperCategory::all();
+        $tasks = collect();
+        $articleCategories = $article->categories;
+        if(count($articleCategories) > 0) {
+            foreach($articleCategories as $category) {
+                $tasks = $tasks->merge($category->tasks);
+            }
+        }
+        $moreTasks = count($tasks) > 3;
         return view('pages.article', [
             'supercategories' => $supercategories,
             'article' => $article,
+            'tasks' => $tasks->take(3),
+            'moretasks' => $moreTasks,
             'page_title' => $article->title_en,
             'has_share' => true
         ]);
@@ -127,10 +155,17 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories = Category::all();
+        $categories = SuperCategory::all();
+        $subcategories = collect();
+        if(count($article->categories) > 0) {
+            if(count($article->categories[0]->supercategories) > 0) {
+                $subcategories = $article->categories[0]->supercategories[0]->categories;
+            }
+        }
         return view('admin/article/editArticle', [
             'article' => $article,
-            'categories' => $categories
+            'categories' => $categories,
+            'subcategories' => $subcategories
         ]);
     }
 

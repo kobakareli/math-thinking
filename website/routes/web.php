@@ -1,7 +1,5 @@
 <?php
 
-use App\SuperCategory;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +12,7 @@ use App\SuperCategory;
 */
 
 Route::get('/', function () {
-    $supercategories = SuperCategory::all();
+    $supercategories = App\SuperCategory::all();
     return view('pages.index', compact('supercategories'));
 })->name('main');
 
@@ -40,11 +38,25 @@ Route::get('/search/{type}/{term}/{category}/{datefrom?}/{dateto?}', 'MainContro
 
 Route::get('/user/{user}', 'UserController@showProfile');
 
+Route::get('/img/{image}', 'ImageController@getImage');
+
+Route::get('/img/en/{image}', 'ImageController@getEnImage');
+
+Route::get('/img/ge/{image}', 'ImageController@getGeImage');
+
 // ajax
 
 Route::get('/ajax/categories/{superCategory}', 'MainController@categories');
 
 Route::get('/ajax/search/{category}/{term}/{datefrom?}/{dateto?}', 'MainController@ajaxSearch');
+
+// fb
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');
+
+// google
+Route::get('/google/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/google/callback', 'SocialAuthGoogleController@callback');
 
 
 
@@ -107,4 +119,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('users/levelprogress/inc/{user}/{dif}', 'UserController@incLevelProgress');
     Route::get('users/history/task/{user}/{task}/{status}', 'UserController@addTask');
     Route::get('users/history/test/{user}/{test}/{status}/{score}', 'UserController@addTest');
+
+    // image upload routes
+
+    Route::get('/image', 'ImageController@uploadPage')->name('uploads');
+    Route::get('/image/ajax/{page}', 'ImageController@fetchUploads');
+    Route::post('/image/store', 'ImageController@upload');
+    Route::get('/image/delete/{image}', 'ImageController@deleteUpload');
 });
