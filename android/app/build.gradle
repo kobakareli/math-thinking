@@ -55,4 +55,6 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    compile "commons-io:commons-io:2.6"
 }

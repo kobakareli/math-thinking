@@ -67,4 +67,7 @@ public interface TestDao {
 
     @Query("SELECT COUNT(test_id) FROM test")
     int getNumberOfTests();
+
+    @Query("SELECT COUNT(test_id) FROM test WHERE test_id = (:testId)")
+    int contains(int testId);
 }

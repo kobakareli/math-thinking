@@ -84,12 +84,12 @@ public class TaskFragment extends Fragment {
         descriptionWebView.getSettings().setSupportZoom(true);
         descriptionWebView.getSettings().setBuiltInZoomControls(true);
         descriptionWebView.getSettings().setDisplayZoomControls(false);
-
         // TODO move webview display code in helper function
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        descriptionWebView.loadDataWithBaseURL("file:///android_asset/",
-                task.getDescription(getContext()), mimeType, encoding, "");
+        descriptionWebView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
+                WebViewHelper.FIT_IMAGE + task.getDescription(getContext()), mimeType,
+                encoding, "");
 
         if (task.isHasOptions()) {
             option1 = view.findViewById(R.id.option1);
@@ -153,6 +153,10 @@ public class TaskFragment extends Fragment {
     }
 
     private void checkOption(Button option, int optionId) {
+        if (option.getText().equals("")) {
+            // empty Strings are never answers
+            return;
+        }
         if (alreadyAnswered) {
             return;
         }
@@ -223,8 +227,8 @@ public class TaskFragment extends Fragment {
 
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        hintWebView.loadDataWithBaseURL("file:///android_asset/", data, mimeType,
-                encoding, "");
+        hintWebView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
+                WebViewHelper.FIT_IMAGE + data, mimeType, encoding, "");
 
         dialog.show();
     }

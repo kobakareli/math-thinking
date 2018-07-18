@@ -1,19 +1,21 @@
 package tmand13.math_thinking.db;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import tmand13.math_thinking.FirstTimeCalledWrapper;
 
@@ -52,6 +54,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static void copyDBFileIfFirstTimeCalled(Context context) {
         FirstTimeCalledWrapper firstTimeCalledWrapper = new FirstTimeCalledWrapper(context);
+        firstTimeCalledWrapper.setFirstTimeCalled(true);
         if (firstTimeCalledWrapper.firstTimeCalled()) {
             if (COPY_FILE) {
                 try {
@@ -88,17 +91,34 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     private static void insertData(Context context) {
-        insertTasks(context);
-        insertTaskWithOptions(context);
-        insertTwoDummyTasks(context);
-        insertTests(context);
-        insertSuperCategories(context);
-        insertCategories(context);
-        insertSuperCategoryCategories(context);
-        insertArticles(context);
-        insertArticleCategories(context);
-        insertTestCategories(context);
-        insertTaskTests(context);
+        InputStream inputStream;
+        try {
+            inputStream = context.getAssets().open("db.json");
+            String data = IOUtils.toString(inputStream, Charset.defaultCharset());
+            // In website every image file path needs "/" at the beginning, but in android it's
+            // not needed
+            data = data.replaceAll("/img", "img");
+            insertDataFromJson(context, data);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertDataFromJson(Context context, String data) throws JSONException {
+        JSONObject jsonObject = new JSONObject(data);
+        insertArticles(context, jsonObject);
+        insertCategories(context, jsonObject);
+        insertSuperCategories(context, jsonObject);
+        insertSuperCategoryCategories(context, jsonObject);
+        insertArticleCategories(context, jsonObject);
+        insertTasks(context, jsonObject);
+        insertTests(context, jsonObject);
+        insertTaskTests(context, jsonObject);
+        insertTestCategories(context, jsonObject);
     }
 
     private static void initializeInstance(Context context) {
@@ -121,154 +141,216 @@ public abstract class AppDatabase extends RoomDatabase {
         initializeInstance(context);
     }
 
-    private static void insertTestCategories(Context context) {
-        getAppDatabase(context).testCategoryDao().insertAll(
-                new TestCategory(1, 1, 1),
-                new TestCategory(2, 2, 2),
-                new TestCategory(3, 3, 3),
-                new TestCategory(4, 4, 4),
-                new TestCategory(5, 5, 5),
-                new TestCategory(6, 6, 6),
-                new TestCategory(7, 7, 7),
-                new TestCategory(8, 8, 8),
-                new TestCategory(9, 9, 9),
-                new TestCategory(10, 10, 10),
-                new TestCategory(11, 11, 11));
-    }
+    private static void insertTestCategories(Context context, JSONObject jsonObject) {
+        TestCategoryDao testCategoryDao = getAppDatabase(context).testCategoryDao();
+        TestDao testDao = getAppDatabase(context).testDao();
+        CategoryDao categoryDao = getAppDatabase(context).categoryDao();
 
-    private static void insertSuperCategoryCategories(Context context) {
-        getAppDatabase(context).superCategoryCategoryDao().insertAll(
-            new SuperCategoryCategory(1, 1, 1),
-            new SuperCategoryCategory(2, 1, 2),
-            new SuperCategoryCategory(3, 1, 3),
-            new SuperCategoryCategory(4, 1, 4),
-            new SuperCategoryCategory(5, 1, 5),
-            new SuperCategoryCategory(6, 1, 6),
-            new SuperCategoryCategory(7, 1, 7),
-            new SuperCategoryCategory(8, 1, 8),
-            new SuperCategoryCategory(9, 2, 9),
-            new SuperCategoryCategory(10, 2, 10),
-            new SuperCategoryCategory(11, 3, 11));
-    }
-
-    private static void insertSuperCategories(Context context) {
-        getAppDatabase(context).superCategoryDao().insertAll(
-            new SuperCategory(1, "Logic", "ლოგიკა"),
-            new SuperCategory(4, "Procents", "პროცენტები"),
-            new SuperCategory(2, "graph theory", "გრაფთა თეორია"),
-            new SuperCategory(3, "Geometry", "გეომეტრიააააააააააააა"));
-    }
-    //TODO maybe give numbers like 1. Logic 1.1 Logic puzzles so on programmatically
-    private static void insertCategories(Context context) {
-        getAppDatabase(context).categoryDao().insertAll(
-            new Category(1, "Puzzles", "პაზლები"),
-            new Category(2, "Crosswords1", "კროსვორდები11111111111111"),
-            new Category(3, "Crosswords2", "კროსვორდები2"),
-            new Category(4, "Crosswords3", "კროსვორდები3"),
-            new Category(5, "Crosswords4", "კროსვორდები4"),
-            new Category(6, "Crosswords5", "კროსვორდები5"),
-            new Category(7, "Crosswords6", "კროსვორდები6"),
-            new Category(8, "Crosswords7", "კროსვორდები7"),
-            new Category(9, "trees", "ხეები"),
-            new Category(10, "dijsktra", "დეიქსტრა"),
-            new Category(11, "Triangle", "სამკუთხედი"));
-    }
-
-    private static void insertArticleCategories(Context context) {
-        getAppDatabase(context).articleCategoryDao().insertAll(
-            new ArticleCategory(1, 1, 1),
-            new ArticleCategory(2, 2, 2),
-            new ArticleCategory(3, 3, 3),
-            new ArticleCategory(4, 4, 4),
-            new ArticleCategory(5, 5, 5),
-            new ArticleCategory(6, 6, 6),
-            new ArticleCategory(7, 7, 7),
-            new ArticleCategory(8, 8, 8),
-            new ArticleCategory(9, 9, 9),
-            new ArticleCategory(10, 10, 10),
-            new ArticleCategory(11, 11, 11));
-    }
-
-    private static void insertArticles(Context context) {
-        getAppDatabase(context).articleDao().insertAll(
-            new Article(1, "Puzzles","პაზლები", "puzzles",
-                    "პაზლები"),
-            new Article(2, "Crosswords1","კროსვორდები11111111111111",
-                    "Crosswords1", "კროსვორდები11111111111111"),
-            new Article(3, "Crosswords2","კროსვორდები2",
-                    "Crosswords2", "კროსვორდები2"),
-            new Article(4, "Crosswords3","კროსვორდები3",
-                    "Crosswords3", "კროსვორდები3"),
-            new Article(5, "Crosswords4","კროსვორდები4",
-                    "Crosswords4", "კროსვორდები4"),
-            new Article(6, "Crosswords5","კროსვორდები5",
-                    "Crosswords5", "კროსვორდები5"),
-            new Article(7, "Crosswords6","კროსვორდები6",
-                    "Crosswords6", "კროსვორდები6"),
-            new Article(8, "Crosswords7","კროსვორდები7",
-                    "Crosswords7", "კროსვორდები7"),
-            new Article(9, "trees","ხეები", "trees",
-                    "ხეები"),
-            new Article(10, "dijsktra","დეიქსტრა", "dijsktra",
-                    "დეიქსტრა"),
-            new Article(11, "Triangle","სამკუთხედი", "Triangle",
-                    "სამკუთხედი"));
-    }
-
-    private static void insertTwoDummyTasks(Context context) {
-        Task[] tasks = new Task[4];
-        for (int i = 102; i <= 105; i++) {
-            tasks[i - 102] = new Task(i, "magari amocana"+String.valueOf(i),
-                    "მაგარი ამოცანა", "es aris descriptioni",
-                    "ეს არის დესკრიპშენი", "g", "ჰინტი",
-                    "pasuxii", "პასუხი", 1, 2,
-                    2, i%2==0, "option pirveli",
-                    "პირველი", "meore", "მეორე",
-                    "mesame", "მესამე", "meotxe",
-                    "მეოთხე", false);
+        try {
+            JSONArray testCategories = jsonObject.getJSONArray("math_db.tests_categories");
+            for (int i = 0; i < testCategories.length(); i++) {
+                JSONObject testCategory = (JSONObject) testCategories.get(i);
+                int id = testCategory.getInt("id");
+                int testId = testCategory.getInt("test_id");
+                int categoryId = testCategory.getInt("category_id");
+                if (testDao.contains(testId) > 0 && categoryDao.contains(categoryId) > 0) {
+                    testCategoryDao.insert(new TestCategory(id, categoryId, testId));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        getAppDatabase(context).taskDao().insertAll(tasks);
     }
 
-    private static void insertTasks(Context context) {
-        Task[] tasks = new Task[100];
-        for (int i = 1; i <= 100; i++) {
-            tasks[i - 1] = new Task(i, "gela"+String.valueOf(i), "გელა",
-                    "d", "დ", "g", "ჰინტი", "g",
-                    "პასუხი", 1, 2, 2,
-                    false, "d", "დ", "D",
-                    "დდ", "d", "დდდ", "D",
-                    "დდდდ", false);
+    private static void insertSuperCategoryCategories(Context context, JSONObject jsonObject) {
+        SuperCategoryCategoryDao superCategoryCategoryDao = getAppDatabase(context).superCategoryCategoryDao();
+        SuperCategoryDao superCategoryDao = getAppDatabase(context).superCategoryDao();
+        CategoryDao categoryDao = getAppDatabase(context).categoryDao();
+        try {
+            JSONArray superCategoriesCategories = jsonObject.getJSONArray("math_db.super_categories_categories");
+            for (int i = 0; i < superCategoriesCategories.length(); i++) {
+                JSONObject superCategoryCategory = (JSONObject) superCategoriesCategories.get(i);
+                int id = superCategoryCategory.getInt("id");
+                int superCategoryId = superCategoryCategory.getInt("super_category_id");
+                int categoryId = superCategoryCategory.getInt("category_id");
+                if (superCategoryDao.contains(superCategoryId) > 0 &&
+                        categoryDao.contains(categoryId) > 0) {
+                    superCategoryCategoryDao.insert(new SuperCategoryCategory(
+                            id, superCategoryId, categoryId));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        getAppDatabase(context).taskDao().insertAll(tasks);
     }
 
-    private static void insertTaskWithOptions(Context context) {
-        getAppDatabase(context).taskDao().insertAll(
-            new Task(101, "gela"+String.valueOf(101), "გელსონა",
-                    "d", "აეეეე", "g", "გგ", "g",
-                    "პასუხი", 1, 2, 2, true,
-                    "d", "დ", "D", "დდ", "D",
-                    "დდდ", "D", "დდდდ", false));
-    }
-
-    private static void insertTests(Context context) {
-        Test[] tests = new Test[100];
-        for (int i = 1; i <= 100; i++) {
-            tests[i - 1] = new Test(i, "test" + String.valueOf(i),
-                    "ტესტი" + String.valueOf(i), false);
+    private static void insertSuperCategories(Context context, JSONObject jsonObject) {
+        SuperCategoryDao superCategoryDao = getAppDatabase(context).superCategoryDao();
+        try {
+            JSONArray superCategories = jsonObject.getJSONArray("math_db.super_categories");
+            for (int i = 0; i < superCategories.length(); i++) {
+                JSONObject superCategory = (JSONObject) superCategories.get(i);
+                int id = superCategory.getInt("id");
+                String titleEn = superCategory.getString("title_en");
+                String titleGe = superCategory.getString("title_ge");
+                superCategoryDao.insert(new SuperCategory(id, titleEn, titleGe));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        getAppDatabase(context).testDao().insertAll(tests);
     }
 
-    private static void insertTaskTests(Context context) {
-        TaskTest[] taskTests = new TaskTest[300];
-        for (int i = 1; i <= 100; i++) {
-            taskTests[3*i - 3] = new TaskTest(3*i-2, i, i);
-            taskTests[3*i - 2] = new TaskTest(3*i-1, i+1, i);
-            taskTests[3*i - 1] = new TaskTest(3*i, 104, i);
+    private static void insertCategories(Context context, JSONObject jsonObject) {
+        CategoryDao categoryDao = getAppDatabase(context).categoryDao();
+        try {
+            JSONArray categories = jsonObject.getJSONArray("math_db.categories");
+            for (int i = 0; i < categories.length(); i++) {
+                JSONObject category = (JSONObject) categories.get(i);
+                int id = category.getInt("id");
+                String titleEn = category.getString("title_en");
+                String titleGe = category.getString("title_ge");
+                categoryDao.insert(new Category(id, titleEn, titleGe));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        getAppDatabase(context).taskTestDao().insertAll(taskTests);
+    }
+
+    private static void insertArticleCategories(Context context, JSONObject jsonObject) {
+        ArticleCategoryDao articleCategoryDao = getAppDatabase(context).articleCategoryDao();
+        ArticleDao articleDao = getAppDatabase(context).articleDao();
+        CategoryDao categoryDao = getAppDatabase(context).categoryDao();
+        try {
+            JSONArray articlesCategories = jsonObject.getJSONArray("math_db.articles_categories");
+            for (int i = 0; i < articlesCategories.length(); i++) {
+                JSONObject articleCategory = (JSONObject) articlesCategories.get(i);
+                int id = articleCategory.getInt("id");
+                int articleId = articleCategory.getInt("article_id");
+                int categoryId = articleCategory.getInt("category_id");
+                if (articleDao.contains(articleId) > 0 && categoryDao.contains(categoryId) > 0) {
+                    articleCategoryDao.insert(new ArticleCategory(id, articleId, categoryId));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertArticles(Context context, JSONObject jsonObject) {
+        ArticleDao articleDao = getAppDatabase(context).articleDao();
+        try {
+            JSONArray articles = jsonObject.getJSONArray("math_db.articles");
+            for (int i = 0; i < articles.length(); i++) {
+                JSONObject article = (JSONObject) articles.get(i);
+                int id = article.getInt("id");
+                String titleEn = article.getString("title_en");
+                String titleGe = article.getString("title_ge");
+                String textEn = article.getString("text_en");
+                String textGe = article.getString("text_ge");
+                articleDao.insert(new Article(id, titleEn, titleGe, textEn, textGe));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertTasks(Context context, JSONObject jsonObject) {
+        TaskDao taskDao = getAppDatabase(context).taskDao();
+        try {
+            JSONArray tasks = jsonObject.getJSONArray("math_db.tasks");
+            for (int i = 0; i < tasks.length(); i++) {
+                JSONObject task = (JSONObject) tasks.get(i);
+                int id = task.getInt("id");
+                String titleEn = task.getString("title_en");
+                String titleGe = task.getString("title_ge");
+                String descriptionEn = task.getString("description_en");
+                String descriptionGe = task.getString("description_ge");
+                String hintEn = task.getString("hint_en");
+                String hintGe = task.getString("hint_ge");
+                String answerEn = task.getString("answer_en");
+                String answerGe = task.getString("answer_ge");
+                int numericAnswer = task.getInt("numeric_answer");
+                int totalAnswers = task.getInt("total_answers");
+                int correctAnswers = task.getInt("correct_answers");
+                boolean hasOptions = task.getInt("has_options") > 0;
+                String option1En = task.getString("option_1_en");
+                String option1Ge = task.getString("option_1_ge");
+                String option2En = task.getString("option_2_en");
+                String option2Ge = task.getString("option_2_ge");
+                String option3En = task.getString("option_3_en");
+                String option3Ge = task.getString("option_3_ge");
+                String option4En = task.getString("option_4_en");
+                String option4Ge = task.getString("option_4_ge");
+                String nullString = "null";
+                String emptyString = "";
+                if (option1En.equals(nullString)) {
+                    option1En = emptyString;
+                }
+                if (option1Ge.equals(nullString)) {
+                    option1Ge = emptyString;
+                }
+                if (option2En.equals(nullString)) {
+                    option2En = emptyString;
+                }
+                if (option2Ge.equals(nullString)) {
+                    option2Ge = emptyString;
+                }
+                if (option3En.equals(nullString)) {
+                    option3En = emptyString;
+                }
+                if (option3Ge.equals(nullString)) {
+                    option3Ge = emptyString;
+                }
+                if (option4En.equals(nullString)) {
+                    option4En = emptyString;
+                }
+                if (option4Ge.equals(nullString)) {
+                    option4Ge = emptyString;
+                }
+                taskDao.insert(new Task(id, titleEn, titleGe, descriptionEn, descriptionGe,
+                        hintEn, hintGe, answerEn, answerGe, numericAnswer, totalAnswers,
+                        correctAnswers, hasOptions, option1En, option1Ge, option2En, option2Ge,
+                        option3En, option3Ge, option4En, option4Ge, false));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertTests(Context context, JSONObject jsonObject) {
+        TestDao testDao = getAppDatabase(context).testDao();
+        try {
+            JSONArray tests = jsonObject.getJSONArray("math_db.tests");
+            for (int i = 0; i < tests.length(); i++) {
+                JSONObject test = (JSONObject) tests.get(i);
+                int id = test.getInt("id");
+                String titleEn = test.getString("title_en");
+                String titleGe = test.getString("title_ge");
+                testDao.insert(new Test(id, titleEn, titleGe, false));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertTaskTests(Context context, JSONObject jsonObject) {
+        TaskTestDao taskTestDao = getAppDatabase(context).taskTestDao();
+        TaskDao taskDao = getAppDatabase(context).taskDao();
+        TestDao testDao = getAppDatabase(context).testDao();
+        try {
+            JSONArray taskTests = jsonObject.getJSONArray("math_db.tasks_tests");
+            for (int i = 0; i < taskTests.length(); i++) {
+                JSONObject taskTest = (JSONObject) taskTests.get(i);
+                int id = taskTest.getInt("id");
+                int taskId = taskTest.getInt("task_id");
+                int testId = taskTest.getInt("test_id");
+                if (taskDao.contains(taskId) > 0 && testDao.contains(testId) > 0) {
+                    taskTestDao.insert(new TaskTest(id, taskId, testId));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void destroyInstance() {

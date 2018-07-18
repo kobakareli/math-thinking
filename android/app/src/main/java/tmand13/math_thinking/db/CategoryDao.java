@@ -24,4 +24,7 @@ public interface CategoryDao {
 
     @Delete
     void delete(Category category);
+
+    @Query("SELECT COUNT(category_id) FROM category WHERE category_id = (:categoryId)")
+    int contains(int categoryId);
 }

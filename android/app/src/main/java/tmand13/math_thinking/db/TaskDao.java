@@ -79,4 +79,7 @@ public interface TaskDao {
 
     @Query("SELECT COUNT(task_id) FROM task")
     int getNumberOfTasks();
+
+    @Query("SELECT COUNT(task_id) FROM task WHERE task_id = (:taskId)")
+    int contains(int taskId);
 }

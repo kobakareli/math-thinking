@@ -16,7 +16,7 @@ public interface ArticleDao {
     @Query("SELECT * FROM article")
     List<Article> getAll();
 
-    @Query("SELECT * FROM article where article_id = (:articleId)")
+    @Query("SELECT * FROM article WHERE article_id = (:articleId)")
     Article getArticle(int articleId);
 
     @Insert
@@ -27,4 +27,7 @@ public interface ArticleDao {
 
     @Delete
     void delete(Article article);
+
+    @Query("SELECT COUNT(article_id) FROM article WHERE article_id = (:articleId)")
+    int contains(int articleId);
 }
