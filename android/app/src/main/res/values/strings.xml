@@ -48,5 +48,7 @@
     <string name="music">Music</string>
     <string name="music_is_on">Music is on</string>
     <string name="music_is_off">Music is off</string>
+    <string name="about_app">About app</string>
+    <string name="about_content">This app helps people develop mathematical thinking. It consists of very interesting, beautiful and fun parts of math. The knowledge and thinking style, you study here, will help you solve the problems, you might meet in life.</string>
 
 </resources>

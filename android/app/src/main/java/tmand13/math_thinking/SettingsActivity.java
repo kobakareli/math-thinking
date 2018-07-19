@@ -85,9 +85,22 @@ public class SettingsActivity extends BaseActivity {
                 }
             }
         });
+
+        final Button aboutButton = findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAbout();
+            }
+        });
     }
 
-    public void rateApp() {
+    private void openAbout() {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+
+    private void rateApp() {
         try {
             Intent rateIntent = rateIntentForUrl("market://details");
             startActivity(rateIntent);
