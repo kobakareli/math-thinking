@@ -31,6 +31,10 @@ public class ProgressActivity extends BaseActivity {
         tests_solved.setText(getString(R.string.progress_tests_solved, numberOfSolvedTests,
                 numberOfTests));
 
+        level.setText(getString(R.string.progress_level, getLevel(numberOfSolvedTasks)));
+    }
+
+    public static int getLevel(int numberOfSolvedTasks) {
         int levelValue = 1;
         int curTasksNeeded = 1;
         while (numberOfSolvedTasks >= curTasksNeeded) {
@@ -38,6 +42,6 @@ public class ProgressActivity extends BaseActivity {
             levelValue ++;
             curTasksNeeded ++;
         }
-        level.setText(getString(R.string.progress_level, levelValue));
+        return levelValue;
     }
 }

@@ -23,6 +23,8 @@ import java.math.BigDecimal;
 
 import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.Task;
+import tmand13.math_thinking.db.TaskDao;
+
 // TODO remove unused libraries and solve all intellij idea
 // advice
 public class TaskFragment extends Fragment {
@@ -206,8 +208,29 @@ public class TaskFragment extends Fragment {
         }
     }
 
+    private int getLevel() {
+        TaskDao taskDao = AppDatabase.getAppDatabase(getContext()).taskDao();
+        int solvedTasks = taskDao.getSolved().size();
+        return ProgressActivity.getLevel(solvedTasks);
+    }
+
     private void setSolved() {
+        int levelBefore = getLevel();
         db.taskDao().updateSolved(taskId, true);
+        int levelAfter = getLevel();
+        if (levelAfter > levelBefore ) {
+            showLevelUpdate(levelAfter);
+        }
+    }
+
+    private void showLevelUpdate(int newLevel) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.textview_dialog);
+
+        TextView textView = (TextView) dialog.findViewById(R.id.textview_dialog);
+        textView.setText(getString(R.string.reached_level, newLevel));
+
+        dialog.show();
     }
 
     public void showHint() {
