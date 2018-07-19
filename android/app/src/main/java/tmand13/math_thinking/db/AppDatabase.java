@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -58,6 +59,8 @@ public abstract class AppDatabase extends RoomDatabase {
             if (COPY_FILE) {
                 try {
                     String db_out_path = context.getDatabasePath(DB_NAME).toString();
+                    String db_out_dir = db_out_path.substring(0, db_out_path.length() - DB_NAME.length());
+                    new File(db_out_dir).mkdirs();
                     File db_out_file = new File(db_out_path);
                     InputStream db_in = context.getAssets().open(DB_NAME);
                     FileOutputStream db_out = new FileOutputStream(db_out_file);

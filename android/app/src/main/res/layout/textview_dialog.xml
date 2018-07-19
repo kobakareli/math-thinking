@@ -10,7 +10,7 @@
         android:background="@color/colorYellow"
         android:textColor="@color/colorWhite"
         android:textSize="17sp"
-        android:padding="10dp"
+        android:padding="15dp"
         android:gravity="center">
     </TextView>
 

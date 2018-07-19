@@ -6,8 +6,8 @@ android {
         applicationId "tmand13.math_thinking"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 7
-        versionName "7"
+        versionCode 9
+        versionName "9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -27,8 +32,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.llollox:androidtoggleswitch:2.0.1'
-    compile 'com.udojava:EvalEx:2.0'
+    implementation 'com.llollox:androidtoggleswitch:2.0.1'
+    implementation 'com.udojava:EvalEx:2.0'
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.1"
@@ -56,5 +61,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
-    compile "commons-io:commons-io:2.6"
+    implementation "commons-io:commons-io:2.6"
 }

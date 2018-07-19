@@ -1,6 +1,7 @@
 package tmand13.math_thinking;
 
-import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -224,12 +226,15 @@ public class TaskFragment extends Fragment {
     }
 
     private void showLevelUpdate(int newLevel) {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.textview_dialog);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.textview_dialog, null);
+        dialogBuilder.setView(dialogView);
 
-        TextView textView = (TextView) dialog.findViewById(R.id.textview_dialog);
+        TextView textView = dialogView.findViewById(R.id.textview_dialog);
         textView.setText(getString(R.string.reached_level, newLevel));
-
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.close), (dialog1, which) -> dialog1.dismiss());
         dialog.show();
     }
 
@@ -242,19 +247,24 @@ public class TaskFragment extends Fragment {
     }
 
     private void showWebviewDialog(String data) {
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.webview_dialog);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.webview_dialog, null);
+        dialogBuilder.setView(dialogView);
 
-        WebView hintWebView = (WebView) dialog.findViewById(R.id.webview_dialog);
-        hintWebView.getSettings().setSupportZoom(true);
-        hintWebView.getSettings().setBuiltInZoomControls(true);
-        hintWebView.getSettings().setDisplayZoomControls(false);
+        WebView webView = dialogView.findViewById(R.id.webview_dialog);
+
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
 
         final String mimeType = "text/html";
         final String encoding = "UTF-8";
-        hintWebView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
+        webView.loadDataWithBaseURL(WebViewHelper.ASSETS_FOLDER,
                 WebViewHelper.FIT_IMAGE + data, mimeType, encoding, "");
 
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.close), (dialog1, which) -> dialog1.dismiss());
         dialog.show();
     }
 

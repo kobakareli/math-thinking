@@ -1,7 +1,6 @@
 package tmand13.math_thinking;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
