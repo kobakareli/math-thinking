@@ -811,6 +811,11 @@ body, html {
         border-bottom-width: 2px;
     }
 
+    .content {
+        font-family: 'Open Sans', sans-serif;
+        line-height: 24px;
+    }
+
     .description {
         font-family: 'Open Sans', sans-serif;
         line-height: 24px;
@@ -1183,7 +1188,9 @@ hr {
 
 .fb-login-btn,
 .google-login-btn {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    text-align: center;
     margin-top: 20px;
     padding: 5px 10px;
     color: white !important;

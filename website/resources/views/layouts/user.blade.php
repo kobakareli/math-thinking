@@ -28,9 +28,9 @@
             <meta class="og_title" property="og:title" content="Math Thinking">
         @endif
 
-        <meta class="og_description" property="og:description" content="">
+        <meta class="og_description" property="og:description" content="{{ trans('web.website_description') }}">
 
-        <meta name="description"  content="" />
+        <meta name="description"  content="{{ trans('web.website_description') }}" />
 
         <meta class="og_image" property="og:image" content="{{ url('/images/og.png') }}" id="meta_image">
 

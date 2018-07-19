@@ -50,6 +50,7 @@
   transition: transform .5s ease;
   transition: transform .5s ease, -webkit-transform .5s ease;
   opacity: 0;
+  pointer-events: none;
 }
 
 .task-page .tasks .task.active {
@@ -58,6 +59,7 @@
   -webkit-transform: translateX(0);
           transform: translateX(0);
   opacity: 1;
+  pointer-events: all;
 }
 
 .task-page .tasks .task.prev {
@@ -172,6 +174,12 @@
   text-align: center;
   padding: 10px 0;
   margin-top: 70px;
+  margin-bottom: 10px;
+}
+
+.task-page .tasks .submit-form-button.disabled {
+  cursor: default;
+  background: lightgray;
 }
 
 @media screen and (max-width: 1450px) {

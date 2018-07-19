@@ -49,22 +49,23 @@
                             <p class="fs-18">{{ trans('web.submit_answer') }}</p>
                             @if($task->has_options)
                                 <div class="open fs-16">
-                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="1"> <span class="answer-1" required>{{ $task->{'option_1_' . App::getLocale()} }}<span><br>
-                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span><br>
-                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span><br>
-                                    <input class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span>
+                                    <input filled="false" class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="1" required> <span class="answer-1">{{ $task->{'option_1_' . App::getLocale()} }}</span><br>
+                                    <input filled="false" class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="2"> <span class="answer-2">{{ $task->{'option_2_' . App::getLocale()} }}</span><br>
+                                    <input filled="false" class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="3"> <span class="answer-3">{{ $task->{'option_3_' . App::getLocale()} }}</span><br>
+                                    <input filled="false" class="answer" type="radio" name="{{ 'answer-' . $task->id }}" value="4"> <span class="answer-4">{{ $task->{'option_4_' . App::getLocale()} }}</span>
                                 </div>
                             @else
                                 <div class="closed fs-16">
-                                    <input class="answer" type="number" name="{{ 'answer-' . $task->id }}" placeholder="{{ trans('web.type_answer') }}" required></input>
+                                    <input filled="false" class="answer" type="text" name="{{ 'answer-' . $task->id }}" placeholder="{{ trans('web.type_answer') }}" required></input>
                                 </div>
                             @endif
                         </div>
                     @endif
                 </div>
             @endforeach
-            <input type="submit" class="submit-form-button fs-17" value="{{ trans('web.submit') }}">
+            <input type="submit" class="submit-form-button disabled fs-17" value="{{ trans('web.submit') }}">
             </input>
+            <p class="fs-18">{{ trans('web.submit_warn') }}</p>
         </form>
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/test/' . $test->id) }}" data-numposts="5"></div>
