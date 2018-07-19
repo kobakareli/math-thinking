@@ -19,6 +19,9 @@ public interface TaskTestDao {
     @Query("SELECT * FROM task_test where test_id = (:testId)")
     List<TaskTest> getByTestId(int testId);
 
+    @Query("SELECT * FROM task_test where task_id = (:taskId)")
+    TaskTest getByTaskId(int taskId);
+
     @Insert
     void insert(TaskTest taskTest);
 

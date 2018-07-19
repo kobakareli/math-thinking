@@ -52,5 +52,6 @@
     <string name="about_content">This app helps people develop mathematical thinking. It consists of very interesting, beautiful and fun parts of math. The knowledge and thinking style, you study here, will help you solve the problems, you might meet in life.</string>
     <string name="reached_level">You\'ve reached level %d!</string>
     <string name="close">close</string>
+    <string name="article">article</string>
 
 </resources>

@@ -9,10 +9,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import tmand13.math_thinking.db.AppDatabase;
+
+import static tmand13.math_thinking.CategoriesActivity.ARTICLE_ID;
+
 public class TaskActivity extends BaseActivity {
     public static final String ANSWER_IS_RIGHT = "answer_is_right";
 
     TaskFragment fragment;
+    int taskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class TaskActivity extends BaseActivity {
         setTitle(R.string.task);
 
         Intent intent = getIntent();
-        int taskId = intent.getIntExtra(TaskSearchActivity.TASK_ID, -1);
+        taskId = intent.getIntExtra(TaskSearchActivity.TASK_ID, -1);
 
         fragment = TaskFragment.newInstance(taskId);
         FragmentManager fm = getSupportFragmentManager();
@@ -64,10 +69,21 @@ public class TaskActivity extends BaseActivity {
             fragment.showHint();
         } else if (id == R.id.menu_task_answer) {
             fragment.showAnswer();
+        } else if (id == R.id.menu_task_article) {
+            AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+            int testId = db.taskTestDao().getByTaskId(taskId).getTestId();
+            int categoryId = db.testCategoryDao().getByTestId(testId).getCategoryId();
+            int articleId = db.articleCategoryDao().getByCategoryId(categoryId).getArticleId();
+            openArticle(articleId);
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void openArticle(int articleId) {
+        Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra(ARTICLE_ID, articleId);
+        startActivity(intent);
+    }
 
     @Override
     public void onBackPressed() {

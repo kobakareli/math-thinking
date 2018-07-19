@@ -3,14 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_task_article"
+        android:title="@string/article"
+        android:icon="@drawable/ic_article_book"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_task_answer"
-        android:title="@string/hint"
+        android:title="@string/answer"
         android:icon="@drawable/ic_teacher_show_answer"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_task_hint"
-        android:title="@string/answer"
+        android:title="@string/hint"
         android:icon="@drawable/ic_bulb"
         app:showAsAction="always" />
 

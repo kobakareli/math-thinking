@@ -22,6 +22,8 @@ import tmand13.math_thinking.db.AppDatabase;
 import tmand13.math_thinking.db.TaskTest;
 import tmand13.math_thinking.db.Test;
 
+import static tmand13.math_thinking.CategoriesActivity.ARTICLE_ID;
+
 //TODO show answer button gvinda?
 
 public class TestActivity extends BaseActivity {
@@ -141,7 +143,24 @@ public class TestActivity extends BaseActivity {
             }
         });
 
+        ImageView showArticleView = findViewById(R.id.article_show);
+        showArticleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+                int categoryId = db.testCategoryDao().getByTestId(testId).getCategoryId();
+                int articleId = db.articleCategoryDao().getByCategoryId(categoryId).getArticleId();
+                openArticle(articleId);
+            }
+        });
+
         updateNumberOfTasksOnView();
+    }
+
+    private void openArticle(int articleId) {
+        Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra(ARTICLE_ID, articleId);
+        startActivity(intent);
     }
 
     private void updateScore(boolean alreadyAnsweredBefore) {
