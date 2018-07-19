@@ -54,6 +54,10 @@
         <activity
             android:name=".ProgressActivity"
             android:screenOrientation="portrait" />
+
+        <service
+            android:name=".BackgroundMusicService"
+            android:enabled="true" />
     </application>
 
 </manifest>
