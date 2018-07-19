@@ -33,7 +33,6 @@ public class TaskFragment extends Fragment {
     private static final double EPS = 1e-8;
 
     Integer taskId;
-    //TODO control edittext based on answer type
     Task task;
     Button option1, option2, option3, option4;
     boolean alreadyAnswered;
@@ -145,7 +144,6 @@ public class TaskFragment extends Fragment {
         checkOption(option4, 4);
     }
 
-    // TODO do we need to validate task data? maybe numericanswer > 4?
     private Button getOptionButton(int optionId) {
         if (optionId == 1) {
             return option1;

@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context="tmand13.math_thinking.MainActivity" >
 
-    <!-- TODO CHAIN_SPREAD  might help -->
-    <!-- TODO In Settings let use choose app color. Have 1 dominant color -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

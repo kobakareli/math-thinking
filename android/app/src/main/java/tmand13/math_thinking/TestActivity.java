@@ -24,8 +24,6 @@ import tmand13.math_thinking.db.Test;
 
 import static tmand13.math_thinking.CategoriesActivity.ARTICLE_ID;
 
-//TODO show answer button gvinda?
-
 public class TestActivity extends BaseActivity {
     public static final String ALL_IS_RIGHT = "all_is_right";
 

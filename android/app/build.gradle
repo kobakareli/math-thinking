@@ -6,8 +6,8 @@ android {
         applicationId "tmand13.math_thinking"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 9
-        versionName "9"
+        versionCode 10
+        versionName "10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
