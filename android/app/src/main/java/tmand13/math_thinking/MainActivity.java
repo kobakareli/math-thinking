@@ -82,6 +82,8 @@ public class MainActivity extends BaseActivity {
 
     protected void onDestroy() {
         super.onDestroy();
-        BackgroundMusic.get(getApplicationContext()).musicOff();
+        if ((new MusicOnOffWrapper(getApplicationContext())).musicIsOn()) {
+            BackgroundMusic.get(getApplicationContext()).musicOff();
+        }
     }
 }

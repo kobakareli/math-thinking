@@ -10,13 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
     BackgroundMusic backgroundMusic;
+    MusicOnOffWrapper wrapper;
 
     Foreground.Listener listener = new Foreground.Listener(){
         public void onBecameForeground(){
-            backgroundMusic.musicOn();
+            if (wrapper.musicIsOn()) {
+                backgroundMusic.musicOn();
+            }
         }
         public void onBecameBackground(){
-            backgroundMusic.musicOff();
+            if (wrapper.musicIsOn()) {
+                backgroundMusic.musicOff();
+            }
         }
     };
 
@@ -29,12 +34,17 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         backgroundMusic = BackgroundMusic.get(getApplicationContext());
-        Foreground.get(this).addListener(listener);
-        listener.onBecameForeground();
+        wrapper = new MusicOnOffWrapper(getApplicationContext());
+        if (wrapper.musicIsOn()) {
+            Foreground.get(this).addListener(listener);
+            listener.onBecameForeground();
+        }
     }
 
     protected void onDestroy() {
         super.onDestroy();
-        Foreground.get(this).removeListener(listener);
+        if (wrapper.musicIsOn()) {
+            Foreground.get(this).removeListener(listener);
+        }
     }
 }

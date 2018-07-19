@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -63,6 +65,24 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 rateApp();
+            }
+        });
+
+        final Switch musicSwitch = findViewById(R.id.music_switch);
+        final MusicOnOffWrapper wrapper = new MusicOnOffWrapper(getApplicationContext());
+        musicSwitch.setChecked(wrapper.musicIsOn());
+        musicSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (musicSwitch.isChecked()) {
+                    wrapper.setMusicIsOn(true);
+                    BackgroundMusic.get(getApplicationContext()).musicOn();
+                    Toast.makeText(SettingsActivity.this, R.string.music_is_on, Toast.LENGTH_SHORT).show();
+                } else {
+                    wrapper.setMusicIsOn(false);
+                    BackgroundMusic.get(getApplicationContext()).musicOff();
+                    Toast.makeText(SettingsActivity.this, R.string.music_is_off, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

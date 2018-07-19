@@ -39,4 +39,7 @@
     <string name="progress_tasks_solved">ამოხსნილი ამოცანები: %d/%d</string>
     <string name="progress_tests_solved">ამოხსნილი ტესტები: %d/%d</string>
     <string name="progress_level">დონე: %d</string>
+    <string name="music">მუსიკა</string>
+    <string name="music_is_on">მუსიკა ჩართულია</string>
+    <string name="music_is_off">მუსიკა გამორთულია</string>
 </resources>
