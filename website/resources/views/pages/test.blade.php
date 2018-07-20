@@ -31,7 +31,7 @@
                     <div class="description content active fs-18">
                         {!! $task->{'description_' . App::getLocale()} !!}
                     </div>
-                    @if($task->{'hint_' . App::getLocale()} != null)
+                    <!--@if($task->{'hint_' . App::getLocale()} != null)
                         <div class="collapsible c-hint fs-18">{{ trans('web.hint') }}</div>
                         <div class="hint content fs-18">
                             {!! $task->{'hint_' . App::getLocale()} !!}
@@ -42,7 +42,7 @@
                         <div class="answer content fs-18">
                             {!! $task->{'answer_' . App::getLocale()} !!}
                         </div>
-                    @endif
+                    @endif-->
 
                     @if(Auth::check())
                         <div class="submit-answer">

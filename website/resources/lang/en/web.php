@@ -63,9 +63,14 @@ return [
     'fb_login' => 'Login with Facebook',
     'google_login' => 'Login with Google',
     'submit_warn' => '* Don\'t click "Submit" until you answer all the questions',
+    'website_title' => 'Mathematical Thinking',
     'website_description' => 'This website helps people develop mathematical
                             thinking. It consists of very interesting, beautiful
                             and fun parts of math. The knowledge and thinking
                             style, you study here, will help you solve the
-                            problems, you might meet in life.',
+                            problems, you might meet in life.
+                            On this website you can read about different mathematical
+                            subjects. Then use the newly acquired theoretical knowledge
+                            in practice by solving all sorts of mathematical problems
+                            and completing tests.',
 ];
