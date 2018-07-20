@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     $supercategories = App\SuperCategory::all();
-    $articles = App\Article::orderBy('created_at')->take(5)->get();
+    $articles = App\Article::orderBy('created_at', 'desc')->take(5)->get();
     return view('pages.index', compact('supercategories', 'articles'));
 })->name('main');
 
