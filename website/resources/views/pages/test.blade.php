@@ -63,9 +63,14 @@
                     @endif
                 </div>
             @endforeach
-            <input type="submit" class="submit-form-button disabled fs-17" value="{{ trans('web.submit') }}">
-            </input>
-            <p class="fs-18">{{ trans('web.submit_warn') }}</p>
+
+            @if(Auth::check())
+                <input type="submit" class="submit-form-button disabled fs-17" value="{{ trans('web.submit') }}">
+                </input>
+                <p class="fs-18">{{ trans('web.submit_warn') }}</p>
+            @else
+                <p class="login-required fs-18">{{ trans('web.registration_required') }}</p>
+            @endif
         </form>
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/test/' . $test->id) }}" data-numposts="5"></div>
