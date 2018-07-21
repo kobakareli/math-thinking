@@ -45,6 +45,8 @@
                     {{ trans('web.submit') }}
                 </div>
             </div>
+        @else
+            <p class="login-required fs-18">{{ trans('web.registration_required') }}</p>
         @endif
 
         @if(count($articles) > 0)

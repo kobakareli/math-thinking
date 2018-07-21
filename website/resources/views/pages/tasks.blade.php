@@ -31,7 +31,7 @@
                 ?>
                 <div class="post">
                     <a href="{{ url('/' . App::getLocale() . '/task/' . $task->id) }}">
-                        <p class="title fs-24 @if(isset($status) && $status == 1){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
+                        <p class="title fs-24 @if(isset($status) && $status > 0){{'status-passed'}}@elseif(isset($status)){{'status-failed'}}@endif">
                             {{ $task->{'title_' . App::getLocale()} }}
                         </p>
                         <!--@foreach($task->categories as $category)

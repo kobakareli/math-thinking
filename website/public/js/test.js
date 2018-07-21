@@ -62,7 +62,7 @@ var taskSlider = new function() {
             if($(this).hasClass('disabled')) {
                 return;
             }
-            ref.submit();
+            $(ref.parent).submit();
         })
     }
 

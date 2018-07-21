@@ -33,7 +33,7 @@
                 </tr>
                 @foreach($user->tasksHistory as $entry)
                     <tr>
-                        <td>{{ $entry->pivot->created_at }}</td>
+                        <td>{{ \Carbon\Carbon::parse($entry->pivot->created_at)->addHours(4) }}</td>
                         <td>{{ $entry->{'title_' . App::getLocale()} }}</td>
                         <td>{{ $entry->pivot->submitted_answer }}</td>
                         <td>{{ $entry->pivot->status }}</td>
@@ -56,7 +56,7 @@
                 </tr>
                 @foreach($user->testsHistory as $entry)
                     <tr>
-                        <td>{{ $entry->created_at }}</td>
+                        <td>{{ \Carbon\Carbon::parse($entry->pivot->created_at)->addHours(4) }}</td>
                         <td>{{ $entry->{'title_' . App::getLocale()} }}</td>
                         <td>{{ $entry->pivot->status }}</td>
                         <td>{{ $entry->pivot->score }}</td>

@@ -79,6 +79,14 @@ class TestController extends Controller
     public function show(Test $test)
     {
         $supercategories = SuperCategory::all();
+        $articles = collect();
+        $testCategories = $test->categories;
+        if(count($testCategories) > 0) {
+            foreach($testCategories as $category) {
+                $articles = $articles->merge($category->articles);
+            }
+        }
+        $moreArticles = count($articles) > 3;
         if(Auth::check()) {
             $t = auth()->user()->tests()->find($test->id);
             if($t != null) {
@@ -89,7 +97,9 @@ class TestController extends Controller
                     'test' => $test,
                     'status' => $status,
                     'score' => $score,
-                    'has_share' => true
+                    'has_share' => true,
+                    'articles' => $articles,
+                    'morearticles' => $moreArticles
                 ]);
             }
         }
@@ -97,7 +107,9 @@ class TestController extends Controller
             'supercategories' => $supercategories,
             'test' => $test,
             'page_title' => $test->title_en,
-            'has_share' => true
+            'has_share' => true,
+            'articles' => $articles,
+            'morearticles' => $moreArticles
         ]);
     }
 
@@ -256,6 +268,7 @@ class TestController extends Controller
         $answers = $request->all();
         $answers = array_slice($answers, 1);
         $count = 0;
+        $status = 0;
         $tasks = $test->tasks;
         foreach($answers as $key=>$value) {
             $id = explode('-', $key)[1];
@@ -265,8 +278,11 @@ class TestController extends Controller
                 $count += 1;
             }
         }
-        auth()->user()->addTest($test->id, 1, $count);
-        auth()->user()->addTestHistory($test->id, 1, $count);
+        if($count > count($tasks)/2) {
+            $status = 1;
+        }
+        auth()->user()->addTest($test->id, $status, $count);
+        auth()->user()->addTestHistory($test->id, $status, $count);
         return redirect('/test/' . $test->id);
     }
 }

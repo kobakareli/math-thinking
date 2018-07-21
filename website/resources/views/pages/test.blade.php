@@ -31,7 +31,7 @@
                     <div class="description content active fs-18">
                         {!! $task->{'description_' . App::getLocale()} !!}
                     </div>
-                    @if($task->{'hint_' . App::getLocale()} != null)
+                    <!--@if($task->{'hint_' . App::getLocale()} != null)
                         <div class="collapsible c-hint fs-18">{{ trans('web.hint') }}</div>
                         <div class="hint content fs-18">
                             {!! $task->{'hint_' . App::getLocale()} !!}
@@ -42,7 +42,7 @@
                         <div class="answer content fs-18">
                             {!! $task->{'answer_' . App::getLocale()} !!}
                         </div>
-                    @endif
+                    @endif-->
 
                     @if(Auth::check())
                         <div class="submit-answer">
@@ -63,10 +63,41 @@
                     @endif
                 </div>
             @endforeach
-            <input type="submit" class="submit-form-button disabled fs-17" value="{{ trans('web.submit') }}">
-            </input>
-            <p class="fs-18">{{ trans('web.submit_warn') }}</p>
+
+            @if(Auth::check())
+                <input type="submit" class="submit-form-button disabled fs-17" value="{{ trans('web.submit') }}">
+                </input>
+                <p class="fs-18">{{ trans('web.submit_warn') }}</p>
+            @else
+                <p class="login-required fs-18">{{ trans('web.registration_required') }}</p>
+            @endif
         </form>
+
+        @if(count($articles) > 0)
+            <div class="trending article-tasks">
+                <span class="blog-section-title fs-20">{{ trans('web.learn_more') }}</span>
+                @if($morearticles)
+                    <a href="{{ url('/' . App::getLocale() . '/search/articles/-1/' . $article->categories[0]->id) }}" class="see-more-link fs-20">{{ trans('web.see_more') }}</a>
+                @endif
+                <div class="trends">
+                    @foreach($articles as $article)
+                        <a href="{{ url('/' . App::getLocale() . '/article/' . $article->id) }}">
+                            <div class="trend">
+
+                                <p class="title fs-16">
+                                    {{ $article->{'title_' . App::getLocale()} }}
+                                </p>
+                                <div class="info">
+                                    <span class="date fs-15">
+                                        {{ \Carbon\Carbon::parse(explode(" ",$article->created_at)[0])->format('d/m/Y') }}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
 
         <div class="fb-comments" data-href="{{ url('/' . App::getLocale() . '/test/' . $test->id) }}" data-numposts="5"></div>
     </div>

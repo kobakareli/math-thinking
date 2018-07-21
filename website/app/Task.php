@@ -30,8 +30,8 @@ class Task extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Task', 'user_tasks',
-                'task_id', 'user_id')->withPivot('status')->withTimestamps();;
+        return $this->belongsToMany('App\User', 'user_tasks',
+                'task_id', 'user_id')->withPivot('status')->withTimestamps();
     }
 
     /* manipulate categories */
