@@ -268,6 +268,7 @@ class TestController extends Controller
         $answers = $request->all();
         $answers = array_slice($answers, 1);
         $count = 0;
+        $status = 0;
         $tasks = $test->tasks;
         foreach($answers as $key=>$value) {
             $id = explode('-', $key)[1];
@@ -277,8 +278,11 @@ class TestController extends Controller
                 $count += 1;
             }
         }
-        auth()->user()->addTest($test->id, 1, $count);
-        auth()->user()->addTestHistory($test->id, 1, $count);
+        if($count > count($tasks)/2) {
+            $status = 1;
+        }
+        auth()->user()->addTest($test->id, $status, $count);
+        auth()->user()->addTestHistory($test->id, $status, $count);
         return redirect('/test/' . $test->id);
     }
 }
