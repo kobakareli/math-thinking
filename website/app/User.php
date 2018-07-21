@@ -38,7 +38,7 @@ class User extends Authenticatable
     public function tasksHistory()
     {
         return $this->belongsToMany('App\Task', 'user_tasks_history',
-                'user_id', 'task_id')->withPivot('status', 'submitted_answer')->withTimestamps()->orderBy('created_at');
+                'user_id', 'task_id')->withPivot('status', 'submitted_answer')->withTimestamps()->orderBy('pivot_created_at', 'DESC');
     }
 
     public function tests()
@@ -50,7 +50,7 @@ class User extends Authenticatable
     public function testsHistory()
     {
         return $this->belongsToMany('App\Test', 'user_tests_history',
-                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps()->orderBy('created_at');
+                'user_id', 'test_id')->withPivot('status', 'score')->withTimestamps()->orderBy('pivot_created_at', 'DESC');
     }
 
     public function addTask($task_id, $status)
