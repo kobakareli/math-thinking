@@ -47,5 +47,10 @@
     <string name="reached_level">ახვედით ახალ დონე %d-ზე!</string>
     <string name="close">დახურე</string>
     <string name="article">სტატია</string>
+    <string name="show_hint">მითითების ჩვენება</string>
+    <string name="show_answer">პასუხის ჩვენება</string>
+    <string name="open_article">სტატიის გახსნა</string>
+    <string name="open_test">ტესტის გახსნა</string>
+    <string name="solve_information">ამოცანა მონიშნულია, თუ სწორად გასცემ პასუხს. ტესტი მონიშნულია, თუ მასში ყველა ამოცანას სწორად გასცემ პასუხს. შეგიძლია ნახო მითითება და ამოხსნა თუ გახსნი ამოცანას, მაგრამ არ შეგიძლია, თუ ტესტს გახსნი.</string>
 
 </resources>
