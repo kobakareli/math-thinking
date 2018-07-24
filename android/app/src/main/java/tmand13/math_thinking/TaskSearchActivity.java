@@ -77,7 +77,9 @@ public class TaskSearchActivity extends BaseActivity {
                 int sortBy = wrapper.getSortBy();
                 int answerSwitch = wrapper.getAnswerSwitch();
                 int solvedSwitch = wrapper.getSolveSwitch();
-
+                int categoryId = wrapper.getCategorySpinner();
+                int superCategoryId = wrapper.getSuperCategorySpinner();
+                
                 switch (answerSwitch) {
                     case 0:
                         hasOptions1 = hasOptions2 = true;
@@ -110,25 +112,31 @@ public class TaskSearchActivity extends BaseActivity {
                     switch (sortBy) {
                         case 0:
                             return db.taskDao().getCursorOrderByCreationTimeEn(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                         case 1:
                             return db.taskDao().getCursorOrderByUpdateTimeEn(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                         default:
                             return db.taskDao().getCursorOrderByTitleEn(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                     }
                 } else {
                     switch (sortBy) {
                         case 0:
                             return db.taskDao().getCursorOrderByCreationTimeGe(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                         case 1:
                             return db.taskDao().getCursorOrderByUpdateTimeGe(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                         default:
                             return db.taskDao().getCursorOrderByTitleGe(titleConstraint,
-                                    hasOptions1, hasOptions2, solved1, solved2);
+                                    hasOptions1, hasOptions2, solved1, solved2, categoryId,
+                                    superCategoryId);
                     }
                 }
             }

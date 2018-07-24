@@ -58,5 +58,8 @@
     <string name="open_article">Open article</string>
     <string name="open_test">Open test</string>
     <string name="solve_information">Task is marked, if you answer correctly. Test is marked, if you answer all of the tasks in it correctly. You can see hint and solution if you open task, but you can\'t if you open test.</string>
+    <string name="show">Show:</string>
+    <string name="any_category">Any subcategory</string>
+    <string name="any_super_category">Any supercategory</string>
 
 </resources>

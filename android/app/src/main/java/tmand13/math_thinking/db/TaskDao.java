@@ -35,41 +35,95 @@ public interface TaskDao {
     // TODO maybe change LIKE to MATCH and add indexes as described
     // here: https://developer.android.com/guide/topics/search/search-dialog
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_en FROM tasks where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
     Cursor getCursorOrderByCreationTimeEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                       boolean solved1, boolean solved2);
+                       boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_en FROM tasks where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
     Cursor getCursorOrderByUpdateTimeEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                                          boolean solved1, boolean solved2);
+                                          boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
-    @Query("SELECT task_id as _id, solved, title_en FROM task where title_en LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_en FROM tasks where title_en LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_en")
     Cursor getCursorOrderByTitleEn(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                                          boolean solved1, boolean solved2);
+                                          boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_ge FROM tasks where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY creation_time")
     Cursor getCursorOrderByCreationTimeGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                                            boolean solved1, boolean solved2);
+                                            boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_ge FROM tasks where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY update_time")
     Cursor getCursorOrderByUpdateTimeGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                                          boolean solved1, boolean solved2);
+                                          boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
-    @Query("SELECT task_id as _id, solved, title_ge FROM task where title_ge LIKE (:titleConstraint) AND " +
+    @Query("WITH tasks as (WITH categories as (" +
+            "SELECT category_id, super_category_id FROM super_category_category " +
+            "WHERE (category_id = (:categoryId) or -1 = (:categoryId)) " +
+            "AND (super_category_id = (:superCategoryId) or -1 = (:superCategoryId))) " +
+            "SELECT * FROM task INNER JOIN " +
+            "(SELECT task_id FROM task_test INNER JOIN " +
+            "(SELECT test_id FROM test_category INNER JOIN categories on categories.category_id = test_category.category_id) AS tests " +
+            "ON tests.test_id = task_test.test_id) as tasks ON tasks.task_id = task.task_id) " +
+
+            "SELECT task_id as _id, solved, title_ge FROM tasks where title_ge LIKE (:titleConstraint) AND " +
             "(has_options = (:hasOptions1) OR has_options = (:hasOptions2)) AND " +
             "(solved = (:solved1) OR solved = (:solved2)) ORDER BY title_ge")
     Cursor getCursorOrderByTitleGe(String titleConstraint, boolean hasOptions1, boolean hasOptions2,
-                                     boolean solved1, boolean solved2);
+                                     boolean solved1, boolean solved2, int categoryId, int superCategoryId);
 
     @Query("SELECT * FROM task where solved > 0")
     List<Task> getSolved();

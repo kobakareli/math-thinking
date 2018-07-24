@@ -52,5 +52,8 @@
     <string name="open_article">სტატიის გახსნა</string>
     <string name="open_test">ტესტის გახსნა</string>
     <string name="solve_information">ამოცანა მონიშნულია, თუ სწორად გასცემ პასუხს. ტესტი მონიშნულია, თუ მასში ყველა ამოცანას სწორად გასცემ პასუხს. შეგიძლია ნახო მითითება და ამოხსნა თუ გახსნი ამოცანას, მაგრამ არ შეგიძლია, თუ ტესტს გახსნი.</string>
+    <string name="show">აჩვენე:</string>
+    <string name="any_category">ნებისმიერი ქვეკატეგორია</string>
+    <string name="any_super_category">ნებისმიერი ზეკატეგორია</string>
 
 </resources>

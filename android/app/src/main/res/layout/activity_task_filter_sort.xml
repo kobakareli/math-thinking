@@ -34,6 +34,52 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_margin="10dp" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show"/>
+
+            <Spinner
+                android:id="@+id/filter_super_category_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:dropDownWidth="wrap_content"
+                android:minWidth="2000dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_margin="10dp" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show"/>
+
+            <Spinner
+                android:id="@+id/filter_category_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:dropDownWidth="wrap_content"
+                android:minWidth="2000dp" />
+
+        </LinearLayout>
+
         <com.llollox.androidtoggleswitch.widgets.ToggleSwitch
             android:id="@+id/answer_switch"
             android:layout_width="match_parent"
