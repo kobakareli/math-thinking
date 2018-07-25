@@ -79,7 +79,7 @@ public class TaskSearchActivity extends BaseActivity {
                 int solvedSwitch = wrapper.getSolveSwitch();
                 int categoryId = wrapper.getCategorySpinner();
                 int superCategoryId = wrapper.getSuperCategorySpinner();
-                
+
                 switch (answerSwitch) {
                     case 0:
                         hasOptions1 = hasOptions2 = true;

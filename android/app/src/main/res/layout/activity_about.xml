@@ -112,6 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:textSize="20sp"
+            android:padding="5dp"
             android:textColor="@color/colorWhite"
             android:text="@string/solve_information" />
 

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -52,7 +53,8 @@ public class LocaleHelper {
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString(SELECTED_LANGUAGE, language);
-        editor.apply();
+        // Use commit, to finish this before app restart. We restart app after language change.
+        editor.commit();
     }
 
     @TargetApi(Build.VERSION_CODES.N)
